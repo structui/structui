@@ -1,0 +1,5 @@
+{
+  "name": "StructUI Framework",
+  "description": "A minimal, thin, modern UI system inspired by shadcn/ui.",
+  "requestFramePermissions": []
+}
