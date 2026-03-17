@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Command } from "cmdk";
-import { Search, User, Settings, CreditCard, Mail, Bell, LayoutDashboard, FileText, Plus, Command as CommandIcon } from "lucide-react";
+import { Search, Blocks, BookOpen, Box, Component, Layers } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { useNavigate } from "react-router-dom";
+
+import { getAllComponents } from "@/src/lib/registry";
 
 export const CommandPalette = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const components = useMemo(() => getAllComponents(), []);
+
+  const goTo = (href: string): void => {
+    navigate(href);
+    setOpen(false);
+  };
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -57,26 +67,32 @@ export const CommandPalette = () => {
                 </div>
                 <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden p-2">
                   <Command.Empty className="py-6 text-center text-sm">No results found.</Command.Empty>
-                  
-                  <Command.Group heading="Suggestions" className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-                    <CommandItem icon={<LayoutDashboard />} label="Dashboard" shortcut="⌘D" />
-                    <CommandItem icon={<Plus />} label="New Project" shortcut="⌘N" />
-                    <CommandItem icon={<FileText />} label="Reports" shortcut="⌘R" />
-                  </Command.Group>
-                  
-                  <Command.Separator className="-mx-2 my-1 h-px bg-border" />
-                  
-                  <Command.Group heading="Settings" className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-                    <CommandItem icon={<User />} label="Profile" shortcut="⌘P" />
-                    <CommandItem icon={<CreditCard />} label="Billing" shortcut="⌘B" />
-                    <CommandItem icon={<Settings />} label="Settings" shortcut="⌘S" />
+
+                  <Command.Group heading="Jump to" className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+                    <CommandItem icon={<BookOpen />} label="Docs" onSelect={() => goTo("/docs")} />
+                    <CommandItem icon={<Component />} label="Components" onSelect={() => goTo("/components")} />
+                    <CommandItem icon={<Blocks />} label="Blocks" onSelect={() => goTo("/blocks")} />
                   </Command.Group>
 
                   <Command.Separator className="-mx-2 my-1 h-px bg-border" />
 
-                  <Command.Group heading="Notifications" className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-                    <CommandItem icon={<Mail />} label="Inbox" />
-                    <CommandItem icon={<Bell />} label="Updates" />
+                  <Command.Group heading="Registry Components" className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+                    {components.map((component) => (
+                      <Command.Item
+                        key={component.id}
+                        value={component.title}
+                        onSelect={() => goTo(`/components/${component.slug}`)}
+                        className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                      >
+                        <div className="mr-2 flex h-4 w-4 items-center justify-center opacity-70">
+                          {component.category === "Data Display" ? <Layers className="h-4 w-4" /> : <Box className="h-4 w-4" />}
+                        </div>
+                        <span>{component.title}</span>
+                        <span className="ml-auto text-xs tracking-widest text-muted-foreground">
+                          {component.category}
+                        </span>
+                      </Command.Item>
+                    ))}
                   </Command.Group>
                 </Command.List>
               </Command>
@@ -88,15 +104,26 @@ export const CommandPalette = () => {
   );
 };
 
-const CommandItem = ({ icon, label, shortcut }: { icon: React.ReactNode; label: string; shortcut?: string }) => (
-  <Command.Item className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+interface CommandItemProps {
+  icon: React.ReactNode;
+  label: string;
+  meta?: string;
+  onSelect?: () => void;
+}
+
+const CommandItem = ({ icon, label, meta, onSelect }: CommandItemProps) => (
+  <Command.Item
+    value={label}
+    onSelect={onSelect}
+    className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+  >
     <div className="mr-2 flex h-4 w-4 items-center justify-center opacity-70">
       {React.cloneElement(icon as React.ReactElement, { className: "h-4 w-4" })}
     </div>
     <span>{label}</span>
-    {shortcut && (
+    {meta && (
       <span className="ml-auto text-xs tracking-widest text-muted-foreground">
-        {shortcut}
+        {meta}
       </span>
     )}
   </Command.Item>
