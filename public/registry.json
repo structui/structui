@@ -7,7 +7,7 @@
   "version": "0.0.0",
   "metrics": {
     "totalComponents": 56,
-    "documentedComponents": 3,
+    "documentedComponents": 8,
     "stableComponents": 56,
     "previewComponents": 0,
     "plannedComponents": 0,
@@ -118,18 +118,26 @@
       "slug": "avatar",
       "title": "Avatar",
       "description": "Profile image primitive with fallback states.",
-      "llmSummary": "Avatar: Profile image primitive with fallback states.",
+      "llmSummary": "Use Avatar to represent people, teams, or entities with image and fallback states.",
       "category": "Data Display",
       "status": "stable",
-      "docsStatus": "draft",
-      "tags": [],
+      "docsStatus": "ready",
+      "tags": [
+        "profile",
+        "user",
+        "image",
+        "fallback"
+      ],
       "sourcePath": "src/components/ui/avatar.tsx",
       "sourceExport": "Avatar",
       "docsPath": "src/content/docs/components/avatar.md",
       "dependencies": [],
       "registryDependencies": [],
-      "relatedComponents": [],
-      "hasMarkdownDoc": false
+      "relatedComponents": [
+        "badge",
+        "card"
+      ],
+      "hasMarkdownDoc": true
     },
     {
       "id": "badge",
@@ -498,18 +506,27 @@
       "slug": "input",
       "title": "Input",
       "description": "Standard text input field for forms and filters.",
-      "llmSummary": "Input: Standard text input field for forms and filters.",
+      "llmSummary": "Use Input for single-line text entry, filtering, and compact form controls.",
       "category": "Forms",
       "status": "stable",
-      "docsStatus": "draft",
-      "tags": [],
+      "docsStatus": "ready",
+      "tags": [
+        "text",
+        "field",
+        "form",
+        "search"
+      ],
       "sourcePath": "src/components/ui/input.tsx",
       "sourceExport": "Input",
       "docsPath": "src/content/docs/components/input.md",
       "dependencies": [],
       "registryDependencies": [],
-      "relatedComponents": [],
-      "hasMarkdownDoc": false
+      "relatedComponents": [
+        "textarea",
+        "select",
+        "checkbox"
+      ],
+      "hasMarkdownDoc": true
     },
     {
       "id": "input-otp",
@@ -753,18 +770,27 @@
       "slug": "select",
       "title": "Select",
       "description": "Dropdown selection menu for predefined options.",
-      "llmSummary": "Select: Dropdown selection menu for predefined options.",
+      "llmSummary": "Use Select when users need to choose one option from a constrained list.",
       "category": "Forms",
       "status": "stable",
-      "docsStatus": "draft",
-      "tags": [],
+      "docsStatus": "ready",
+      "tags": [
+        "dropdown",
+        "options",
+        "picker",
+        "form"
+      ],
       "sourcePath": "src/components/ui/select.tsx",
       "sourceExport": "Select",
       "docsPath": "src/content/docs/components/select.md",
       "dependencies": [],
       "registryDependencies": [],
-      "relatedComponents": [],
-      "hasMarkdownDoc": false
+      "relatedComponents": [
+        "combobox",
+        "radio-group",
+        "input"
+      ],
+      "hasMarkdownDoc": true
     },
     {
       "id": "separator",
@@ -932,36 +958,52 @@
       "slug": "tabs",
       "title": "Tabs",
       "description": "Tabbed navigation for switching between related content panels.",
-      "llmSummary": "Tabs: Tabbed navigation for switching between related content panels.",
+      "llmSummary": "Use Tabs to switch between related views without leaving the current page context.",
       "category": "Navigation",
       "status": "stable",
-      "docsStatus": "draft",
-      "tags": [],
+      "docsStatus": "ready",
+      "tags": [
+        "navigation",
+        "panels",
+        "switcher",
+        "layout"
+      ],
       "sourcePath": "src/components/ui/tabs.tsx",
       "sourceExport": "Tabs",
       "docsPath": "src/content/docs/components/tabs.md",
       "dependencies": [],
       "registryDependencies": [],
-      "relatedComponents": [],
-      "hasMarkdownDoc": false
+      "relatedComponents": [
+        "accordion",
+        "navigation-menu"
+      ],
+      "hasMarkdownDoc": true
     },
     {
       "id": "textarea",
       "slug": "textarea",
       "title": "Textarea",
       "description": "Multiline text field for messages, notes, and descriptions.",
-      "llmSummary": "Textarea: Multiline text field for messages, notes, and descriptions.",
+      "llmSummary": "Use Textarea for longer freeform input such as notes, bios, and support messages.",
       "category": "Forms",
       "status": "stable",
-      "docsStatus": "draft",
-      "tags": [],
+      "docsStatus": "ready",
+      "tags": [
+        "multiline",
+        "content",
+        "form",
+        "notes"
+      ],
       "sourcePath": "src/components/ui/textarea.tsx",
       "sourceExport": "Textarea",
       "docsPath": "src/content/docs/components/textarea.md",
       "dependencies": [],
       "registryDependencies": [],
-      "relatedComponents": [],
-      "hasMarkdownDoc": false
+      "relatedComponents": [
+        "input",
+        "markdown-editor"
+      ],
+      "hasMarkdownDoc": true
     },
     {
       "id": "timeline",
