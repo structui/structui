@@ -15,7 +15,7 @@ It now exposes both human-facing docs and machine-readable surfaces from the sam
 ## Local Development
 
 ```bash
-npm install --legacy-peer-deps
+npm install
 npm run dev
 ```
 
