@@ -37,7 +37,7 @@ import { CommandPalette } from "@/src/components/ui/command-palette";
 import { IPhoneMockup, AndroidMockup, TabletMockup, LaptopMockup, DesktopMockup } from "@/src/components/ui/device-mockups";
 import { Spinner1, Spinner2, Spinner3, Spinner4, Spinner5, Loader1, Loader2, Loader3, Loader4, Loader5 } from "@/src/components/ui/loaders";
 import { CookiesBanner } from "@/src/components/ui/cookies-banner";
-import { SignInModal, AlertDialog } from "@/src/components/ui/dialogs";
+import { SignInModal, AlertDialog as DialogShowcaseAlertDialog } from "@/src/components/ui/dialogs";
 import { Breadcrumbs, Pagination } from "@/src/components/ui/navigation";
 import { Progress, Alert, AlertTitle, AlertDescription } from "@/src/components/ui/feedback";
 import { Separator, AspectRatio, ScrollArea } from "@/src/components/ui/primitives";
@@ -45,7 +45,7 @@ import { Toggle, ToggleGroup, ToggleGroupItem, InputOTP, InputTag, FileUpload } 
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger, HoverCard, HoverCardContent, HoverCardTrigger, Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger, MenubarSeparator } from "@/src/components/ui/overlay-advanced";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/src/components/ui/navigation-advanced";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/src/components/ui/sheet";
-import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/src/components/ui/alert-dialog";
+import { AlertDialog as RadixAlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/src/components/ui/alert-dialog";
 import ReactMarkdown from "react-markdown";
 import {
   getComponentBySlug,
@@ -1169,7 +1169,7 @@ export default function Layout({ children }) {
         title: "Alert",
         description: "A confirmation dialog for destructive actions.",
         code: `<AlertDialog title="Are you sure?" description="This action cannot be undone." />`,
-        render: <AlertDialog title="Delete Project" description="Are you sure you want to delete this project? All data will be permanently removed." />
+        render: <DialogShowcaseAlertDialog title="Delete Project" description="Are you sure you want to delete this project? All data will be permanently removed." />
       }
     ],
     props: [],
@@ -1644,7 +1644,7 @@ export default function Page() {
         code: `<AlertDialog>\n  <AlertDialogTrigger>Open</AlertDialogTrigger>\n  <AlertDialogContent>\n    <AlertDialogHeader>\n      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>\n    </AlertDialogHeader>\n    <AlertDialogFooter>\n      <AlertDialogCancel>Cancel</AlertDialogCancel>\n      <AlertDialogAction>Continue</AlertDialogAction>\n    </AlertDialogFooter>\n  </AlertDialogContent>\n</AlertDialog>`,
         render: (
           <div className="w-full h-full flex items-center justify-center">
-            <AlertDialog>
+            <RadixAlertDialog>
               <AlertDialogTrigger asChild>
                 <Button variant="outline">Show Alert Dialog</Button>
               </AlertDialogTrigger>
@@ -1660,7 +1660,7 @@ export default function Page() {
                   <AlertDialogAction>Continue</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
-            </AlertDialog>
+            </RadixAlertDialog>
           </div>
         )
       }

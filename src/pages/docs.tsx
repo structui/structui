@@ -5,7 +5,9 @@ import {
   getSiteMetrics,
   SITE_BRAND_NAME,
   SITE_CLI_COMMAND,
+  SITE_GITHUB_URL,
   SITE_PACKAGE_NAME,
+  SITE_URL,
 } from "@/src/lib/registry";
 import { cn } from "@/src/lib/utils";
 import { ChevronRight, BookOpen, Terminal, Palette, Layers, Zap, Shield } from "lucide-react";
@@ -60,6 +62,7 @@ const Feature = ({ icon, title, desc }: { icon: React.ReactNode; title: string; 
 const NAV = [
   { id: "introduction", label: "Introduction", group: "Getting Started" },
   { id: "installation", label: "Installation", group: "Getting Started" },
+  { id: "registry", label: "Registry & LLMs", group: "Getting Started" },
   { id: "theming", label: "Theming", group: "Getting Started" },
   { id: "cli", label: "CLI Usage", group: "Getting Started" },
   { id: "principles", label: "Design Principles", group: "Architecture" },
@@ -74,6 +77,7 @@ export const DocsPage = () => {
   const installCommand = `npm install ${SITE_PACKAGE_NAME} lucide-react motion clsx tailwind-merge\n\n# pnpm (recommended)\npnpm add ${SITE_PACKAGE_NAME} lucide-react motion clsx tailwind-merge\n\n# yarn\nyarn add ${SITE_PACKAGE_NAME} lucide-react motion clsx tailwind-merge`;
   const stylesImport = `@import "tailwindcss";\n@import "${SITE_PACKAGE_NAME}/styles";`;
   const componentImport = `import { Button } from "${SITE_PACKAGE_NAME}/button";\n\nexport default function App() {\n  return <Button variant="outline">Hello ${SITE_BRAND_NAME}</Button>;\n}`;
+  const registrySnippet = `# Public machine-readable surfaces\n${SITE_URL}/registry.json\n${SITE_URL}/registry/index.json\n${SITE_URL}/registry/components/button.json\n${SITE_URL}/registry/components/button.md\n${SITE_URL}/llms.txt\n${SITE_URL}/llms-full.txt`;
   const cliSnippet = `# List installed components and blocks\nnpx ${SITE_CLI_COMMAND} list\n\n# Add a component\nnpx ${SITE_CLI_COMMAND} add button\nnpx ${SITE_CLI_COMMAND} add data-table-advanced\n\n# Add a block (prefix with block-)\nnpx ${SITE_CLI_COMMAND} add block-pricing\nnpx ${SITE_CLI_COMMAND} add block-dashboard\n\n# Remove a component\nnpx ${SITE_CLI_COMMAND} remove button\n\n# Initialize a full project template\nnpx ${SITE_CLI_COMMAND} init saas\nnpx ${SITE_CLI_COMMAND} init erp\nnpx ${SITE_CLI_COMMAND} init crm`;
 
   const groups = Array.from(new Set(NAV.map(n => n.group)));
@@ -114,9 +118,8 @@ export const DocsPage = () => {
             {/* ── Introduction ── */}
             <Section id="introduction" title="Introduction">
               <P>
-                {SITE_BRAND_NAME} is a modern, enterprise-ready component library for React. Built on top of
-                Radix UI primitives and styled with Tailwind CSS v4, it provides accessible, animated,
-                and fully customizable components.
+                {SITE_BRAND_NAME} is a registry-first React UI system. It ships reusable components,
+                machine-readable metadata, and LLM-oriented discovery surfaces from the same source of truth.
               </P>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Feature icon={<Zap className="w-4 h-4" />} title="Fast by default" desc="Tree-shaking, lazy-loading, and virtual scrolling built in." />
@@ -124,6 +127,30 @@ export const DocsPage = () => {
                 <Feature icon={<Palette className="w-4 h-4" />} title="Themeable" desc="CSS variable-based system with 4 built-in themes and a visual Theme Creator." />
                 <Feature icon={<Layers className="w-4 h-4" />} title={`${siteMetrics.totalComponents} Components`} desc={`${siteMetrics.documentedComponents} documented entries across ${siteMetrics.categories} categories.`} />
               </div>
+            </Section>
+
+            <Section id="registry" title="Registry & LLMs">
+              <P>
+                {SITE_BRAND_NAME} publishes human-facing docs and machine-facing exports together.
+                Use the registry JSON for structured integrations and the LLM text files for lightweight discovery.
+              </P>
+              <Snippet
+                code={registrySnippet}
+                language="text"
+              />
+              <div className="rounded-xl border p-4 bg-muted/20 text-sm space-y-2">
+                <p className="font-semibold text-foreground">What each surface is for</p>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li><InlineCode>registry.json</InlineCode> gives you global metadata, metrics, and the component index.</li>
+                  <li><InlineCode>registry/components/*.json</InlineCode> exposes per-component structured records.</li>
+                  <li><InlineCode>registry/components/*.md</InlineCode> exposes the matching markdown docs when available.</li>
+                  <li><InlineCode>llms.txt</InlineCode> is the compact discovery surface for agents and search systems.</li>
+                  <li><InlineCode>llms-full.txt</InlineCode> includes longer component context and embedded markdown docs.</li>
+                </ul>
+              </div>
+              <P>
+                Canonical source code and issue tracking live on <a href={SITE_GITHUB_URL} target="_blank" rel="noreferrer" className="text-primary underline underline-offset-2">GitHub</a>.
+              </P>
             </Section>
 
             {/* ── Installation ── */}
@@ -239,8 +266,8 @@ export function cn(...inputs: ClassValue[]) {
             {/* ── CLI ── */}
             <Section id="cli" title="CLI Usage">
               <P>
-                The <InlineCode>{SITE_CLI_COMMAND}</InlineCode> CLI lets you add, remove, and list components directly
-                from the registry without copying files manually.
+                <InlineCode>{SITE_CLI_COMMAND}</InlineCode> is the canonical CLI contract for the registry workflow.
+                The public registry and LLM exports are available now; the full install automation flow is being aligned to this command surface.
               </P>
               <Snippet
                 code={cliSnippet}

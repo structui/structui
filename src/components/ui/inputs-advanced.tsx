@@ -194,9 +194,11 @@ export const FileUpload = ({ onUpload }: { onUpload?: (files: File[]) => void })
   const [fileNames, setFileNames] = React.useState<string[]>([]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
+    const fileList = e.target.files;
+    const files: File[] = fileList ? Array.from<File>(fileList) : [];
+
     if (files.length > 0) {
-      setFileNames(files.map(f => f.name));
+      setFileNames(files.map((file) => file.name));
       onUpload?.(files);
     }
   };
