@@ -1,0 +1,18 @@
+{
+  "id": "alert",
+  "slug": "alert",
+  "title": "Alert",
+  "description": "Inline status and warning messaging.",
+  "llmSummary": "Alert: Inline status and warning messaging.",
+  "category": "Feedback",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/feedback.tsx",
+  "sourceExport": "Alert",
+  "docsPath": "src/content/docs/components/alert.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

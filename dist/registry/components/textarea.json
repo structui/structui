@@ -1,0 +1,26 @@
+{
+  "id": "textarea",
+  "slug": "textarea",
+  "title": "Textarea",
+  "description": "Multiline text field for messages, notes, and descriptions.",
+  "llmSummary": "Use Textarea for longer freeform input such as notes, bios, and support messages.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "ready",
+  "tags": [
+    "multiline",
+    "content",
+    "form",
+    "notes"
+  ],
+  "sourcePath": "src/components/ui/textarea.tsx",
+  "sourceExport": "Textarea",
+  "docsPath": "src/content/docs/components/textarea.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [
+    "input",
+    "markdown-editor"
+  ],
+  "hasMarkdownDoc": true
+}

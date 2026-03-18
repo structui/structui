@@ -1,7 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-import { componentRegistryEntries } from "@/src/content/registry/components";
+import { componentRegistryEntries } from "@/registry/components";
 import { getMarkdownDocBySlug } from "@/src/lib/content/docs";
 import type {
   ComponentCategory,
@@ -10,7 +10,8 @@ import type {
   DocsStatus,
 } from "@/src/lib/registry/types";
 
-const UI_ROOT = path.join(process.cwd(), "src/components/ui");
+const UI_ROOT = path.join(process.cwd(), "components/ui");
+const DOCS_ROOT = path.join(process.cwd(), "docs/components");
 
 type CatalogOverride = Partial<ComponentRegistryEntry> & {
   title?: string;
@@ -101,8 +102,21 @@ const TITLE_OVERRIDES: Record<string, string> = {
   "radio-group": "Radio Group",
 };
 
+const normalizeSourcePath = (value: string): string =>
+  value.replace(/^src\/components\/ui\//, "components/ui/");
+
+const normalizeDocsPath = (value: string): string =>
+  value.replace(/^src\/content\/docs\/components\//, "docs/components/");
+
 const REGISTRY_OVERRIDES = new Map(
-  componentRegistryEntries.map((entry) => [entry.slug, entry]),
+  componentRegistryEntries.map((entry) => [
+    entry.slug,
+    {
+      ...entry,
+      sourcePath: normalizeSourcePath(entry.sourcePath ?? `components/ui/${entry.slug}.tsx`),
+      docsPath: normalizeDocsPath(entry.docsPath),
+    },
+  ]),
 );
 
 export interface ComponentCatalogEntry extends ComponentRegistryEntry {
@@ -133,8 +147,7 @@ const slugToExport = (slug: string): string =>
     .join("");
 
 const createBaseEntry = (slug: string): ComponentRegistryEntry => {
-  const sourcePath = `src/components/ui/${slug}.tsx`;
-  const hasDocs = REGISTRY_OVERRIDES.has(slug);
+  const sourcePath = `components/ui/${slug}.tsx`;
 
   return {
     id: slug,
@@ -144,16 +157,25 @@ const createBaseEntry = (slug: string): ComponentRegistryEntry => {
     llmSummary: `Use ${slugToTitle(slug)} by copying the source file or importing it into your UI layer.`,
     category: CATEGORY_OVERRIDES[slug] || "General",
     status: "stable" as ComponentStatus,
-    docsStatus: (hasDocs ? "ready" : "draft") as DocsStatus,
+    docsStatus: "draft" as DocsStatus,
     visibility: "public",
     tags: [slug],
     sourcePath,
     sourceExport: slugToExport(slug),
-    docsPath: `src/content/docs/components/${slug}.md`,
+    docsPath: `docs/components/${slug}.md`,
     dependencies: [],
     registryDependencies: [],
     relatedComponents: [],
   };
+};
+
+const hasDocForSlug = async (slug: string): Promise<boolean> => {
+  try {
+    await fs.access(path.join(DOCS_ROOT, `${slug}.md`));
+    return true;
+  } catch {
+    return false;
+  }
 };
 
 export async function getPublicComponentCatalog(): Promise<ComponentCatalogEntry[]> {
@@ -162,24 +184,34 @@ export async function getPublicComponentCatalog(): Promise<ComponentCatalogEntry
     .filter((file) => file.endsWith(".tsx"))
     .map((file) => file.replace(/\.tsx$/, ""));
 
-  const entries = slugs
-    .map((slug) => ({
-      ...createBaseEntry(slug),
-      ...(REGISTRY_OVERRIDES.get(slug) as CatalogOverride | undefined),
-    }))
-    .filter((entry) => entry.visibility === "public")
-    .map((entry) => {
-      const docsAvailable = REGISTRY_OVERRIDES.has(entry.slug);
+  const merged = slugs
+    .map((slug) => {
+      const entry = {
+        ...createBaseEntry(slug),
+        ...(REGISTRY_OVERRIDES.get(slug) as CatalogOverride | undefined),
+      };
+
+      return {
+        ...entry,
+        sourcePath: normalizeSourcePath(entry.sourcePath ?? `components/ui/${slug}.tsx`),
+        docsPath: normalizeDocsPath(entry.docsPath ?? `docs/components/${slug}.md`),
+      };
+    })
+    .filter((entry) => entry.visibility === "public");
+
+  const entries = await Promise.all(
+    merged.map(async (entry) => {
+      const docsAvailable = await hasDocForSlug(entry.slug);
 
       return {
         ...entry,
         docsAvailable,
         docsUrl: docsAvailable ? `/docs/components/${entry.slug}` : null,
       };
-    })
-    .sort((left, right) => left.title.localeCompare(right.title));
+    }),
+  );
 
-  return entries;
+  return entries.sort((left, right) => left.title.localeCompare(right.title));
 }
 
 export async function getComponentCatalogDetail(
@@ -188,25 +220,38 @@ export async function getComponentCatalogDetail(
   const entries = await getPublicComponentCatalog();
   const entry = entries.find((item) => item.slug === slug);
 
-  if (!entry) {
+  if (!entry?.sourcePath) {
     return null;
   }
 
-  const sourceFile = path.join(process.cwd(), entry.sourcePath);
+  const sourceFile = path.join(UI_ROOT, `${entry.slug}.tsx`);
   const sourceCode = await fs.readFile(sourceFile, "utf8");
   const doc = await getMarkdownDocBySlug(slug);
-  const sourceImportPath = `@/src/components/ui/${entry.slug}`;
+  const sourceImportPath = `@/components/ui/${entry.slug}`;
+  const isToast = entry.slug === "toast";
+
+  const importCode = isToast
+    ? `import { ToastProvider, useToast } from "${sourceImportPath}";`
+    : `import { ${entry.sourceExport} } from "${sourceImportPath}";`;
+
+  const manualSteps = isToast
+    ? [
+        `Copy \`${entry.sourcePath}\` into your project.`,
+        "Wrap your app/layout with `ToastProvider` once.",
+        "Call `useToast()` in client components to trigger toasts.",
+      ]
+    : [
+        `Copy \`${entry.sourcePath}\` into your project.`,
+        "Move any shared utilities such as `cn` into your local `lib/utils.ts`.",
+        `Import the exported API with \`${entry.sourceExport}\` and adapt aliases if your project uses a different path setup.`,
+      ];
 
   return {
     ...entry,
     sourceCode,
     docContent: doc?.content || null,
-    importCode: `import { ${entry.sourceExport} } from "${sourceImportPath}";`,
-    installCode: `npx strui add ${entry.slug}`,
-    manualSteps: [
-      `Copy \`${entry.sourcePath}\` into your project.`,
-      "Move any shared utilities such as `cn` into your local `lib/utils.ts`.",
-      `Import the exported API with \`${entry.sourceExport}\` and adapt aliases if your project uses a different path setup.`,
-    ],
+    importCode,
+    installCode: `npx sui add ${entry.slug}`,
+    manualSteps,
   };
 }

@@ -9,11 +9,13 @@ import {
   ExternalLink,
   FileText,
   Layers,
+  Terminal,
 } from "lucide-react";
 
 import { SiteSidebar } from "@/src/components/site/sidebar";
 import { Badge } from "@/src/components/ui/badge";
 import { Button } from "@/src/components/ui/button";
+import { CodeBlock } from "@/src/components/ui/code-block";
 import { getAllMarkdownDocs, getMarkdownDocBySlug } from "@/src/lib/content/docs";
 import { getComponentCatalogDetail } from "@/src/lib/registry/catalog";
 
@@ -42,6 +44,13 @@ export default async function Page({
   const currentIndex = allDocs.findIndex((d) => d.slug === slug);
   const prevDoc = currentIndex > 0 ? allDocs[currentIndex - 1] : null;
   const nextDoc = currentIndex < allDocs.length - 1 ? allDocs[currentIndex + 1] : null;
+  const cliInstallCode = component ? component.installCode : null;
+  const registryInspectCode = component
+    ? `curl -s https://structui.com/api/registry/components/${component.slug} | jq '.files[0]'`
+    : null;
+  const shadcnInstallCode = component
+    ? `npx shadcn@latest add https://structui.com/api/r/${component.slug}`
+    : null;
 
   return (
     <div className="flex min-h-screen">
@@ -111,8 +120,41 @@ export default async function Page({
                 )}
               </div>
 
+              {/* Install */}
+              {component && (
+                <div id="installation" className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Terminal className="h-4 w-4 text-primary/70" />
+                    <p className="text-sm font-semibold">Installation</p>
+                  </div>
+                  <div className="grid gap-4 lg:grid-cols-2">
+                    <div className="rounded-2xl border border-border/70 bg-card p-4">
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        CLI
+                      </p>
+                      {cliInstallCode && (
+                        <CodeBlock code={cliInstallCode} language="bash" />
+                      )}
+                    </div>
+                    <div className="rounded-2xl border border-border/70 bg-card p-4">
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        Registry API
+                      </p>
+                      {registryInspectCode && (
+                        <CodeBlock code={registryInspectCode} language="bash" />
+                      )}
+                      {shadcnInstallCode && (
+                        <div className="mt-3">
+                          <CodeBlock code={shadcnInstallCode} language="bash" />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Article */}
-              <div className="rounded-2xl border border-border/70 bg-card">
+              <div id="documentation" className="rounded-2xl border border-border/70 bg-card">
                 <div className="border-b px-6 py-3">
                   <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     Documentation
@@ -168,7 +210,13 @@ export default async function Page({
                   </p>
                 </div>
                 <div className="space-y-1 p-3">
-                  <a href="#" className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-muted/40 hover:text-foreground">
+                  {component && (
+                    <a href="#installation" className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-muted/40 hover:text-foreground">
+                      <Terminal className="h-3 w-3 shrink-0" />
+                      Installation
+                    </a>
+                  )}
+                  <a href="#documentation" className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-muted/40 hover:text-foreground">
                     <FileText className="h-3 w-3 shrink-0" />
                     Documentation
                   </a>

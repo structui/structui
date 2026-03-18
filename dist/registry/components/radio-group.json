@@ -1,0 +1,18 @@
+{
+  "id": "radio-group",
+  "slug": "radio-group",
+  "title": "Radio Group",
+  "description": "Single-selection input for mutually exclusive choices.",
+  "llmSummary": "Radio Group: Single-selection input for mutually exclusive choices.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/radio-group.tsx",
+  "sourceExport": "RadioGroup",
+  "docsPath": "src/content/docs/components/radio-group.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

@@ -1,0 +1,18 @@
+{
+  "id": "toggle",
+  "slug": "toggle",
+  "title": "Toggle",
+  "description": "Pressed-state control for compact option toggles.",
+  "llmSummary": "Toggle: Pressed-state control for compact option toggles.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/inputs-advanced.tsx",
+  "sourceExport": "Toggle",
+  "docsPath": "src/content/docs/components/toggle.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

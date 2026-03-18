@@ -1,0 +1,196 @@
+# StructUI
+
+> Expanded LLM reference for StructUI. Includes docs links, registry links, machine-readable endpoints, and component summaries.
+
+## Overview
+
+- [Components](https://structui.com/components): Browse the component catalog.
+- [Blocks](https://structui.com/blocks): Explore composable blocks and section patterns.
+- [Ready to Go](https://structui.com/r2go): Browse starter templates and builder flows.
+- [Theme Creator](https://structui.com/theme-creator): Build and export design token themes.
+- [CLI Page](https://structui.com/docs/cli): Dedicated CLI docs surface.
+- [GitHub](https://github.com/structui/structui): Source code, issues, and project history.
+
+## Getting Started
+
+- [Introduction](https://structui.com/docs/introduction): What StructUI is and how the registry-first model works.
+- [Installation](https://structui.com/docs/installation): Add struct-ui and configure the base setup.
+- [Registry & LLMs](https://structui.com/docs/registry): Public machine-readable endpoints and LLM discovery surfaces.
+- [Theming](https://structui.com/docs/theming): CSS variable driven theming and token customization.
+- [CLI Usage](https://structui.com/docs/cli): Canonical strui command surface and examples.
+- [Design Principles](https://structui.com/docs/principles): System principles behind composition, consistency, and scale.
+- [Styling System](https://structui.com/docs/styling): Tailwind and token-level styling approach.
+- [Accessibility](https://structui.com/docs/accessibility): Accessibility guarantees and expectations.
+
+## Package
+
+- package: `struct-ui`
+- cli: `npx strui`
+- metrics: 56 total, 8 markdown-documented, 56 stable, 8 categories
+
+## Registry Surfaces
+
+- [registry.json](https://structui.com/registry.json): Global registry export with metrics and component index.
+- [registry/index.json](https://structui.com/registry/index.json): Mirrored registry index export.
+- [Component JSON](https://structui.com/registry/components/button.json): Example per-component structured record.
+- [Component Markdown](https://structui.com/registry/components/button.md): Example component markdown document when available.
+- [llms.txt](https://structui.com/llms.txt): Compact discovery-oriented LLM file.
+- [llms-full.txt](https://structui.com/llms-full.txt): Expanded LLM reference with grouped component links.
+
+## Components (56)
+
+### Advanced Patterns
+
+- [3D Pin](https://structui.com/docs/components/3d-pin): 3D Pin: Interactive 3D hover card for standout links and showcases.
+  - links: [Docs](https://structui.com/docs/components/3d-pin) | [Registry JSON](https://structui.com/registry/components/3d-pin.json)
+- [Command Palette](https://structui.com/docs/components/command-palette): Command Palette: Keyboard-driven search and action launcher.
+  - links: [Docs](https://structui.com/docs/components/command-palette) | [Registry JSON](https://structui.com/registry/components/command-palette.json)
+- [Hero](https://structui.com/docs/components/hero): Hero: Landing page hero section for high-impact product messaging.
+  - links: [Docs](https://structui.com/docs/components/hero) | [Registry JSON](https://structui.com/registry/components/hero.json)
+
+### Core
+
+- [Badge](https://structui.com/docs/components/badge): Use Badge to communicate status, category, or small metadata labels. Suitable for filters, labels, and inline semantic emphasis.
+  - links: [Docs](https://structui.com/docs/components/badge) | [Registry JSON](https://structui.com/registry/components/badge.json) | [Registry Markdown](https://structui.com/registry/components/badge.md)
+  - tags: status, label, metadata, pill
+  - related: button
+- [Button](https://structui.com/docs/components/button): Use Button for primary and secondary actions. Supports variants, sizes, icons, loading states, and polymorphic rendering via asChild.
+  - links: [Docs](https://structui.com/docs/components/button) | [Registry JSON](https://structui.com/registry/components/button.json) | [Registry Markdown](https://structui.com/registry/components/button.md)
+  - tags: action, trigger, form, cta
+  - related: badge, accordion
+- [Loaders & Spinners](https://structui.com/docs/components/loaders): Loaders & Spinners: Animated loading indicators for async states and pending screens.
+  - links: [Docs](https://structui.com/docs/components/loaders) | [Registry JSON](https://structui.com/registry/components/loaders.json)
+  - tags: loading, spinner, feedback
+- [Typography](https://structui.com/docs/components/typography): Typography: Type styles and content patterns for structured text layouts.
+  - links: [Docs](https://structui.com/docs/components/typography) | [Registry JSON](https://structui.com/registry/components/typography.json)
+  - tags: text, content, heading
+
+### Data Views
+
+- [Accordion](https://structui.com/docs/components/accordion): Use Accordion for FAQs, settings panels, and dense content sections. Supports single or multiple expanded items and keyboard navigation.
+  - links: [Docs](https://structui.com/docs/components/accordion) | [Registry JSON](https://structui.com/registry/components/accordion.json) | [Registry Markdown](https://structui.com/registry/components/accordion.md)
+  - tags: collapse, faq, disclosure, content
+  - related: button
+- [Avatar](https://structui.com/docs/components/avatar): Use Avatar to represent people, teams, or entities with image and fallback states.
+  - links: [Docs](https://structui.com/docs/components/avatar) | [Registry JSON](https://structui.com/registry/components/avatar.json) | [Registry Markdown](https://structui.com/registry/components/avatar.md)
+  - tags: profile, user, image, fallback
+  - related: badge, card
+- [Calendar](https://structui.com/docs/components/calendar): Calendar: Date and schedule UI for picking and browsing dates.
+  - links: [Docs](https://structui.com/docs/components/calendar) | [Registry JSON](https://structui.com/registry/components/calendar.json)
+- [Charts](https://structui.com/docs/components/charts): Charts: Composable chart components for visualizing trends and distributions.
+  - links: [Docs](https://structui.com/docs/components/charts) | [Registry JSON](https://structui.com/registry/components/charts.json)
+- [Data Table Advanced](https://structui.com/docs/components/data-table-advanced): Data Table Advanced: Feature-rich table with sorting, filtering, and large dataset support.
+  - links: [Docs](https://structui.com/docs/components/data-table-advanced) | [Registry JSON](https://structui.com/registry/components/data-table-advanced.json)
+- [Kanban](https://structui.com/docs/components/kanban): Kanban: Board-style workflow layout for task and pipeline management.
+  - links: [Docs](https://structui.com/docs/components/kanban) | [Registry JSON](https://structui.com/registry/components/kanban.json)
+- [Pricing](https://structui.com/docs/components/pricing): Pricing: Pricing cards and plan comparison layouts.
+  - links: [Docs](https://structui.com/docs/components/pricing) | [Registry JSON](https://structui.com/registry/components/pricing.json)
+- [Skeleton](https://structui.com/docs/components/skeleton): Skeleton: Loading placeholder blocks for content still in flight.
+  - links: [Docs](https://structui.com/docs/components/skeleton) | [Registry JSON](https://structui.com/registry/components/skeleton.json)
+- [Stats](https://structui.com/docs/components/stats): Stats: Metric cards and summary layouts for dashboards.
+  - links: [Docs](https://structui.com/docs/components/stats) | [Registry JSON](https://structui.com/registry/components/stats.json)
+- [Table](https://structui.com/docs/components/table): Table: Standard table primitives for structured data.
+  - links: [Docs](https://structui.com/docs/components/table) | [Registry JSON](https://structui.com/registry/components/table.json)
+- [Timeline](https://structui.com/docs/components/timeline): Timeline: Sequential activity and event display for history-heavy screens.
+  - links: [Docs](https://structui.com/docs/components/timeline) | [Registry JSON](https://structui.com/registry/components/timeline.json)
+
+### Feedback & Status
+
+- [Alert](https://structui.com/docs/components/alert): Alert: Inline status and warning messaging.
+  - links: [Docs](https://structui.com/docs/components/alert) | [Registry JSON](https://structui.com/registry/components/alert.json)
+- [Progress](https://structui.com/docs/components/progress): Progress: Progress indicators for uploads, steps, and async work.
+  - links: [Docs](https://structui.com/docs/components/progress) | [Registry JSON](https://structui.com/registry/components/progress.json)
+- [Spinner](https://structui.com/docs/components/spinner): Spinner: Compact loading spinner for buttons and small placeholders.
+  - links: [Docs](https://structui.com/docs/components/spinner) | [Registry JSON](https://structui.com/registry/components/spinner.json)
+- [Toast](https://structui.com/docs/components/toast): Toast: Transient notification system for success, error, and info messages.
+  - links: [Docs](https://structui.com/docs/components/toast) | [Registry JSON](https://structui.com/registry/components/toast.json)
+
+### Inputs & Forms
+
+- [Checkbox](https://structui.com/docs/components/checkbox): Checkbox: Binary input for multi-select and consent flows.
+  - links: [Docs](https://structui.com/docs/components/checkbox) | [Registry JSON](https://structui.com/registry/components/checkbox.json)
+- [Combobox](https://structui.com/docs/components/combobox): Combobox: Searchable selection UI for larger option sets.
+  - links: [Docs](https://structui.com/docs/components/combobox) | [Registry JSON](https://structui.com/registry/components/combobox.json)
+- [File Upload](https://structui.com/docs/components/file-upload): File Upload: Drag-and-drop upload field for files and attachments.
+  - links: [Docs](https://structui.com/docs/components/file-upload) | [Registry JSON](https://structui.com/registry/components/file-upload.json)
+- [Input](https://structui.com/docs/components/input): Use Input for single-line text entry, filtering, and compact form controls.
+  - links: [Docs](https://structui.com/docs/components/input) | [Registry JSON](https://structui.com/registry/components/input.json) | [Registry Markdown](https://structui.com/registry/components/input.md)
+  - tags: text, field, form, search
+  - related: textarea, select, checkbox
+- [Input OTP](https://structui.com/docs/components/input-otp): Input OTP: Segmented one-time password input for auth flows.
+  - links: [Docs](https://structui.com/docs/components/input-otp) | [Registry JSON](https://structui.com/registry/components/input-otp.json)
+- [Input Tag](https://structui.com/docs/components/input-tag): Input Tag: Tag entry input for labels, recipients, and multi-value fields.
+  - links: [Docs](https://structui.com/docs/components/input-tag) | [Registry JSON](https://structui.com/registry/components/input-tag.json)
+- [Markdown Editor](https://structui.com/docs/components/markdown-editor): Markdown Editor: Markdown editor with live preview for content workflows.
+  - links: [Docs](https://structui.com/docs/components/markdown-editor) | [Registry JSON](https://structui.com/registry/components/markdown-editor.json)
+- [Radio Group](https://structui.com/docs/components/radio-group): Radio Group: Single-selection input for mutually exclusive choices.
+  - links: [Docs](https://structui.com/docs/components/radio-group) | [Registry JSON](https://structui.com/registry/components/radio-group.json)
+- [Select](https://structui.com/docs/components/select): Use Select when users need to choose one option from a constrained list.
+  - links: [Docs](https://structui.com/docs/components/select) | [Registry JSON](https://structui.com/registry/components/select.json) | [Registry Markdown](https://structui.com/registry/components/select.md)
+  - tags: dropdown, options, picker, form
+  - related: combobox, radio-group, input
+- [Slider](https://structui.com/docs/components/slider): Slider: Range input for numeric selection and tuning.
+  - links: [Docs](https://structui.com/docs/components/slider) | [Registry JSON](https://structui.com/registry/components/slider.json)
+- [Switch](https://structui.com/docs/components/switch): Switch: Toggle control for on/off settings.
+  - links: [Docs](https://structui.com/docs/components/switch) | [Registry JSON](https://structui.com/registry/components/switch.json)
+- [Textarea](https://structui.com/docs/components/textarea): Use Textarea for longer freeform input such as notes, bios, and support messages.
+  - links: [Docs](https://structui.com/docs/components/textarea) | [Registry JSON](https://structui.com/registry/components/textarea.json) | [Registry Markdown](https://structui.com/registry/components/textarea.md)
+  - tags: multiline, content, form, notes
+  - related: input, markdown-editor
+- [Toggle](https://structui.com/docs/components/toggle): Toggle: Pressed-state control for compact option toggles.
+  - links: [Docs](https://structui.com/docs/components/toggle) | [Registry JSON](https://structui.com/registry/components/toggle.json)
+
+### Layout & Structure
+
+- [Aspect Ratio](https://structui.com/docs/components/aspect-ratio): Aspect Ratio: Constrain media and embeds to a fixed aspect ratio.
+  - links: [Docs](https://structui.com/docs/components/aspect-ratio) | [Registry JSON](https://structui.com/registry/components/aspect-ratio.json)
+- [Bento Grid](https://structui.com/docs/components/bento-grid): Bento Grid: Editorial grid layout for feature sections and dashboards.
+  - links: [Docs](https://structui.com/docs/components/bento-grid) | [Registry JSON](https://structui.com/registry/components/bento-grid.json)
+- [Card](https://structui.com/docs/components/card): Card: Flexible container for grouped content, metadata, and actions.
+  - links: [Docs](https://structui.com/docs/components/card) | [Registry JSON](https://structui.com/registry/components/card.json)
+  - related: badge, button
+- [Device Mockups](https://structui.com/docs/components/device-mockups): Device Mockups: Device frames for product previews across desktop and mobile form factors.
+  - links: [Docs](https://structui.com/docs/components/device-mockups) | [Registry JSON](https://structui.com/registry/components/device-mockups.json)
+- [Scroll Area](https://structui.com/docs/components/scroll-area): Scroll Area: Styled scroll container for overflow-heavy content.
+  - links: [Docs](https://structui.com/docs/components/scroll-area) | [Registry JSON](https://structui.com/registry/components/scroll-area.json)
+- [Separator](https://structui.com/docs/components/separator): Separator: Visual divider for grouping content and actions.
+  - links: [Docs](https://structui.com/docs/components/separator) | [Registry JSON](https://structui.com/registry/components/separator.json)
+
+### Navigation
+
+- [Breadcrumbs](https://structui.com/docs/components/breadcrumbs): Breadcrumbs: Hierarchy-based navigation trail for nested pages.
+  - links: [Docs](https://structui.com/docs/components/breadcrumbs) | [Registry JSON](https://structui.com/registry/components/breadcrumbs.json)
+- [Menubar](https://structui.com/docs/components/menubar): Menubar: Desktop-style application menu bar.
+  - links: [Docs](https://structui.com/docs/components/menubar) | [Registry JSON](https://structui.com/registry/components/menubar.json)
+- [Navigation Menu](https://structui.com/docs/components/navigation-menu): Navigation Menu: Advanced site navigation menus for headers and mega menus.
+  - links: [Docs](https://structui.com/docs/components/navigation-menu) | [Registry JSON](https://structui.com/registry/components/navigation-menu.json)
+- [Pagination](https://structui.com/docs/components/pagination): Pagination: Paging controls for list and table navigation.
+  - links: [Docs](https://structui.com/docs/components/pagination) | [Registry JSON](https://structui.com/registry/components/pagination.json)
+- [Stepper](https://structui.com/docs/components/stepper): Stepper: Step-based progress indicator for multi-stage flows.
+  - links: [Docs](https://structui.com/docs/components/stepper) | [Registry JSON](https://structui.com/registry/components/stepper.json)
+- [Tabs](https://structui.com/docs/components/tabs): Use Tabs to switch between related views without leaving the current page context.
+  - links: [Docs](https://structui.com/docs/components/tabs) | [Registry JSON](https://structui.com/registry/components/tabs.json) | [Registry Markdown](https://structui.com/registry/components/tabs.md)
+  - tags: navigation, panels, switcher, layout
+  - related: accordion, navigation-menu
+
+### Overlays
+
+- [Alert Dialog](https://structui.com/docs/components/alert-dialog): Alert Dialog: High-stakes confirmation dialog for destructive actions.
+  - links: [Docs](https://structui.com/docs/components/alert-dialog) | [Registry JSON](https://structui.com/registry/components/alert-dialog.json)
+- [Context Menu](https://structui.com/docs/components/context-menu): Context Menu: Right-click menu for contextual actions.
+  - links: [Docs](https://structui.com/docs/components/context-menu) | [Registry JSON](https://structui.com/registry/components/context-menu.json)
+- [Cookies Banner](https://structui.com/docs/components/cookies-banner): Cookies Banner: Consent banner for privacy and cookie preferences.
+  - links: [Docs](https://structui.com/docs/components/cookies-banner) | [Registry JSON](https://structui.com/registry/components/cookies-banner.json)
+- [Dialogs](https://structui.com/docs/components/dialogs): Dialogs: Modal flows for auth, confirmation, and focused interaction.
+  - links: [Docs](https://structui.com/docs/components/dialogs) | [Registry JSON](https://structui.com/registry/components/dialogs.json)
+- [Dropdown Menu](https://structui.com/docs/components/dropdown-menu): Dropdown Menu: Action menu for compact contextual choices.
+  - links: [Docs](https://structui.com/docs/components/dropdown-menu) | [Registry JSON](https://structui.com/registry/components/dropdown-menu.json)
+- [Hover Card](https://structui.com/docs/components/hover-card): Hover Card: Preview card shown on hover for linked entities and metadata.
+  - links: [Docs](https://structui.com/docs/components/hover-card) | [Registry JSON](https://structui.com/registry/components/hover-card.json)
+- [Popover](https://structui.com/docs/components/popover): Popover: Floating panel anchored to a trigger element.
+  - links: [Docs](https://structui.com/docs/components/popover) | [Registry JSON](https://structui.com/registry/components/popover.json)
+- [Sheet](https://structui.com/docs/components/sheet): Sheet: Slide-over panel for secondary flows and contextual tasks.
+  - links: [Docs](https://structui.com/docs/components/sheet) | [Registry JSON](https://structui.com/registry/components/sheet.json)
+- [Tooltip](https://structui.com/docs/components/tooltip): Tooltip: Short contextual hint shown on hover or focus.
+  - links: [Docs](https://structui.com/docs/components/tooltip) | [Registry JSON](https://structui.com/registry/components/tooltip.json)
+

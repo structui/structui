@@ -1,0 +1,17 @@
+{
+  "id": "toast",
+  "slug": "toast",
+  "title": "Toast",
+  "description": "Transient notification system for success, error, and info messages.",
+  "llmSummary": "Toast: Transient notification system for success, error, and info messages.",
+  "category": "Feedback",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/toast.tsx",
+  "docsPath": "src/content/docs/components/toast.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

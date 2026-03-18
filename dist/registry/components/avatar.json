@@ -1,0 +1,26 @@
+{
+  "id": "avatar",
+  "slug": "avatar",
+  "title": "Avatar",
+  "description": "Profile image primitive with fallback states.",
+  "llmSummary": "Use Avatar to represent people, teams, or entities with image and fallback states.",
+  "category": "Data Display",
+  "status": "stable",
+  "docsStatus": "ready",
+  "tags": [
+    "profile",
+    "user",
+    "image",
+    "fallback"
+  ],
+  "sourcePath": "src/components/ui/avatar.tsx",
+  "sourceExport": "Avatar",
+  "docsPath": "src/content/docs/components/avatar.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [
+    "badge",
+    "card"
+  ],
+  "hasMarkdownDoc": true
+}

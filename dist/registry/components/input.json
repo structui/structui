@@ -1,0 +1,27 @@
+{
+  "id": "input",
+  "slug": "input",
+  "title": "Input",
+  "description": "Standard text input field for forms and filters.",
+  "llmSummary": "Use Input for single-line text entry, filtering, and compact form controls.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "ready",
+  "tags": [
+    "text",
+    "field",
+    "form",
+    "search"
+  ],
+  "sourcePath": "src/components/ui/input.tsx",
+  "sourceExport": "Input",
+  "docsPath": "src/content/docs/components/input.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [
+    "textarea",
+    "select",
+    "checkbox"
+  ],
+  "hasMarkdownDoc": true
+}

@@ -1,7 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-const DOCS_ROOT = path.join(process.cwd(), "src/content/docs/components");
+const DOCS_ROOT = path.join(process.cwd(), "docs/components");
 
 export interface MarkdownDocPage {
   slug: string;

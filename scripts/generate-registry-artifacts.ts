@@ -2,7 +2,7 @@ import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { componentRegistryEntries } from "../src/content/registry/components/index";
+import { componentRegistryEntries } from "../registry/components/index";
 import {
   COMPONENT_CATEGORY_LABELS,
   SITE_BRAND_NAME,

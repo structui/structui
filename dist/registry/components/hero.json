@@ -1,0 +1,18 @@
+{
+  "id": "hero",
+  "slug": "hero",
+  "title": "Hero",
+  "description": "Landing page hero section for high-impact product messaging.",
+  "llmSummary": "Hero: Landing page hero section for high-impact product messaging.",
+  "category": "Advanced",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/hero.tsx",
+  "sourceExport": "Hero",
+  "docsPath": "src/content/docs/components/hero.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

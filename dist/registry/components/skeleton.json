@@ -1,0 +1,18 @@
+{
+  "id": "skeleton",
+  "slug": "skeleton",
+  "title": "Skeleton",
+  "description": "Loading placeholder blocks for content still in flight.",
+  "llmSummary": "Skeleton: Loading placeholder blocks for content still in flight.",
+  "category": "Data Display",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/skeleton.tsx",
+  "sourceExport": "Skeleton",
+  "docsPath": "src/content/docs/components/skeleton.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

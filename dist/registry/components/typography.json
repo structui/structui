@@ -1,0 +1,20 @@
+{
+  "id": "typography",
+  "slug": "typography",
+  "title": "Typography",
+  "description": "Type styles and content patterns for structured text layouts.",
+  "llmSummary": "Typography: Type styles and content patterns for structured text layouts.",
+  "category": "General",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [
+    "text",
+    "content",
+    "heading"
+  ],
+  "docsPath": "src/content/docs/components/typography.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

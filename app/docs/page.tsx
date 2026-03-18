@@ -7,9 +7,9 @@ import {
   BookOpen,
   CheckCircle2,
   ChevronRight,
-  Circle,
   Cpu,
   FileCode2,
+  Globe,
   Layers,
   Package,
   Terminal,
@@ -22,13 +22,6 @@ import {
 import { SiteSidebar } from "@/src/components/site/sidebar";
 import { Badge } from "@/src/components/ui/badge";
 import { Button } from "@/src/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/src/components/ui/card";
 import { Snippet } from "@/src/components/ui/snippet";
 import { getAllMarkdownDocs } from "@/src/lib/content/docs";
 import { cn } from "@/src/lib/utils";
@@ -88,68 +81,107 @@ const SUPPORTED_FRAMEWORKS = [
 const WORKFLOW_STEPS = [
   {
     title: "Catalog",
-    description: "The registry lists component metadata — slug, category, status, source path.",
+    description:
+      "The registry catalog exposes components and blocks in a machine-readable index.",
     icon: Layers,
   },
   {
     title: "Inspect",
-    description: "Users view a component through live preview, source code, and markdown docs.",
+    description:
+      "Each package has a detail document with dependencies, files, source paths, and download URLs.",
     icon: BookOpen,
   },
   {
     title: "Install",
-    description: "Files are added via CLI (`npx sui add`) or manual copy-paste.",
+    description:
+      "Teams can install through CLI (`npx sui add <name>`), shadcn-style endpoints, or direct downloads.",
     icon: Terminal,
   },
   {
-    title: "Track",
-    description: "Local config and state track what has been added to a project.",
+    title: "Compose",
+    description:
+      "Components and blocks can be composed in your own project without runtime vendor lock-in.",
     icon: FileCode2,
   },
   {
     title: "Distribute",
-    description: "The registry can later serve real packages through a remote JSON endpoint.",
+    description:
+      "The backend serves CLI contract routes and shadcn-compatible routes from the same source catalog.",
     icon: Zap,
   },
 ];
 
 const KEY_FILES = [
   "package.json",
-  "src/index.ts",
-  "src/core/registry.ts",
-  "src/core/config.ts",
-  "src/core/state.ts",
-  "src/commands/add.ts",
-  "src/commands/init.ts",
-  "src/commands/search.ts",
-  "src/commands/info.ts",
-  "src/commands/list.ts",
-  "src/commands/update.ts",
+  "src/lib/registry/distribution.ts",
+  "src/lib/registry/catalog.ts",
+  "app/api/registry/index.json/route.ts",
+  "app/api/registry/components/[slug]/route.ts",
+  "app/api/registry/blocks/[slug]/route.ts",
+  "app/api/registry/download/[type]/[slug]/route.ts",
+  "app/api/registry.json/route.ts",
+  "app/api/r/index.json/route.ts",
+  "app/api/r/[slug]/route.ts",
 ];
 
 const BUILT_AREAS = [
-  "TypeScript CLI with npm bin entry and distributable output",
-  "Command modules for add, info, init, list, registry, update, and doctor",
-  "Registry abstraction with HTTP, file:// and local fallback behavior",
-  "Local config and state files (sui.config.json, .sui/installed.json)",
-  "Package install flow that resolves details and writes files into the consumer project",
-  "Utility layer for args, terminal styling, semver comparison, and timestamps",
+  "Unified registry source layer for components and blocks",
+  "CLI-friendly index and detail contracts under `/api/registry/...`",
+  "Direct source download endpoint for component and block files",
+  "shadcn-style index and item endpoints under `/api/registry.json` and `/api/r/...`",
+  "Search filtering via query params (`?q=...`) on index routes",
+  "Consistent English JSON error responses and cache headers",
 ];
 
 const LIMITATIONS = [
-  "Production StructUI registry endpoint is not wired yet",
-  "Dependency install is declared but not executed automatically",
-  "No `remove` command yet",
-  "No interactive prompt mode yet",
-  "No remote CLI self-update check yet",
+  "Block package entries currently map selected existing component source files.",
+  "Registry endpoints are public and do not include auth- or plan-based gating.",
+  "Dependency installation is still executed by consumer tooling, not by the API itself.",
+  "Semver release channels (stable, beta, canary) are not split yet.",
+  "Package signatures and integrity hashes are not exposed yet.",
 ];
 
 const NEXT_STEPS = [
-  "Connect structui.com to a real JSON registry endpoint",
-  "Finalize package schema for components and blocks",
-  "Add overwrite, merge and diff preview behavior",
-  "Add remove command and dry-run support",
-  "Publish the package and verify npx install flows against the live registry",
+  "Add dedicated source templates for every block package.",
+  "Expose integrity hash fields to support secure installs.",
+  "Add version channels and per-item changelog metadata.",
+  "Add optional authentication and role-based package visibility.",
+  "Ship CLI autofix flows for dependency sync and upgrade previews.",
+];
+
+const API_ENDPOINTS = [
+  {
+    path: "/api/registry/index.json",
+    description: "Combined CLI index for all package types.",
+  },
+  {
+    path: "/api/registry/components/index.json",
+    description: "CLI index for component packages only.",
+  },
+  {
+    path: "/api/registry/blocks/index.json",
+    description: "CLI index for block packages only.",
+  },
+  {
+    path: "/api/registry/components/:slug",
+    description: "CLI detail payload for a single component package.",
+  },
+  {
+    path: "/api/registry/blocks/:slug",
+    description: "CLI detail payload for a single block package.",
+  },
+  {
+    path: "/api/registry/download/:type/:slug",
+    description: "Direct source file download endpoint.",
+  },
+  {
+    path: "/api/registry.json",
+    description: "shadcn-style registry index.",
+  },
+  {
+    path: "/api/r/:slug",
+    description: "shadcn-style registry item document.",
+  },
 ];
 
 export const metadata: Metadata = {
@@ -180,8 +212,9 @@ export default async function Page() {
               { title: "How It Works", href: "/docs#workflow" },
               { title: "Framework Support", href: "/docs#frameworks" },
               { title: "CLI Surface", href: "/docs#cli" },
-              { title: "Registry Contract", href: "/docs#registry" },
-              { title: "Limitations", href: "/docs#limitations" },
+              { title: "Install Flows", href: "/docs#install-flows" },
+              { title: "Registry API", href: "/docs#registry" },
+              { title: "Current Status", href: "/docs#limitations" },
             ],
           },
           {
@@ -199,7 +232,7 @@ export default async function Page() {
         <div className="mx-auto space-y-16 px-6 py-12 lg:px-10">
 
           {/* ── Overview ─────────────────────────────────────────────── */}
-          <section id="overview" className="space-y-8">
+          <section id="overview" className="scroll-mt-20 space-y-8 md:scroll-mt-24">
             {/* Hero */}
             <div className="relative overflow-hidden rounded-3xl border border-primary/12 bg-gradient-to-br from-primary/10 via-background to-background px-8 py-10">
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
@@ -287,7 +320,7 @@ export default async function Page() {
           <div className="border-t" />
 
           {/* ── How It Works ─────────────────────────────────────────── */}
-          <section id="workflow" className="space-y-6">
+          <section id="workflow" className="scroll-mt-20 space-y-6 md:scroll-mt-24">
             <div className="space-y-2">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                 Workflow
@@ -326,7 +359,7 @@ export default async function Page() {
           <div className="border-t" />
 
           {/* ── Framework Support ────────────────────────────────────── */}
-          <section id="frameworks" className="space-y-6">
+          <section id="frameworks" className="scroll-mt-20 space-y-6 md:scroll-mt-24">
             <div className="space-y-2">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                 Compatibility
@@ -363,14 +396,14 @@ export default async function Page() {
           <div className="border-t" />
 
           {/* ── CLI ──────────────────────────────────────────────────── */}
-          <section id="cli" className="space-y-6">
+          <section id="cli" className="scroll-mt-20 space-y-6 md:scroll-mt-24">
             <div className="space-y-2">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                 CLI
               </p>
               <h2 className="text-2xl font-bold tracking-tight">CLI surface</h2>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                The CLI is built around the <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">sui</code> command surface and provides the foundation for StructUI distribution.
+                StructUI packages can be installed from the <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">sui</code> command surface, backed by the registry API routes.
               </p>
             </div>
 
@@ -409,6 +442,16 @@ export default async function Page() {
                     ))}
                   </div>
                 </div>
+
+                <Snippet
+                  language="bash"
+                  filename="cli-install-examples.sh"
+                  code={`npx sui init
+npx sui add button
+npx sui add hero-section
+npx sui info button
+npx sui search pricing`}
+                />
               </div>
 
               {/* Key files */}
@@ -435,53 +478,173 @@ export default async function Page() {
 
           <div className="border-t" />
 
-          {/* ── Registry Contract ────────────────────────────────────── */}
-          <section id="registry" className="space-y-6">
+          {/* ── Install Flows ───────────────────────────────────────── */}
+          <section id="install-flows" className="scroll-mt-20 space-y-6 md:scroll-mt-24">
             <div className="space-y-2">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                Registry
+                Install
               </p>
-              <h2 className="text-2xl font-bold tracking-tight">Registry contract</h2>
+              <h2 className="text-2xl font-bold tracking-tight">Component and block install flows</h2>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                The CLI expects a package index and individual package documents as JSON.
-                This contract can be connected to a live registry served by structui.com.
+                You can install with CLI, inspect detail payloads, and download raw source files directly from the API.
               </p>
             </div>
 
             <div className="grid gap-4 lg:grid-cols-2">
               <Snippet
+                language="bash"
+                filename="install-component.sh"
+                code={`# 1) List component packages
+curl -s https://structui.com/api/registry/components/index.json | jq '.items[0]'
+
+# 2) Inspect one package detail
+curl -s https://structui.com/api/registry/components/button | jq '.files[0]'
+
+# 3) Download source file directly
+curl -L https://structui.com/api/registry/download/component/button -o button.tsx
+
+# 4) CLI install
+npx sui add button`}
+              />
+              <Snippet
+                language="bash"
+                filename="install-block.sh"
+                code={`# 1) List block packages
+curl -s https://structui.com/api/registry/blocks/index.json | jq '.items[0]'
+
+# 2) Inspect one block package
+curl -s https://structui.com/api/registry/blocks/hero-section | jq '.files[0]'
+
+# 3) Download source file directly
+curl -L https://structui.com/api/registry/download/block/hero-section -o hero-section.tsx
+
+# 4) CLI install
+npx sui add hero-section`}
+              />
+            </div>
+          </section>
+
+          <div className="border-t" />
+
+          {/* ── Registry API ───────────────────────────────────────── */}
+          <section id="registry" className="scroll-mt-20 space-y-6 md:scroll-mt-24">
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Registry
+              </p>
+              <h2 className="text-2xl font-bold tracking-tight">Registry API contract</h2>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                StructUI serves both a CLI contract and shadcn-compatible contract from the same package catalog.
+              </p>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {API_ENDPOINTS.map((endpoint) => (
+                <div
+                  key={endpoint.path}
+                  className="rounded-2xl border border-border/70 bg-card p-4"
+                >
+                  <div className="mb-1.5 flex items-center gap-2">
+                    <Globe className="h-3.5 w-3.5 text-primary/70" />
+                    <code className="text-xs text-primary">{endpoint.path}</code>
+                  </div>
+                  <p className="text-xs text-muted-foreground">{endpoint.description}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid gap-4 lg:grid-cols-2">
+              <Snippet
                 language="json"
-                filename="registry-index.json"
+                filename="cli-index.json"
                 code={`{
   "registryVersion": 1,
-  "updatedAt": "2026-03-18T00:00:00.000Z",
+  "updatedAt": "2026-03-19T00:00:00.000Z",
+  "message": "StructUI registry index generated successfully.",
+  "source": "StructUI Registry API",
   "items": [
     {
-      "name": "hero-banner",
+      "name": "button",
+      "type": "component",
+      "version": "0.1.0",
+      "description": "Interactive button with multiple variants and sizes.",
+      "entrypoint": "components/button.json",
+      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
+      "tags": ["action", "trigger", "form", "cta"]
+    },
+    {
+      "name": "hero-section",
       "type": "block",
-      "version": "1.0.0",
-      "description": "Marketing hero section",
-      "entrypoint": "registry/hero-banner.json",
+      "version": "0.1.0",
+      "description": "Marketing hero section with CTA and headline content.",
+      "entrypoint": "blocks/hero-section.json",
       "dependencies": [],
-      "tags": ["marketing", "hero"]
+      "tags": ["hero", "marketing", "landing"]
     }
   ]
 }`}
               />
               <Snippet
                 language="json"
-                filename="hero-banner.json"
+                filename="component-detail.json"
                 code={`{
-  "name": "hero-banner",
-  "type": "block",
-  "version": "1.0.0",
-  "description": "Marketing hero section",
-  "dependencies": [],
-  "tags": ["marketing", "hero"],
+  "name": "button",
+  "type": "component",
+  "version": "0.1.0",
+  "title": "Button",
+  "description": "Interactive button with multiple variants and sizes.",
+  "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
+  "registryDependencies": [],
+  "tags": ["action", "trigger", "form", "cta"],
   "files": [
     {
-      "path": "hero-banner.tsx",
-      "content": "export function HeroBanner() {}"
+      "path": "button.tsx",
+      "sourcePath": "src/components/ui/button.tsx",
+      "target": "components/ui/button.tsx",
+      "content": "..."
+    }
+  ],
+  "downloadUrl": "/api/registry/download/component/button",
+  "message": "Registry item generated successfully."
+}`}
+              />
+              <Snippet
+                language="json"
+                filename="shadcn-index.json"
+                code={`{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "structui",
+  "homepage": "https://structui.com",
+  "updatedAt": "2026-03-19T00:00:00.000Z",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Interactive button with multiple variants and sizes.",
+      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
+      "registryDependencies": []
+    }
+  ]
+}`}
+              />
+              <Snippet
+                language="json"
+                filename="shadcn-item.json"
+                code={`{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "type": "registry:ui",
+  "title": "Button",
+  "description": "Interactive button with multiple variants and sizes.",
+  "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "button.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/button.tsx",
+      "content": "..."
     }
   ]
 }`}
@@ -492,7 +655,7 @@ export default async function Page() {
           <div className="border-t" />
 
           {/* ── Limitations + Next Steps ──────────────────────────────── */}
-          <section id="limitations" className="space-y-6">
+          <section id="limitations" className="scroll-mt-20 space-y-6 md:scroll-mt-24">
             <div className="space-y-2">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                 Status
@@ -554,7 +717,7 @@ export default async function Page() {
                 <p className="text-sm leading-relaxed text-muted-foreground">
                   Generated from markdown files under{" "}
                   <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">
-                    src/content/docs/components
+                    docs/components
                   </code>
                   .
                 </p>

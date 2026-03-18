@@ -1,0 +1,26 @@
+{
+  "id": "tabs",
+  "slug": "tabs",
+  "title": "Tabs",
+  "description": "Tabbed navigation for switching between related content panels.",
+  "llmSummary": "Use Tabs to switch between related views without leaving the current page context.",
+  "category": "Navigation",
+  "status": "stable",
+  "docsStatus": "ready",
+  "tags": [
+    "navigation",
+    "panels",
+    "switcher",
+    "layout"
+  ],
+  "sourcePath": "src/components/ui/tabs.tsx",
+  "sourceExport": "Tabs",
+  "docsPath": "src/content/docs/components/tabs.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [
+    "accordion",
+    "navigation-menu"
+  ],
+  "hasMarkdownDoc": true
+}

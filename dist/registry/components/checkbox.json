@@ -1,0 +1,18 @@
+{
+  "id": "checkbox",
+  "slug": "checkbox",
+  "title": "Checkbox",
+  "description": "Binary input for multi-select and consent flows.",
+  "llmSummary": "Checkbox: Binary input for multi-select and consent flows.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/checkbox.tsx",
+  "sourceExport": "Checkbox",
+  "docsPath": "src/content/docs/components/checkbox.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

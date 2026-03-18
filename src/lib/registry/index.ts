@@ -6,8 +6,6 @@ export {
   getDocumentedComponents,
   getPublicComponents,
 } from "./components";
-export { getComponentDocByPath, getComponentDocBySlug } from "./docs";
-export { DOCS_NAV_ITEMS, getDocPathById } from "./docs-nav";
 export {
   COMPONENT_CATEGORY_LABELS,
   SITE_BRAND_NAME,

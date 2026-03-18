@@ -1,0 +1,18 @@
+{
+  "id": "navigation-menu",
+  "slug": "navigation-menu",
+  "title": "Navigation Menu",
+  "description": "Advanced site navigation menus for headers and mega menus.",
+  "llmSummary": "Navigation Menu: Advanced site navigation menus for headers and mega menus.",
+  "category": "Navigation",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/navigation-advanced.tsx",
+  "sourceExport": "NavigationMenu",
+  "docsPath": "src/content/docs/components/navigation-menu.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

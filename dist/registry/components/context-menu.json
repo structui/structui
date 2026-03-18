@@ -1,0 +1,18 @@
+{
+  "id": "context-menu",
+  "slug": "context-menu",
+  "title": "Context Menu",
+  "description": "Right-click menu for contextual actions.",
+  "llmSummary": "Context Menu: Right-click menu for contextual actions.",
+  "category": "Overlay",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/overlay-advanced.tsx",
+  "sourceExport": "ContextMenu",
+  "docsPath": "src/content/docs/components/context-menu.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

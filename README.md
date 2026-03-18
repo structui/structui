@@ -1,42 +1,36 @@
-# StructUI
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-StructUI is a registry-first React UI system built with Vite, React, TypeScript, Radix UI, and Tailwind CSS v4.
+## Getting Started
 
-It now exposes both human-facing docs and machine-readable surfaces from the same source of truth.
-
-## Public Surfaces
-
-- `https://structui.com/registry.json` - full registry export with metrics and component index
-- `https://structui.com/registry/components/<slug>.json` - per-component structured metadata
-- `https://structui.com/registry/components/<slug>.md` - per-component markdown docs when available
-- `https://structui.com/llms.txt` - compact LLM discovery surface
-- `https://structui.com/llms-full.txt` - expanded LLM surface with embedded component docs
-
-## Local Development
+First, run the development server:
 
 ```bash
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Key Scripts
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-npm run generate:registry
-npm run build
-npx tsc --noEmit
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Current Direction
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- central typed registry for components
-- markdown-backed component docs
-- registry-driven marketing and docs surfaces
-- public exports for external tools, agents, and LLM workflows
+## Learn More
 
-## Notes
+To learn more about Next.js, take a look at the following resources:
 
-- Canonical brand: `StructUI`
-- Canonical package: `struct-ui`
-- Canonical CLI contract: `strui`
-- Source repository: `https://github.com/structui/structui`
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

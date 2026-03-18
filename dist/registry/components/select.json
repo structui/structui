@@ -1,0 +1,27 @@
+{
+  "id": "select",
+  "slug": "select",
+  "title": "Select",
+  "description": "Dropdown selection menu for predefined options.",
+  "llmSummary": "Use Select when users need to choose one option from a constrained list.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "ready",
+  "tags": [
+    "dropdown",
+    "options",
+    "picker",
+    "form"
+  ],
+  "sourcePath": "src/components/ui/select.tsx",
+  "sourceExport": "Select",
+  "docsPath": "src/content/docs/components/select.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [
+    "combobox",
+    "radio-group",
+    "input"
+  ],
+  "hasMarkdownDoc": true
+}

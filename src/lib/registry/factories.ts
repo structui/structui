@@ -37,7 +37,7 @@ export const createComponentRegistryEntry = (
   tags: seed.tags ?? [],
   sourcePath: seed.sourcePath,
   sourceExport: seed.sourceExport,
-  docsPath: seed.docsPath ?? `src/content/docs/components/${seed.id}.md`,
+  docsPath: seed.docsPath ?? `docs/components/${seed.id}.md`,
   dependencies: seed.dependencies ?? [],
   registryDependencies: seed.registryDependencies ?? [],
   relatedComponents: seed.relatedComponents ?? [],

@@ -1,0 +1,17 @@
+{
+  "id": "device-mockups",
+  "slug": "device-mockups",
+  "title": "Device Mockups",
+  "description": "Device frames for product previews across desktop and mobile form factors.",
+  "llmSummary": "Device Mockups: Device frames for product previews across desktop and mobile form factors.",
+  "category": "Layout",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/device-mockups.tsx",
+  "docsPath": "src/content/docs/components/device-mockups.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

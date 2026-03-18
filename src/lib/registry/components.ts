@@ -1,10 +1,21 @@
-import { componentRegistryEntries } from "@/src/content/registry/components";
+import { componentRegistryEntries } from "@/registry/components";
 import { STATIC_DOCS_SIDEBAR } from "@/src/lib/registry/constants";
 import type {
   ComponentCategory,
   ComponentRegistryEntry,
   SidebarSection,
 } from "@/src/lib/registry/types";
+
+const normalizeSourcePath = (value?: string): string | undefined => {
+  if (!value) {
+    return value;
+  }
+
+  return value.replace(/^src\/components\/ui\//, "components/ui/");
+};
+
+const normalizeDocsPath = (value: string): string =>
+  value.replace(/^src\/content\/docs\/components\//, "docs/components/");
 
 const validateComponentRegistry = (
   entries: ComponentRegistryEntry[],
@@ -28,7 +39,13 @@ const validateComponentRegistry = (
   return [...entries].sort((left, right) => left.title.localeCompare(right.title));
 };
 
-const COMPONENTS = validateComponentRegistry(componentRegistryEntries);
+const COMPONENTS = validateComponentRegistry(
+  componentRegistryEntries.map((entry) => ({
+    ...entry,
+    sourcePath: normalizeSourcePath(entry.sourcePath),
+    docsPath: normalizeDocsPath(entry.docsPath),
+  })),
+);
 
 export const getAllComponents = (): ComponentRegistryEntry[] => [...COMPONENTS];
 

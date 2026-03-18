@@ -1,0 +1,18 @@
+{
+  "id": "alert-dialog",
+  "slug": "alert-dialog",
+  "title": "Alert Dialog",
+  "description": "High-stakes confirmation dialog for destructive actions.",
+  "llmSummary": "Alert Dialog: High-stakes confirmation dialog for destructive actions.",
+  "category": "Overlay",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/alert-dialog.tsx",
+  "sourceExport": "AlertDialog",
+  "docsPath": "src/content/docs/components/alert-dialog.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

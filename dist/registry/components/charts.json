@@ -1,0 +1,17 @@
+{
+  "id": "charts",
+  "slug": "charts",
+  "title": "Charts",
+  "description": "Composable chart components for visualizing trends and distributions.",
+  "llmSummary": "Charts: Composable chart components for visualizing trends and distributions.",
+  "category": "Data Display",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/charts.tsx",
+  "docsPath": "src/content/docs/components/charts.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}
