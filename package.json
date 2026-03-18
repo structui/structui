@@ -1,5 +1,6 @@
 {
-  "name": "react-example",
+  "name": "struct-ui",
+  "description": "Registry-first React UI system with public docs and LLM-friendly exports.",
   "private": true,
   "version": "0.0.0",
   "type": "module",
