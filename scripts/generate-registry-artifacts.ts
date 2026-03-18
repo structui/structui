@@ -136,7 +136,7 @@ const getComponentGroups = (components: ComponentExport[]): ComponentGroup[] => 
 };
 
 const getComponentDocsUrl = (slug: string): string =>
-  `${SITE_URL}/components/${slug}`;
+  `${SITE_URL}/docs/components/${slug}`;
 
 const getRegistryJsonUrl = (slug: string): string =>
   `${SITE_URL}/registry/components/${slug}.json`;

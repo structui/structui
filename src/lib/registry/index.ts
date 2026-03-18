@@ -3,6 +3,7 @@ export {
   getComponentBySlug,
   getComponentCategories,
   getComponentSidebarSections,
+  getDocumentedComponents,
   getPublicComponents,
 } from "./components";
 export { getComponentDocByPath, getComponentDocBySlug } from "./docs";

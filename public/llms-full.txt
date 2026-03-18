@@ -26,7 +26,7 @@
 
 - package: `struct-ui`
 - cli: `npx strui`
-- metrics: 56 total, 3 markdown-documented, 56 stable, 8 categories
+- metrics: 56 total, 8 markdown-documented, 56 stable, 8 categories
 
 ## Registry Surfaces
 
@@ -71,8 +71,10 @@
   - links: [Docs](https://structui.com/components/accordion) | [Registry JSON](https://structui.com/registry/components/accordion.json) | [Registry Markdown](https://structui.com/registry/components/accordion.md)
   - tags: collapse, faq, disclosure, content
   - related: button
-- [Avatar](https://structui.com/components/avatar): Avatar: Profile image primitive with fallback states.
-  - links: [Docs](https://structui.com/components/avatar) | [Registry JSON](https://structui.com/registry/components/avatar.json)
+- [Avatar](https://structui.com/components/avatar): Use Avatar to represent people, teams, or entities with image and fallback states.
+  - links: [Docs](https://structui.com/components/avatar) | [Registry JSON](https://structui.com/registry/components/avatar.json) | [Registry Markdown](https://structui.com/registry/components/avatar.md)
+  - tags: profile, user, image, fallback
+  - related: badge, card
 - [Calendar](https://structui.com/components/calendar): Calendar: Date and schedule UI for picking and browsing dates.
   - links: [Docs](https://structui.com/components/calendar) | [Registry JSON](https://structui.com/registry/components/calendar.json)
 - [Charts](https://structui.com/components/charts): Charts: Composable chart components for visualizing trends and distributions.
@@ -111,8 +113,10 @@
   - links: [Docs](https://structui.com/components/combobox) | [Registry JSON](https://structui.com/registry/components/combobox.json)
 - [File Upload](https://structui.com/components/file-upload): File Upload: Drag-and-drop upload field for files and attachments.
   - links: [Docs](https://structui.com/components/file-upload) | [Registry JSON](https://structui.com/registry/components/file-upload.json)
-- [Input](https://structui.com/components/input): Input: Standard text input field for forms and filters.
-  - links: [Docs](https://structui.com/components/input) | [Registry JSON](https://structui.com/registry/components/input.json)
+- [Input](https://structui.com/components/input): Use Input for single-line text entry, filtering, and compact form controls.
+  - links: [Docs](https://structui.com/components/input) | [Registry JSON](https://structui.com/registry/components/input.json) | [Registry Markdown](https://structui.com/registry/components/input.md)
+  - tags: text, field, form, search
+  - related: textarea, select, checkbox
 - [Input OTP](https://structui.com/components/input-otp): Input OTP: Segmented one-time password input for auth flows.
   - links: [Docs](https://structui.com/components/input-otp) | [Registry JSON](https://structui.com/registry/components/input-otp.json)
 - [Input Tag](https://structui.com/components/input-tag): Input Tag: Tag entry input for labels, recipients, and multi-value fields.
@@ -121,14 +125,18 @@
   - links: [Docs](https://structui.com/components/markdown-editor) | [Registry JSON](https://structui.com/registry/components/markdown-editor.json)
 - [Radio Group](https://structui.com/components/radio-group): Radio Group: Single-selection input for mutually exclusive choices.
   - links: [Docs](https://structui.com/components/radio-group) | [Registry JSON](https://structui.com/registry/components/radio-group.json)
-- [Select](https://structui.com/components/select): Select: Dropdown selection menu for predefined options.
-  - links: [Docs](https://structui.com/components/select) | [Registry JSON](https://structui.com/registry/components/select.json)
+- [Select](https://structui.com/components/select): Use Select when users need to choose one option from a constrained list.
+  - links: [Docs](https://structui.com/components/select) | [Registry JSON](https://structui.com/registry/components/select.json) | [Registry Markdown](https://structui.com/registry/components/select.md)
+  - tags: dropdown, options, picker, form
+  - related: combobox, radio-group, input
 - [Slider](https://structui.com/components/slider): Slider: Range input for numeric selection and tuning.
   - links: [Docs](https://structui.com/components/slider) | [Registry JSON](https://structui.com/registry/components/slider.json)
 - [Switch](https://structui.com/components/switch): Switch: Toggle control for on/off settings.
   - links: [Docs](https://structui.com/components/switch) | [Registry JSON](https://structui.com/registry/components/switch.json)
-- [Textarea](https://structui.com/components/textarea): Textarea: Multiline text field for messages, notes, and descriptions.
-  - links: [Docs](https://structui.com/components/textarea) | [Registry JSON](https://structui.com/registry/components/textarea.json)
+- [Textarea](https://structui.com/components/textarea): Use Textarea for longer freeform input such as notes, bios, and support messages.
+  - links: [Docs](https://structui.com/components/textarea) | [Registry JSON](https://structui.com/registry/components/textarea.json) | [Registry Markdown](https://structui.com/registry/components/textarea.md)
+  - tags: multiline, content, form, notes
+  - related: input, markdown-editor
 - [Toggle](https://structui.com/components/toggle): Toggle: Pressed-state control for compact option toggles.
   - links: [Docs](https://structui.com/components/toggle) | [Registry JSON](https://structui.com/registry/components/toggle.json)
 
@@ -160,8 +168,10 @@
   - links: [Docs](https://structui.com/components/pagination) | [Registry JSON](https://structui.com/registry/components/pagination.json)
 - [Stepper](https://structui.com/components/stepper): Stepper: Step-based progress indicator for multi-stage flows.
   - links: [Docs](https://structui.com/components/stepper) | [Registry JSON](https://structui.com/registry/components/stepper.json)
-- [Tabs](https://structui.com/components/tabs): Tabs: Tabbed navigation for switching between related content panels.
-  - links: [Docs](https://structui.com/components/tabs) | [Registry JSON](https://structui.com/registry/components/tabs.json)
+- [Tabs](https://structui.com/components/tabs): Use Tabs to switch between related views without leaving the current page context.
+  - links: [Docs](https://structui.com/components/tabs) | [Registry JSON](https://structui.com/registry/components/tabs.json) | [Registry Markdown](https://structui.com/registry/components/tabs.md)
+  - tags: navigation, panels, switcher, layout
+  - related: accordion, navigation-menu
 
 ### Overlays
 
