@@ -103,6 +103,15 @@ import { Textarea } from "@/src/components/ui/textarea";
 import { Timeline, activityLog } from "@/src/components/ui/timeline";
 import { ToastDemo } from "@/src/components/ui/toast";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/src/components/ui/tooltip";
+import { CommandBarDemo } from "@/src/components/ui/command-bar";
+import {
+  BentoMarketingBlock,
+  NewsletterBlock,
+  StatsBlock,
+} from "@/src/components/ui/blocks-modern";
+import { ColorPicker, ColorPalette } from "@/src/components/ui/color-picker";
+import { Rating, RatingStats } from "@/src/components/ui/rating";
+import { Kbd, Shortcut, KeyHint, ShortcutList } from "@/src/components/ui/kbd";
 
 const chartData = [
   { name: "Jan", value: 1200 },
@@ -299,6 +308,14 @@ export function ComponentPreview({ slug }: { slug: string }) {
           />
         </BentoGrid>
       );
+    case "blocks-modern":
+      return (
+        <div className="space-y-8">
+          <BentoMarketingBlock className="py-12" />
+          <StatsBlock className="py-10" />
+          <NewsletterBlock className="py-12" />
+        </div>
+      );
     case "button":
       return (
         <div className="flex flex-wrap gap-3">
@@ -371,6 +388,12 @@ export function ComponentPreview({ slug }: { slug: string }) {
           title="Command Palette"
           description="Global search entrypoint preview. The full site command palette is also available from the navbar."
         />
+      );
+    case "command-bar":
+      return (
+        <div className="max-w-xl">
+          <CommandBarDemo />
+        </div>
       );
     case "cookies-banner":
       return (
@@ -988,6 +1011,109 @@ export function ComponentPreview({ slug }: { slug: string }) {
       return (
         <div className="max-w-xl">
           <FormWizard steps={wizardSteps} />
+        </div>
+      );
+    }
+
+    case "color-picker": {
+      const palette = ["#ef4444","#f97316","#eab308","#22c55e","#3b82f6","#8b5cf6","#ec4899","#64748b"];
+      const [pickerColor, setPickerColor] = useState("#3b82f6");
+      const [paletteColor, setPaletteColor] = useState("#22c55e");
+      return (
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <p className="text-sm font-medium">Color Picker with opacity</p>
+            <div className="flex items-center gap-4">
+              <ColorPicker value={pickerColor} onChange={setPickerColor} />
+              <span className="text-xs font-mono text-muted-foreground">{pickerColor}</span>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm font-medium">Color Palette</p>
+            <ColorPalette colors={palette} value={paletteColor} onChange={setPaletteColor} />
+          </div>
+        </div>
+      );
+    }
+
+    case "rating": {
+      const [ratingValue, setRatingValue] = useState(3);
+      return (
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <p className="text-sm font-medium">Interactive — {ratingValue} / 5</p>
+            <Rating value={ratingValue} onChange={setRatingValue} allowHalf size="lg" showValue />
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm font-medium">Read-only variants</p>
+            <div className="flex flex-col gap-2">
+              <Rating value={4.5} readOnly allowHalf showValue showCount count={2431} />
+              <Rating value={3} readOnly icon="heart" color="#ec4899" size="sm" />
+              <Rating value={4} readOnly icon="zap" color="#f59e0b" max={5} />
+            </div>
+          </div>
+          <RatingStats
+            average={4.3}
+            total={1284}
+            breakdown={[
+              { stars: 1, count: 24 },
+              { stars: 2, count: 51 },
+              { stars: 3, count: 130 },
+              { stars: 4, count: 380 },
+              { stars: 5, count: 699 },
+            ]}
+          />
+        </div>
+      );
+    }
+
+    case "kbd": {
+      return (
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <p className="text-sm font-medium">Single keys</p>
+            <div className="flex items-center gap-2">
+              <Kbd>⌘</Kbd>
+              <Kbd>K</Kbd>
+              <Kbd size="lg">Enter</Kbd>
+              <Kbd size="sm">Esc</Kbd>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm font-medium">Shortcuts</p>
+            <div className="flex flex-col gap-2">
+              <Shortcut keys={["cmd", "k"]} />
+              <Shortcut keys={["ctrl", "shift", "p"]} />
+              <Shortcut keys={["cmd", "z"]} />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm font-medium">Key hints</p>
+            <div className="flex flex-col gap-1.5">
+              <KeyHint label="Open command palette" keys={["cmd", "k"]} />
+              <KeyHint label="Save file" keys={["cmd", "s"]} />
+              <KeyHint label="Close tab" keys={["cmd", "w"]} />
+            </div>
+          </div>
+          <ShortcutList
+            columns={2}
+            groups={[
+              {
+                title: "Navigation",
+                items: [
+                  { keys: ["cmd", "k"], description: "Command palette" },
+                  { keys: ["cmd", "/"], description: "Search" },
+                ],
+              },
+              {
+                title: "Editing",
+                items: [
+                  { keys: ["cmd", "z"], description: "Undo" },
+                  { keys: ["cmd", "shift", "z"], description: "Redo" },
+                ],
+              },
+            ]}
+          />
         </div>
       );
     }

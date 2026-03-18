@@ -31,7 +31,7 @@ export const AlertDialogContent = React.forwardRef<
     <AlertDialogPrimitive.Content
       ref={ref}
       className={cn(
-        "ui-alert-content fixed inset-0 z-50 m-auto grid h-fit w-[calc(100%-2rem)] max-w-lg gap-4 border border-border/70 bg-background/95 p-6 shadow-2xl will-change-transform sm:rounded-xl",
+        "ui-alert-content fixed left-1/2 top-1/2 z-50 grid max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 overflow-y-auto border border-border/70 bg-background/95 p-6 shadow-2xl will-change-transform sm:rounded-xl",
         className
       )}
       {...props}

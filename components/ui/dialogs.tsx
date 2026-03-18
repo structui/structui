@@ -33,7 +33,7 @@ export const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "ui-dialog-content fixed inset-0 z-50 m-auto grid h-fit w-[calc(100%-2rem)] max-w-lg gap-4 rounded-3xl border border-border/70 bg-background/95 p-6 shadow-2xl will-change-transform",
+        "ui-dialog-content fixed left-1/2 top-1/2 z-50 grid max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 overflow-y-auto rounded-3xl border border-border/70 bg-background/95 p-6 shadow-2xl will-change-transform",
         className
       )}
       {...props}
@@ -143,7 +143,7 @@ export const SignInModal = () => (
         <Button variant="outline" className="rounded-xl border-primary/10 font-light">GitHub</Button>
       </div>
       <p className="text-center text-xs text-muted-foreground pt-4">
-        Don't have an account? <button className="text-primary font-medium">Sign up</button>
+        Don&apos;t have an account? <button className="text-primary font-medium">Sign up</button>
       </p>
     </DialogContent>
   </Dialog>

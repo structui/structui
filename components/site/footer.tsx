@@ -123,8 +123,8 @@ export function SiteFooter() {
           <div className="col-span-2 lg:col-span-4">
             {/* Logo */}
             <Link href="/" className="inline-flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-primary/20 bg-primary/10">
-                <span className="text-xs font-bold text-primary">S</span>
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-primary/20 bg-primary">
+                <span className="text-xs font-bold text-background">S</span>
               </div>
               <span className="text-base font-bold tracking-tight">
                 S<span className="text-primary/50">UI</span>
