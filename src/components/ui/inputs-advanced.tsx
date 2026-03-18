@@ -140,7 +140,9 @@ export const InputOTP = ({ length = 6, onChange }: { length?: number; onChange?:
       {values.map((v, i) => (
         <input
           key={i}
-          ref={(el) => (inputs.current[i] = el)}
+          ref={(el) => {
+            inputs.current[i] = el;
+          }}
           value={v}
           onChange={(e) => handleChange(i, e.target.value)}
           onKeyDown={(e) => handleKeyDown(i, e)}
@@ -194,9 +196,11 @@ export const FileUpload = ({ onUpload }: { onUpload?: (files: File[]) => void })
   const [fileNames, setFileNames] = React.useState<string[]>([]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
+    const fileList = e.target.files;
+    const files: File[] = fileList ? Array.from<File>(fileList) : [];
+
     if (files.length > 0) {
-      setFileNames(files.map(f => f.name));
+      setFileNames(files.map((file) => file.name));
       onUpload?.(files);
     }
   };

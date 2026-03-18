@@ -1,0 +1,18 @@
+{
+  "id": "hover-card",
+  "slug": "hover-card",
+  "title": "Hover Card",
+  "description": "Preview card shown on hover for linked entities and metadata.",
+  "llmSummary": "Hover Card: Preview card shown on hover for linked entities and metadata.",
+  "category": "Overlay",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/overlay-advanced.tsx",
+  "sourceExport": "HoverCard",
+  "docsPath": "src/content/docs/components/hover-card.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

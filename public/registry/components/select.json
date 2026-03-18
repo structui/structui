@@ -1,0 +1,18 @@
+{
+  "id": "select",
+  "slug": "select",
+  "title": "Select",
+  "description": "Dropdown selection menu for predefined options.",
+  "llmSummary": "Select: Dropdown selection menu for predefined options.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/select.tsx",
+  "sourceExport": "Select",
+  "docsPath": "src/content/docs/components/select.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

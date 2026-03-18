@@ -118,7 +118,7 @@ const CommandItem = ({ icon, label, meta, onSelect }: CommandItemProps) => (
     className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
   >
     <div className="mr-2 flex h-4 w-4 items-center justify-center opacity-70">
-      {React.cloneElement(icon as React.ReactElement, { className: "h-4 w-4" })}
+      {icon}
     </div>
     <span>{label}</span>
     {meta && (

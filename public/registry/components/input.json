@@ -1,0 +1,18 @@
+{
+  "id": "input",
+  "slug": "input",
+  "title": "Input",
+  "description": "Standard text input field for forms and filters.",
+  "llmSummary": "Input: Standard text input field for forms and filters.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/input.tsx",
+  "sourceExport": "Input",
+  "docsPath": "src/content/docs/components/input.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

@@ -37,7 +37,7 @@ import { CommandPalette } from "@/src/components/ui/command-palette";
 import { IPhoneMockup, AndroidMockup, TabletMockup, LaptopMockup, DesktopMockup } from "@/src/components/ui/device-mockups";
 import { Spinner1, Spinner2, Spinner3, Spinner4, Spinner5, Loader1, Loader2, Loader3, Loader4, Loader5 } from "@/src/components/ui/loaders";
 import { CookiesBanner } from "@/src/components/ui/cookies-banner";
-import { SignInModal, AlertDialog } from "@/src/components/ui/dialogs";
+import { SignInModal, AlertDialog as DialogShowcaseAlertDialog } from "@/src/components/ui/dialogs";
 import { Breadcrumbs, Pagination } from "@/src/components/ui/navigation";
 import { Progress, Alert, AlertTitle, AlertDescription } from "@/src/components/ui/feedback";
 import { Separator, AspectRatio, ScrollArea } from "@/src/components/ui/primitives";
@@ -45,7 +45,15 @@ import { Toggle, ToggleGroup, ToggleGroupItem, InputOTP, InputTag, FileUpload } 
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger, HoverCard, HoverCardContent, HoverCardTrigger, Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger, MenubarSeparator } from "@/src/components/ui/overlay-advanced";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/src/components/ui/navigation-advanced";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/src/components/ui/sheet";
-import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/src/components/ui/alert-dialog";
+import { AlertDialog as RadixAlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/src/components/ui/alert-dialog";
+import ReactMarkdown from "react-markdown";
+import {
+  getComponentBySlug,
+  getComponentDocBySlug,
+  SITE_CLI_COMMAND,
+  SITE_ISSUES_URL,
+  SITE_PACKAGE_NAME,
+} from "@/src/lib/registry";
 import { ExternalLink, Info, Layers, MousePointer2, Type, BarChart3, Calendar as CalendarIcon, LayoutDashboard, Trello, CreditCard, ListTree, Command as CommandIcon, Smartphone, Laptop, Tablet, Monitor, ChevronRight, MoreHorizontal, AlertCircle, CheckCircle2, Terminal } from "lucide-react";
 
 interface ComponentExample {
@@ -1161,7 +1169,7 @@ export default function Layout({ children }) {
         title: "Alert",
         description: "A confirmation dialog for destructive actions.",
         code: `<AlertDialog title="Are you sure?" description="This action cannot be undone." />`,
-        render: <AlertDialog title="Delete Project" description="Are you sure you want to delete this project? All data will be permanently removed." />
+        render: <DialogShowcaseAlertDialog title="Delete Project" description="Are you sure you want to delete this project? All data will be permanently removed." />
       }
     ],
     props: [],
@@ -1636,7 +1644,7 @@ export default function Page() {
         code: `<AlertDialog>\n  <AlertDialogTrigger>Open</AlertDialogTrigger>\n  <AlertDialogContent>\n    <AlertDialogHeader>\n      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>\n    </AlertDialogHeader>\n    <AlertDialogFooter>\n      <AlertDialogCancel>Cancel</AlertDialogCancel>\n      <AlertDialogAction>Continue</AlertDialogAction>\n    </AlertDialogFooter>\n  </AlertDialogContent>\n</AlertDialog>`,
         render: (
           <div className="w-full h-full flex items-center justify-center">
-            <AlertDialog>
+            <RadixAlertDialog>
               <AlertDialogTrigger asChild>
                 <Button variant="outline">Show Alert Dialog</Button>
               </AlertDialogTrigger>
@@ -1652,7 +1660,7 @@ export default function Page() {
                   <AlertDialogAction>Continue</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
-            </AlertDialog>
+            </RadixAlertDialog>
           </div>
         )
       }
@@ -2047,8 +2055,17 @@ export default function LandingPage() {
 export const ComponentDetail = () => {
   const { componentId } = useParams();
   const data = componentId ? componentData[componentId] : null;
+  const registryEntry = componentId ? getComponentBySlug(componentId) : undefined;
+  const componentDoc = componentId ? getComponentDocBySlug(componentId) : undefined;
+  const displayCategory = registryEntry?.category ?? data?.category;
+  const displayTitle = registryEntry?.title ?? data?.title;
+  const displayDescription = registryEntry?.description ?? data?.description;
+  const sourcePath = registryEntry?.sourcePath ?? `src/components/ui/${componentId}.tsx`;
+  const packageName = registryEntry?.sourceExport
+    ? `${SITE_PACKAGE_NAME}/${registryEntry.slug}`
+    : SITE_PACKAGE_NAME;
 
-  if (!data) {
+  if (!data && !registryEntry) {
     // Fallback for components not yet fully documented in this detailed view
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -2068,18 +2085,31 @@ export const ComponentDetail = () => {
         {/* Header */}
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="rounded-sm px-1.5">{data.category}</Badge>
+            <Badge variant="secondary" className="rounded-sm px-1.5">{displayCategory}</Badge>
+            {registryEntry && (
+              <Badge variant="outline" className="rounded-sm px-1.5 uppercase">
+                {registryEntry.status}
+              </Badge>
+            )}
           </div>
-          <h1 className="text-5xl font-extrabold tracking-tight">{data.title}</h1>
+          <h1 className="text-5xl font-extrabold tracking-tight">{displayTitle}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl leading-relaxed">
-            {data.description}
+            {displayDescription}
           </p>
           <div className="flex gap-4 pt-2">
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button variant="outline" size="sm" className="gap-2" asChild>
+              <Link to="/docs">
               <ExternalLink className="h-4 w-4" /> Docs
+              </Link>
             </Button>
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button variant="outline" size="sm" className="gap-2" asChild>
+              <a
+                href={SITE_ISSUES_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
               <Info className="h-4 w-4" /> Report Issue
+              </a>
             </Button>
           </div>
         </div>
@@ -2093,16 +2123,16 @@ export const ComponentDetail = () => {
               <TabsTrigger value="manual">Manual</TabsTrigger>
             </TabsList>
             <TabsContent value="cli">
-              <CodeBlock code={`npx struct-ui add ${componentId}`} language="bash" />
+              <CodeBlock code={`npx ${SITE_CLI_COMMAND} add ${componentId}`} language="bash" />
             </TabsContent>
             <TabsContent value="manual">
               <div className="space-y-3">
                 <p className="text-sm text-muted-foreground">Copy the source file into your <code className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono">src/components/ui/</code> directory:</p>
                 <CodeBlock code={`# 1. Copy the component file
-cp node_modules/struct-ui/src/components/ui/${componentId}.tsx src/components/ui/
+cp node_modules/${SITE_PACKAGE_NAME}/${sourcePath} src/components/ui/
 
-# 2. Or manually create src/components/ui/${componentId}.tsx
-# 3. Import as: import { ... } from "@/components/ui/${componentId}"`} language="bash" />
+# 2. Or manually create ${sourcePath}
+# 3. Import the exported symbol into your app`} language="bash" />
                 {data.usage && (
                   <div>
                     <p className="text-sm font-medium mb-2">Full source usage:</p>
@@ -2122,64 +2152,77 @@ cp node_modules/struct-ui/src/components/ui/${componentId}.tsx src/components/ui
           </div>
         )}
 
-        {/* Examples */}
-        <div className="space-y-12">
-          <h2 className="text-3xl font-bold tracking-tight">Examples</h2>
-          {data.examples.map((example, index) => (
-            <div key={index} className="space-y-4">
-              <div className="space-y-1">
-                <h3 className="text-xl font-bold">{example.title}</h3>
-                <p className="text-muted-foreground">{example.description}</p>
-              </div>
-              <Tabs defaultValue="preview" className="w-full">
-                <TabsList className="grid w-[200px] grid-cols-2">
-                  <TabsTrigger value="preview">Preview</TabsTrigger>
-                  <TabsTrigger value="code">Code</TabsTrigger>
-                </TabsList>
-                <TabsContent value="preview" className="mt-4">
-                  <div className="flex items-center justify-center p-12 border rounded-xl bg-muted/10 min-h-[200px]">
-                    {example.render}
-                  </div>
-                </TabsContent>
-                <TabsContent value="code">
-                  <CodeBlock code={example.code} />
-                </TabsContent>
-              </Tabs>
+        {componentDoc && (
+          <div className="space-y-6">
+            <h2 className="text-3xl font-bold tracking-tight">Documentation</h2>
+            <div className="min-h-[200px] rounded-xl border bg-muted/10 p-6 prose prose-sm dark:prose-invert max-w-none">
+              <ReactMarkdown>{componentDoc.content}</ReactMarkdown>
             </div>
-          ))}
-        </div>
+          </div>
+        )}
+
+        {/* Examples */}
+        {data && (
+          <div className="space-y-12">
+            <h2 className="text-3xl font-bold tracking-tight">Examples</h2>
+            {data.examples.map((example, index) => (
+              <div key={index} className="space-y-4">
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold">{example.title}</h3>
+                  <p className="text-muted-foreground">{example.description}</p>
+                </div>
+                <Tabs defaultValue="preview" className="w-full">
+                  <TabsList className="grid w-[200px] grid-cols-2">
+                    <TabsTrigger value="preview">Preview</TabsTrigger>
+                    <TabsTrigger value="code">Code</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="preview" className="mt-4">
+                    <div className="flex items-center justify-center p-12 border rounded-xl bg-muted/10 min-h-[200px]">
+                      {example.render}
+                    </div>
+                  </TabsContent>
+                  <TabsContent value="code">
+                    <CodeBlock code={example.code} />
+                  </TabsContent>
+                </Tabs>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Props */}
-        <div className="space-y-6">
-          <h2 className="text-3xl font-bold tracking-tight">Props</h2>
-          <div className="border rounded-lg overflow-hidden">
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-muted/50">
-                  <TableHead className="w-[150px]">Prop</TableHead>
-                  <TableHead className="w-[200px]">Type</TableHead>
-                  <TableHead className="w-[100px]">Default</TableHead>
-                  <TableHead>Description</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {data.props.map((prop) => (
-                  <TableRow key={prop.name}>
-                    <TableCell className="font-mono text-sm font-bold text-primary">{prop.name}</TableCell>
-                    <TableCell className="font-mono text-xs text-muted-foreground">{prop.type}</TableCell>
-                    <TableCell className="font-mono text-xs">{prop.default}</TableCell>
-                    <TableCell className="text-sm">{prop.description}</TableCell>
+        {data && (
+          <div className="space-y-6">
+            <h2 className="text-3xl font-bold tracking-tight">Props</h2>
+            <div className="border rounded-lg overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/50">
+                    <TableHead className="w-[150px]">Prop</TableHead>
+                    <TableHead className="w-[200px]">Type</TableHead>
+                    <TableHead className="w-[100px]">Default</TableHead>
+                    <TableHead>Description</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {data.props.map((prop) => (
+                    <TableRow key={prop.name}>
+                      <TableCell className="font-mono text-sm font-bold text-primary">{prop.name}</TableCell>
+                      <TableCell className="font-mono text-xs text-muted-foreground">{prop.type}</TableCell>
+                      <TableCell className="font-mono text-xs">{prop.default}</TableCell>
+                      <TableCell className="text-sm">{prop.description}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Sidebar */}
       <div className="lg:w-80 space-y-8">
-        {data.features && (
+        {data?.features && (
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
@@ -2198,7 +2241,7 @@ cp node_modules/struct-ui/src/components/ui/${componentId}.tsx src/components/ui
           </Card>
         )}
 
-        {data.accessibility && (
+        {data?.accessibility && (
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
@@ -2226,12 +2269,54 @@ cp node_modules/struct-ui/src/components/ui/${componentId}.tsx src/components/ui
           <CardContent className="space-y-4">
             <div className="space-y-1">
               <p className="text-xs font-bold uppercase text-muted-foreground">Category</p>
-              <p className="text-sm">{data.category}</p>
+              <p className="text-sm">{displayCategory}</p>
             </div>
             <div className="space-y-1">
               <p className="text-xs font-bold uppercase text-muted-foreground">Package</p>
-              <p className="text-sm font-mono">@struct-ui/{componentId}</p>
+              <p className="text-sm font-mono">{packageName}</p>
             </div>
+            {registryEntry?.sourcePath && (
+              <div className="space-y-1">
+                <p className="text-xs font-bold uppercase text-muted-foreground">Source</p>
+                <p className="text-sm font-mono break-all">{registryEntry.sourcePath}</p>
+              </div>
+            )}
+            {registryEntry && (
+              <div className="space-y-1">
+                <p className="text-xs font-bold uppercase text-muted-foreground">Docs Status</p>
+                <p className="text-sm">{registryEntry.docsStatus}</p>
+              </div>
+            )}
+            {registryEntry?.tags.length ? (
+              <div className="space-y-2">
+                <p className="text-xs font-bold uppercase text-muted-foreground">Tags</p>
+                <div className="flex flex-wrap gap-2">
+                  {registryEntry.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary" className="rounded-full">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+            {registryEntry?.llmSummary && (
+              <div className="space-y-1">
+                <p className="text-xs font-bold uppercase text-muted-foreground">LLM Summary</p>
+                <p className="text-sm text-muted-foreground">{registryEntry.llmSummary}</p>
+              </div>
+            )}
+            {registryEntry?.relatedComponents.length ? (
+              <div className="space-y-2">
+                <p className="text-xs font-bold uppercase text-muted-foreground">Related</p>
+                <div className="flex flex-wrap gap-2">
+                  {registryEntry.relatedComponents.map((relatedComponent) => (
+                    <Button key={relatedComponent} variant="outline" size="sm" asChild>
+                      <Link to={`/components/${relatedComponent}`}>{relatedComponent}</Link>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </CardContent>
         </Card>
       </div>

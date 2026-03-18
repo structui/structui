@@ -1,0 +1,18 @@
+{
+  "id": "combobox",
+  "slug": "combobox",
+  "title": "Combobox",
+  "description": "Searchable selection UI for larger option sets.",
+  "llmSummary": "Combobox: Searchable selection UI for larger option sets.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/combobox.tsx",
+  "sourceExport": "Combobox",
+  "docsPath": "src/content/docs/components/combobox.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

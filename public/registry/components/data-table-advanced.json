@@ -1,0 +1,18 @@
+{
+  "id": "data-table-advanced",
+  "slug": "data-table-advanced",
+  "title": "Data Table Advanced",
+  "description": "Feature-rich table with sorting, filtering, and large dataset support.",
+  "llmSummary": "Data Table Advanced: Feature-rich table with sorting, filtering, and large dataset support.",
+  "category": "Data Display",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/data-table-advanced.tsx",
+  "sourceExport": "DataTableAdvanced",
+  "docsPath": "src/content/docs/components/data-table-advanced.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

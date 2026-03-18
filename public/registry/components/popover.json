@@ -1,0 +1,18 @@
+{
+  "id": "popover",
+  "slug": "popover",
+  "title": "Popover",
+  "description": "Floating panel anchored to a trigger element.",
+  "llmSummary": "Popover: Floating panel anchored to a trigger element.",
+  "category": "Overlay",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/popover.tsx",
+  "sourceExport": "Popover",
+  "docsPath": "src/content/docs/components/popover.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

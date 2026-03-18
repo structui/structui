@@ -9,6 +9,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
 import { BentoGrid, BentoGridItem } from "@/src/components/ui/bento-grid";
 import { Card, CardContent } from "@/src/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/src/components/ui/accordion";
+import {
+  getSiteMetrics,
+  SITE_BRAND_NAME,
+  SITE_CLI_COMMAND,
+  SITE_PACKAGE_NAME,
+} from "@/src/lib/registry";
 import { useInView } from "motion/react";
 import {
   ArrowRight, Zap, Shield, Layout, Code2, Sparkles, CheckCircle2,
@@ -50,6 +56,24 @@ const PreviewCard = ({ icon, label, color }: { icon: React.ReactNode; label: str
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export const HomePage = () => {
   const AVATARS = [1, 2, 3, 4, 5];
+  const siteMetrics = getSiteMetrics();
+  const siteStats = [
+    { label: "Components", value: siteMetrics.totalComponents },
+    { label: "Documented", value: siteMetrics.documentedComponents },
+    { label: "Stable", value: siteMetrics.stableComponents },
+    { label: "Categories", value: siteMetrics.categories },
+  ];
+  const featuredPreviewItems = [
+    { icon: <MousePointer2 className="w-3 h-3" />, label: "Button", color: "#6366f1" },
+    { icon: <Layers className="w-3 h-3" />, label: "Accordion", color: "#10b981" },
+    { icon: <BarChart3 className="w-3 h-3" />, label: "Charts", color: "#f59e0b" },
+    { icon: <Calendar className="w-3 h-3" />, label: "Calendar", color: "#3b82f6" },
+    { icon: <Trello className="w-3 h-3" />, label: "Kanban", color: "#ec4899" },
+    { icon: <Command className="w-3 h-3" />, label: "Command", color: "#8b5cf6" },
+    { icon: <Palette className="w-3 h-3" />, label: "Theme Creator", color: "#ef4444" },
+    { icon: <Blocks className="w-3 h-3" />, label: "Blocks", color: "#14b8a6" },
+  ];
+  const cliSnippet = `# Install the CLI\nnpm install -g ${SITE_PACKAGE_NAME}\n\n# Add a component\nnpx ${SITE_CLI_COMMAND} add button\nnpx ${SITE_CLI_COMMAND} add data-table-advanced\n\n# Add a full block\nnpx ${SITE_CLI_COMMAND} add block-dashboard\n\n# Initialize a project template\nnpx ${SITE_CLI_COMMAND} init saas`;
 
   return (
     <div className="relative min-h-screen flex flex-col overflow-hidden bg-background">
@@ -66,7 +90,7 @@ export const HomePage = () => {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-              A professional-grade component library for React — accessible, animated, and built with
+              {SITE_BRAND_NAME} is a professional-grade component library for React — accessible, animated, and built with
               Radix UI + Tailwind CSS v4. Ship faster without compromising quality.
             </p>
 
@@ -95,24 +119,17 @@ export const HomePage = () => {
                 <div className="flex gap-0.5 mb-0.5">
                   {[1,2,3,4,5].map(s => <Star key={s} className="w-3.5 h-3.5 text-amber-400 fill-current" />)}
                 </div>
-                <p className="text-xs text-muted-foreground">Trusted by <strong className="text-foreground">10,000+</strong> developers</p>
+                <p className="text-xs text-muted-foreground">Currently shipping <strong className="text-foreground">{siteMetrics.documentedComponents}</strong> documented components</p>
               </div>
             </div>
           </div>
 
           {/* Component strip */}
           <div className="flex flex-wrap gap-2 mt-12">
-            {[
-              { icon: <MousePointer2 className="w-3 h-3" />, label: "Button", color: "#6366f1" },
-              { icon: <Layers className="w-3 h-3" />, label: "Accordion", color: "#10b981" },
-              { icon: <BarChart3 className="w-3 h-3" />, label: "Charts", color: "#f59e0b" },
-              { icon: <Calendar className="w-3 h-3" />, label: "Calendar", color: "#3b82f6" },
-              { icon: <Trello className="w-3 h-3" />, label: "Kanban", color: "#ec4899" },
-              { icon: <Command className="w-3 h-3" />, label: "Command", color: "#8b5cf6" },
-              { icon: <Palette className="w-3 h-3" />, label: "Theme Creator", color: "#ef4444" },
-              { icon: <Blocks className="w-3 h-3" />, label: "Blocks", color: "#14b8a6" },
-            ].map(c => (
-              <PreviewCard key={c.label} {...c} />
+            {featuredPreviewItems.map((item) => (
+              <div key={item.label}>
+                <PreviewCard icon={item.icon} label={item.label} color={item.color} />
+              </div>
             ))}
           </div>
         </Container>
@@ -122,15 +139,10 @@ export const HomePage = () => {
       <section className="border-y border-border bg-muted/20">
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
-            {[
-              { label: "Components", value: 60, suffix: "+" },
-              { label: "Blocks", value: 15, suffix: "+" },
-              { label: "Developers", value: 10000, suffix: "+" },
-              { label: "GitHub Stars", value: 2400, suffix: "+" },
-            ].map(stat => (
+            {siteStats.map((stat) => (
               <div key={stat.label} className="py-10 px-8">
                 <p className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-                  <Counter to={stat.value} suffix={stat.suffix} />
+                  <Counter to={stat.value} />
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
               </div>
@@ -153,8 +165,8 @@ export const HomePage = () => {
           <BentoGrid className="md:auto-rows-[16rem]">
             <BentoGridItem
               className="md:col-span-2"
-              title="60+ Production-Ready Components"
-              description="From buttons to complex data tables, charts, and kanban boards. Every component is accessible, animated, and fully typed."
+              title={`${siteMetrics.totalComponents} Registry-Tracked Components`}
+              description={`${siteMetrics.documentedComponents} documented entries across ${siteMetrics.categories} categories. Every component is tracked through a single typed registry.`}
               icon={<Layers className="w-4 h-4" />}
               header={
                 <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center gap-3 flex-wrap p-4">
@@ -229,7 +241,7 @@ export const HomePage = () => {
                 Install components with one command.
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                The <code className="font-mono bg-muted px-1.5 py-0.5 rounded text-sm text-foreground">strui</code> CLI
+                The <code className="font-mono bg-muted px-1.5 py-0.5 rounded text-sm text-foreground">{SITE_CLI_COMMAND}</code> CLI
                 lets you add, remove, and scaffold components directly from the registry.
                 No manual file copying.
               </p>
@@ -257,18 +269,7 @@ export const HomePage = () => {
 
             <div className="space-y-3">
               <Snippet
-                code={`# Install the CLI
-npm install -g struct-ui
-
-# Add a component
-npx strui add button
-npx strui add data-table-advanced
-
-# Add a full block
-npx strui add block-dashboard
-
-# Initialize a project template
-npx strui init saas`}
+                code={cliSnippet}
                 language="bash"
               />
             </div>
@@ -372,11 +373,11 @@ npx strui init saas`}
             <div>
               <Accordion type="single" collapsible className="space-y-2">
                 {[
-                  { q: "Is StructUI free to use?", a: "Yes, StructUI is completely free and open source. Use it in personal and commercial projects." },
-                  { q: "Does it work with Next.js?", a: "Absolutely. StructUI works with any React framework — Next.js, Vite, Remix, and more." },
+                  { q: `Is ${SITE_BRAND_NAME} free to use?`, a: `Yes, ${SITE_BRAND_NAME} is completely free and open source. Use it in personal and commercial projects.` },
+                  { q: "Does it work with Next.js?", a: `Absolutely. ${SITE_BRAND_NAME} works with any React framework — Next.js, Vite, Remix, and more.` },
                   { q: "Can I customize the components?", a: "Yes. All components use CSS variables and Tailwind classes, making them fully customizable. The Theme Creator lets you export a custom theme." },
                   { q: "Is TypeScript required?", a: "No, but recommended. All components are fully typed for the best developer experience." },
-                  { q: "How do I add components to my project?", a: "Use the strui CLI: `npx strui add button`. Or copy files manually from the repository." },
+                  { q: "How do I add components to my project?", a: `Use the ${SITE_CLI_COMMAND} CLI: \`npx ${SITE_CLI_COMMAND} add button\`. Or copy files manually from the repository.` },
                 ].map((item, i) => (
                   <AccordionItem key={i} value={`faq-${i}`} className="border rounded-xl px-4 border-border">
                     <AccordionTrigger className="text-sm font-medium py-3.5">{item.q}</AccordionTrigger>
@@ -399,7 +400,7 @@ npx strui init saas`}
               Start building today.
             </h2>
             <p className="relative text-muted-foreground max-w-md leading-relaxed">
-              Join thousands of developers shipping faster with StructUI.
+              Explore {siteMetrics.totalComponents} registry-tracked components and start building faster with {SITE_BRAND_NAME}.
             </p>
             <div className="relative flex flex-col sm:flex-row items-start gap-3">
               <Button asChild size="lg" className="h-12 px-10 rounded-xl text-base font-semibold shadow-lg shadow-primary/20">

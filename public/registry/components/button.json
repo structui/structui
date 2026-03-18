@@ -1,0 +1,29 @@
+{
+  "id": "button",
+  "slug": "button",
+  "title": "Button",
+  "description": "Interactive button with multiple variants and sizes.",
+  "llmSummary": "Use Button for primary and secondary actions. Supports variants, sizes, icons, loading states, and polymorphic rendering via asChild.",
+  "category": "General",
+  "status": "stable",
+  "docsStatus": "ready",
+  "tags": [
+    "action",
+    "trigger",
+    "form",
+    "cta"
+  ],
+  "sourcePath": "src/components/ui/button.tsx",
+  "sourceExport": "Button",
+  "docsPath": "src/content/docs/components/button.md",
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [],
+  "relatedComponents": [
+    "badge",
+    "accordion"
+  ],
+  "hasMarkdownDoc": true
+}

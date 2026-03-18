@@ -1,0 +1,18 @@
+{
+  "id": "kanban",
+  "slug": "kanban",
+  "title": "Kanban",
+  "description": "Board-style workflow layout for task and pipeline management.",
+  "llmSummary": "Kanban: Board-style workflow layout for task and pipeline management.",
+  "category": "Data Display",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/kanban.tsx",
+  "sourceExport": "KanbanBoard",
+  "docsPath": "src/content/docs/components/kanban.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

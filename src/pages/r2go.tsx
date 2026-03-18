@@ -250,7 +250,9 @@ ${items.map(id => {
           <TabsContent value="templates">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {TEMPLATES.map(tpl => (
-                <TemplateCard key={tpl.id} tpl={tpl} onSelect={() => {}} />
+                <div key={tpl.id}>
+                  <TemplateCard tpl={tpl} onSelect={() => {}} />
+                </div>
               ))}
             </div>
 
@@ -347,13 +349,14 @@ pnpm dev`}
                         {items.map(id => {
                           const block = AVAILABLE_BLOCKS.find(b => b.id === id);
                           return (
-                            <SortableBlock
-                              key={id}
-                              id={id}
-                              name={block?.name ?? id}
-                              desc={block?.desc}
-                              icon={block?.icon}
-                            />
+                            <div key={id}>
+                              <SortableBlock
+                                id={id}
+                                name={block?.name ?? id}
+                                desc={block?.desc}
+                                icon={block?.icon}
+                              />
+                            </div>
                           );
                         })}
                       </div>

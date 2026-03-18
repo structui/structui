@@ -32,7 +32,9 @@ export const InputOTP = ({ length = 6, onChange }: { length?: number; onChange?:
       {values.map((v, i) => (
         <Input
           key={i}
-          ref={(el) => (inputs.current[i] = el)}
+          ref={(el) => {
+            inputs.current[i] = el;
+          }}
           value={v}
           onChange={(e) => handleChange(i, e.target.value)}
           onKeyDown={(e) => handleKeyDown(i, e)}

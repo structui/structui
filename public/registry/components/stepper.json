@@ -1,0 +1,18 @@
+{
+  "id": "stepper",
+  "slug": "stepper",
+  "title": "Stepper",
+  "description": "Step-based progress indicator for multi-stage flows.",
+  "llmSummary": "Stepper: Step-based progress indicator for multi-stage flows.",
+  "category": "Navigation",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/stepper.tsx",
+  "sourceExport": "Stepper",
+  "docsPath": "src/content/docs/components/stepper.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

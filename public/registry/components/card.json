@@ -1,0 +1,21 @@
+{
+  "id": "card",
+  "slug": "card",
+  "title": "Card",
+  "description": "Flexible container for grouped content, metadata, and actions.",
+  "llmSummary": "Card: Flexible container for grouped content, metadata, and actions.",
+  "category": "Layout",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/card.tsx",
+  "sourceExport": "Card",
+  "docsPath": "src/content/docs/components/card.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [
+    "badge",
+    "button"
+  ],
+  "hasMarkdownDoc": false
+}

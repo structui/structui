@@ -28,8 +28,8 @@ export interface ComponentRegistryEntry {
   docsStatus: DocsStatus;
   visibility: "public";
   tags: string[];
-  sourcePath: string;
-  sourceExport: string;
+  sourcePath?: string;
+  sourceExport?: string;
   docsPath: string;
   dependencies: string[];
   registryDependencies: string[];
@@ -53,4 +53,9 @@ export interface SiteMetrics {
   previewComponents: number;
   plannedComponents: number;
   categories: number;
+}
+
+export interface ComponentDoc {
+  path: string;
+  content: string;
 }

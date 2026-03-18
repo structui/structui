@@ -1,5 +1,6 @@
 {
-  "name": "react-example",
+  "name": "struct-ui",
+  "description": "Registry-first React UI system with public docs and LLM-friendly exports.",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,8 +8,9 @@
     "strui": "./bin/strui.js"
   },
   "scripts": {
+    "generate:registry": "tsx scripts/generate-registry-artifacts.ts",
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
+    "build": "npm run generate:registry && vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"
@@ -49,7 +51,7 @@
     "@vitejs/plugin-react": "^5.0.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "cmdk": "^1.0.0",
+    "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
@@ -57,6 +59,7 @@
     "motion": "^12.23.24",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-is": "^19.2.4",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.13.1",
     "recharts": "^3.8.0",

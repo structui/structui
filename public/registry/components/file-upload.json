@@ -1,0 +1,18 @@
+{
+  "id": "file-upload",
+  "slug": "file-upload",
+  "title": "File Upload",
+  "description": "Drag-and-drop upload field for files and attachments.",
+  "llmSummary": "File Upload: Drag-and-drop upload field for files and attachments.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/inputs-advanced.tsx",
+  "sourceExport": "FileUpload",
+  "docsPath": "src/content/docs/components/file-upload.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}
