@@ -2,12 +2,14 @@ import { cn } from "@/src/lib/utils";
 import { Github, Star, Menu, X, Search } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { getSiteMetrics, SITE_BRAND_NAME, SITE_GITHUB_URL } from "@/src/lib/registry";
 import { Button } from "./ui/button";
 import { CommandPalette } from "./ui/command-palette";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const siteMetrics = getSiteMetrics();
 
   const navLinks = [
     { name: "Docs", href: "/docs" },
@@ -21,7 +23,7 @@ export const Navbar = () => {
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center gap-2">
             <span className="text-xl font-bold tracking-tighter">
-              Struct<span className="text-primary/60">UI</span>
+              {SITE_BRAND_NAME.replace("UI", "")}<span className="text-primary/60">UI</span>
             </span>
           </Link>
           <div className="hidden md:flex items-center gap-6">
@@ -49,10 +51,10 @@ export const Navbar = () => {
           <div className="hidden sm:flex items-center gap-2">
             <Button variant="ghost" size="sm" className="gap-2">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <span className="text-xs font-medium">1.2k</span>
+              <span className="text-xs font-medium">{siteMetrics.documentedComponents} docs</span>
             </Button>
             <a
-              href="https://github.com"
+              href={SITE_GITHUB_URL}
               target="_blank"
               rel="noreferrer"
               className="p-2 text-muted-foreground hover:text-primary transition-colors"
@@ -93,9 +95,11 @@ export const Navbar = () => {
             <div className="flex items-center gap-4 pt-4 border-t">
               <Button variant="ghost" size="sm" className="gap-2">
                 <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <span className="text-xs font-medium">1.2k</span>
+                <span className="text-xs font-medium">{siteMetrics.documentedComponents} docs</span>
               </Button>
-              <Github className="h-5 w-5 text-muted-foreground" />
+              <a href={SITE_GITHUB_URL} target="_blank" rel="noreferrer">
+                <Github className="h-5 w-5 text-muted-foreground" />
+              </a>
             </div>
           </div>
         </div>

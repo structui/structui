@@ -5,7 +5,13 @@ export {
   getComponentSidebarSections,
   getPublicComponents,
 } from "./components";
-export { SITE_BRAND_NAME, SITE_CLI_COMMAND, SITE_PACKAGE_NAME } from "./constants";
+export {
+  SITE_BRAND_NAME,
+  SITE_CLI_COMMAND,
+  SITE_GITHUB_URL,
+  SITE_ISSUES_URL,
+  SITE_PACKAGE_NAME,
+} from "./constants";
 export { createComponentRegistryEntry } from "./factories";
 export { getSiteMetrics } from "./metrics";
 export type {

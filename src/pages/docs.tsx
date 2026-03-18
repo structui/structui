@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { Snippet } from "@/src/components/ui/snippet";
 import { Container } from "@/src/components/layout/container";
+import {
+  getSiteMetrics,
+  SITE_BRAND_NAME,
+  SITE_CLI_COMMAND,
+  SITE_PACKAGE_NAME,
+} from "@/src/lib/registry";
 import { cn } from "@/src/lib/utils";
 import { ChevronRight, BookOpen, Terminal, Palette, Layers, Zap, Shield } from "lucide-react";
 
@@ -64,6 +70,11 @@ const NAV = [
 // ─── Page ────────────────────────────────────────────────────────────────────
 export const DocsPage = () => {
   const [active, setActive] = useState("introduction");
+  const siteMetrics = getSiteMetrics();
+  const installCommand = `npm install ${SITE_PACKAGE_NAME} lucide-react motion clsx tailwind-merge\n\n# pnpm (recommended)\npnpm add ${SITE_PACKAGE_NAME} lucide-react motion clsx tailwind-merge\n\n# yarn\nyarn add ${SITE_PACKAGE_NAME} lucide-react motion clsx tailwind-merge`;
+  const stylesImport = `@import "tailwindcss";\n@import "${SITE_PACKAGE_NAME}/styles";`;
+  const componentImport = `import { Button } from "${SITE_PACKAGE_NAME}/button";\n\nexport default function App() {\n  return <Button variant="outline">Hello ${SITE_BRAND_NAME}</Button>;\n}`;
+  const cliSnippet = `# List installed components and blocks\nnpx ${SITE_CLI_COMMAND} list\n\n# Add a component\nnpx ${SITE_CLI_COMMAND} add button\nnpx ${SITE_CLI_COMMAND} add data-table-advanced\n\n# Add a block (prefix with block-)\nnpx ${SITE_CLI_COMMAND} add block-pricing\nnpx ${SITE_CLI_COMMAND} add block-dashboard\n\n# Remove a component\nnpx ${SITE_CLI_COMMAND} remove button\n\n# Initialize a full project template\nnpx ${SITE_CLI_COMMAND} init saas\nnpx ${SITE_CLI_COMMAND} init erp\nnpx ${SITE_CLI_COMMAND} init crm`;
 
   const groups = Array.from(new Set(NAV.map(n => n.group)));
 
@@ -103,7 +114,7 @@ export const DocsPage = () => {
             {/* ── Introduction ── */}
             <Section id="introduction" title="Introduction">
               <P>
-                StructUI is a modern, enterprise-ready component library for React. Built on top of
+                {SITE_BRAND_NAME} is a modern, enterprise-ready component library for React. Built on top of
                 Radix UI primitives and styled with Tailwind CSS v4, it provides accessible, animated,
                 and fully customizable components.
               </P>
@@ -111,13 +122,13 @@ export const DocsPage = () => {
                 <Feature icon={<Zap className="w-4 h-4" />} title="Fast by default" desc="Tree-shaking, lazy-loading, and virtual scrolling built in." />
                 <Feature icon={<Shield className="w-4 h-4" />} title="Accessible" desc="WAI-ARIA compliant, keyboard navigable, screen reader friendly." />
                 <Feature icon={<Palette className="w-4 h-4" />} title="Themeable" desc="CSS variable-based system with 4 built-in themes and a visual Theme Creator." />
-                <Feature icon={<Layers className="w-4 h-4" />} title="60+ Components" desc="From primitives to complex data-tables, charts, and kanban boards." />
+                <Feature icon={<Layers className="w-4 h-4" />} title={`${siteMetrics.totalComponents} Components`} desc={`${siteMetrics.documentedComponents} documented entries across ${siteMetrics.categories} categories.`} />
               </div>
             </Section>
 
             {/* ── Installation ── */}
             <Section id="installation" title="Installation">
-              <P>Install StructUI and its peer dependencies using your preferred package manager.</P>
+              <P>Install {SITE_BRAND_NAME} and its peer dependencies using your preferred package manager.</P>
 
               <Steps steps={[
                 {
@@ -125,14 +136,7 @@ export const DocsPage = () => {
                   title: "Install packages",
                   desc: (
                     <Snippet
-                      code={`# npm
-npm install struct-ui lucide-react motion clsx tailwind-merge
-
-# pnpm (recommended)
-pnpm add struct-ui lucide-react motion clsx tailwind-merge
-
-# yarn
-yarn add struct-ui lucide-react motion clsx tailwind-merge`}
+                      code={installCommand}
                       language="bash"
                     />
                   )
@@ -143,9 +147,8 @@ yarn add struct-ui lucide-react motion clsx tailwind-merge`}
                   desc: (
                     <>
                       <p className="mb-2">Import StructUI's styles in your global CSS:</p>
-                      <Snippet
-                        code={`@import "tailwindcss";
-@import "struct-ui/styles";`}
+                        <Snippet
+                        code={stylesImport}
                         language="css"
                         filename="globals.css"
                       />
@@ -176,11 +179,7 @@ export function cn(...inputs: ClassValue[]) {
                   title: "Use a component",
                   desc: (
                     <Snippet
-                      code={`import { Button } from "struct-ui/button";
-
-export default function App() {
-  return <Button variant="outline">Hello StructUI</Button>;
-}`}
+                      code={componentImport}
                       language="tsx"
                       filename="App.tsx"
                     />
@@ -192,7 +191,7 @@ export default function App() {
             {/* ── Theming ── */}
             <Section id="theming" title="Theming">
               <P>
-                StructUI uses CSS custom properties (variables) for theming. Override them in your
+                {SITE_BRAND_NAME} uses CSS custom properties (variables) for theming. Override them in your
                 global CSS to apply a custom theme instantly — no build step required.
               </P>
               <Snippet
@@ -240,28 +239,11 @@ export default function App() {
             {/* ── CLI ── */}
             <Section id="cli" title="CLI Usage">
               <P>
-                The <InlineCode>strui</InlineCode> CLI lets you add, remove, and list components directly
+                The <InlineCode>{SITE_CLI_COMMAND}</InlineCode> CLI lets you add, remove, and list components directly
                 from the registry without copying files manually.
               </P>
               <Snippet
-                code={`# List installed components and blocks
-npx strui list
-
-# Add a component
-npx strui add button
-npx strui add data-table-advanced
-
-# Add a block (prefix with block-)
-npx strui add block-pricing
-npx strui add block-dashboard
-
-# Remove a component
-npx strui remove button
-
-# Initialize a full project template
-npx strui init saas
-npx strui init erp
-npx strui init crm`}
+                code={cliSnippet}
                 language="bash"
               />
               <div className="rounded-xl border p-4 bg-muted/20 text-sm space-y-2">
@@ -269,11 +251,11 @@ npx strui init crm`}
                 <table className="w-full text-xs text-muted-foreground">
                   <tbody>
                     {[
-                      ["strui list", "List all installed components and blocks"],
-                      ["strui add <name>", "Download and install a component/block"],
-                      ["strui remove <name>", "Uninstall a component/block"],
-                      ["strui init <template>", "Scaffold a complete project (saas / erp / crm)"],
-                      ["strui info <name>", "Show details about an installed component"],
+                      [`${SITE_CLI_COMMAND} list`, "List all installed components and blocks"],
+                      [`${SITE_CLI_COMMAND} add <name>`, "Download and install a component/block"],
+                      [`${SITE_CLI_COMMAND} remove <name>`, "Uninstall a component/block"],
+                      [`${SITE_CLI_COMMAND} init <template>`, "Scaffold a complete project (saas / erp / crm)"],
+                      [`${SITE_CLI_COMMAND} info <name>`, "Show details about an installed component"],
                     ].map(([cmd, desc]) => (
                       <tr key={cmd} className="border-b border-border/50 last:border-none">
                         <td className="py-1.5 pr-6 font-mono text-foreground">{cmd}</td>
@@ -287,7 +269,7 @@ npx strui init crm`}
 
             {/* ── Design Principles ── */}
             <Section id="principles" title="Design Principles">
-              <P>StructUI is built around four core principles:</P>
+              <P>{SITE_BRAND_NAME} is built around four core principles:</P>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
                   { title: "Clarity", desc: "Interfaces should be immediately understandable. Reduce cognitive load with consistent patterns." },
@@ -306,7 +288,7 @@ npx strui init crm`}
             {/* ── Styling ── */}
             <Section id="styling" title="Styling System">
               <P>
-                StructUI uses <strong>Tailwind CSS v4</strong> with the Vite plugin for zero-config setup.
+                {SITE_BRAND_NAME} uses <strong>Tailwind CSS v4</strong> with the Vite plugin for zero-config setup.
                 Component variants are managed with <InlineCode>class-variance-authority</InlineCode> (CVA)
                 and class merging is handled by <InlineCode>tailwind-merge</InlineCode>.
               </P>
