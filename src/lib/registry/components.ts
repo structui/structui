@@ -35,6 +35,9 @@ export const getAllComponents = (): ComponentRegistryEntry[] => [...COMPONENTS];
 export const getPublicComponents = (): ComponentRegistryEntry[] =>
   COMPONENTS.filter((entry) => entry.visibility === "public");
 
+export const getDocumentedComponents = (): ComponentRegistryEntry[] =>
+  COMPONENTS.filter((entry) => entry.docsStatus === "ready");
+
 export const getComponentBySlug = (
   slug: string,
 ): ComponentRegistryEntry | undefined =>

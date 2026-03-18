@@ -6,6 +6,7 @@ import { Container } from "@/src/components/layout/container";
 import { Snippet } from "@/src/components/ui/snippet";
 import {
   DOCS_NAV_ITEMS,
+  getDocumentedComponents,
   getSiteMetrics,
   SITE_BRAND_NAME,
   SITE_CLI_COMMAND,
@@ -70,6 +71,7 @@ export const DocsPageShell = ({
 );
 
 const siteMetrics = getSiteMetrics();
+const documentedComponents = getDocumentedComponents().slice(0, 6);
 
 export const DOC_SNIPPETS = {
   installCommand: `npm install ${SITE_PACKAGE_NAME} lucide-react motion clsx tailwind-merge\n\n# pnpm (recommended)\npnpm add ${SITE_PACKAGE_NAME} lucide-react motion clsx tailwind-merge\n\n# yarn\nyarn add ${SITE_PACKAGE_NAME} lucide-react motion clsx tailwind-merge`,
@@ -149,6 +151,20 @@ export const DOC_SECTION_CONTENT = {
         <DocsParagraph>
           Canonical source code and issue tracking live on <a href={SITE_GITHUB_URL} target="_blank" rel="noreferrer" className="text-primary underline underline-offset-2">GitHub</a>.
         </DocsParagraph>
+        <div className="rounded-xl border p-4 bg-muted/10 text-sm space-y-3">
+          <p className="font-semibold text-foreground">Documented component routes</p>
+          <div className="flex flex-wrap gap-2">
+            {documentedComponents.map((component) => (
+              <Link
+                key={component.slug}
+                to={`/docs/components/${component.slug}`}
+                className="inline-flex rounded-full border px-3 py-1.5 hover:border-primary/40 hover:text-primary transition-colors"
+              >
+                {component.title}
+              </Link>
+            ))}
+          </div>
+        </div>
       </>
     ),
   },

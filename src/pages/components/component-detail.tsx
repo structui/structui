@@ -63,8 +63,8 @@ export const ComponentDetail = () => {
           </p>
           <div className="flex gap-4 pt-2">
             <Button variant="outline" size="sm" className="gap-2" asChild>
-              <Link to="/docs">
-              <ExternalLink className="h-4 w-4" /> Docs
+              <Link to={registryEntry?.docsStatus === "ready" ? `/docs/components/${registryEntry.slug}` : "/docs"}>
+               <ExternalLink className="h-4 w-4" /> Docs
               </Link>
             </Button>
             <Button variant="outline" size="sm" className="gap-2" asChild>
