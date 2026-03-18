@@ -47,6 +47,11 @@ interface ComponentExport {
   hasMarkdownDoc: boolean;
 }
 
+interface ComponentGroup {
+  category: string;
+  components: ComponentExport[];
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, "..");
@@ -108,31 +113,117 @@ const toComponentExport = async (
   };
 };
 
+const getComponentGroups = (components: ComponentExport[]): ComponentGroup[] => {
+  const groups = new Map<string, ComponentExport[]>();
+
+  for (const component of components) {
+    const categoryComponents = groups.get(component.category) ?? [];
+    categoryComponents.push(component);
+    groups.set(component.category, categoryComponents);
+  }
+
+  return [...groups.entries()]
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([category, categoryComponents]) => ({
+      category,
+      components: categoryComponents.sort((left, right) =>
+        left.title.localeCompare(right.title),
+      ),
+    }));
+};
+
+const getComponentDocsUrl = (slug: string): string =>
+  `${SITE_URL}/components/${slug}`;
+
+const getRegistryJsonUrl = (slug: string): string =>
+  `${SITE_URL}/registry/components/${slug}.json`;
+
+const getRegistryMarkdownUrl = (slug: string): string =>
+  `${SITE_URL}/registry/components/${slug}.md`;
+
 const buildLlmsTxt = (components: ComponentExport[]): string => {
   const metrics = getSiteMetrics();
+  const groups = getComponentGroups(components);
   const lines = [
-    `${SITE_BRAND_NAME} is a React component registry and docs system for reusable UI primitives and higher-level blocks.`,
+    `# ${SITE_BRAND_NAME}`,
     "",
-    `Canonical package: ${SITE_PACKAGE_NAME}`,
-    `Canonical CLI: npx ${SITE_CLI_COMMAND}`,
-    `Registry URL: ${SITE_URL}/registry.json`,
-    `GitHub: ${SITE_GITHUB_URL}`,
+    `> ${SITE_BRAND_NAME} is a registry-first React UI system with reusable components, public docs, structured registry exports, and LLM-friendly discovery surfaces.`,
     "",
-    `Metrics: ${metrics.totalComponents} total components, ${metrics.documentedComponents} documented, ${metrics.stableComponents} stable, ${metrics.categories} categories.`,
+    "## Overview",
     "",
-    "Component index:",
-    ...components.map(
-      (component) =>
-        `- ${component.slug}: ${component.title} (${component.category}, ${component.status}) - ${component.llmSummary}`,
-    ),
+    `- [Docs](${SITE_URL}/docs): Product and usage documentation.`,
+    `- [Components](${SITE_URL}/components): Browse the component catalog.`,
+    `- [Blocks](${SITE_URL}/blocks): Explore higher-level UI patterns and page sections.`,
+    `- [Theme Creator](${SITE_URL}/theme-creator): Build and export design token themes.`,
+    `- [GitHub](${SITE_GITHUB_URL}): Source code, issues, and project history.`,
+    "",
+    "## Installation",
+    "",
+    `- [Docs Installation](${SITE_URL}/docs#installation): Install ${SITE_PACKAGE_NAME} in a React app.`,
+    `- [CLI Usage](${SITE_URL}/docs#cli): Canonical \`npx ${SITE_CLI_COMMAND}\` command surface.`,
+    `- [Registry & LLMs](${SITE_URL}/docs#registry): Public machine-readable registry and LLM endpoints.`,
+    "",
+    "## Registry",
+    "",
+    `- [registry.json](${SITE_URL}/registry.json): Global registry export with metrics and component index.`,
+    `- [registry/index.json](${SITE_URL}/registry/index.json): Mirrored registry index export.`,
+    `- [llms-full.txt](${SITE_URL}/llms-full.txt): Expanded LLM reference with per-component links and summaries.`,
+    "",
+    `## Components (${metrics.totalComponents})`,
+    "",
   ];
+
+  for (const group of groups) {
+    lines.push(`### ${group.category}`, "");
+
+    for (const component of group.components) {
+      lines.push(
+        `- [${component.title}](${getComponentDocsUrl(component.slug)}): ${component.description}`,
+      );
+    }
+
+    lines.push("");
+  }
 
   return `${lines.join("\n")}\n`;
 };
 
 const buildLlmsFullTxt = async (components: ComponentExport[]): Promise<string> => {
-  const sections = await Promise.all(
-    components.map(async (component) => {
+  const metrics = getSiteMetrics();
+  const groups = getComponentGroups(components);
+  const lines = [
+    `# ${SITE_BRAND_NAME}`,
+    "",
+    `> Expanded LLM reference for ${SITE_BRAND_NAME}. Includes docs links, registry links, machine-readable endpoints, and component summaries.`,
+    "",
+    "## Overview",
+    "",
+    `- [Docs](${SITE_URL}/docs): Product overview, installation, theming, and CLI guidance.`,
+    `- [Components](${SITE_URL}/components): Human-facing catalog for all registry entries.`,
+    `- [Registry JSON](${SITE_URL}/registry.json): Structured registry export for tools and integrations.`,
+    `- [GitHub](${SITE_GITHUB_URL}): Source repository and issue tracker.`,
+    "",
+    "## Package",
+    "",
+    `- package: \`${SITE_PACKAGE_NAME}\``,
+    `- cli: \`npx ${SITE_CLI_COMMAND}\``,
+    `- metrics: ${metrics.totalComponents} total, ${metrics.documentedComponents} markdown-documented, ${metrics.stableComponents} stable, ${metrics.categories} categories`,
+    "",
+    "## Registry Surfaces",
+    "",
+    `- [registry.json](${SITE_URL}/registry.json): Global registry export with metrics and all components.`,
+    `- [registry/index.json](${SITE_URL}/registry/index.json): Mirrored registry index.`,
+    `- [llms.txt](${SITE_URL}/llms.txt): Compact discovery-oriented LLM file.`,
+    `- [llms-full.txt](${SITE_URL}/llms-full.txt): Expanded LLM file.`,
+    "",
+    `## Components (${metrics.totalComponents})`,
+    "",
+  ];
+
+  for (const group of groups) {
+    lines.push(`### ${group.category}`, "");
+
+    for (const component of group.components) {
       const registryEntry = componentRegistryEntries.find(
         (entry) => entry.slug === component.slug,
       );
@@ -142,39 +233,36 @@ const buildLlmsFullTxt = async (components: ComponentExport[]): Promise<string> 
       }
 
       const markdownDoc = await readComponentDoc(registryEntry);
-      const docBlock = markdownDoc
-        ? ["", "Markdown documentation:", markdownDoc.trim()].join("\n")
-        : "";
+      const extraLinks = [
+        `[Docs](${getComponentDocsUrl(component.slug)})`,
+        `[Registry JSON](${getRegistryJsonUrl(component.slug)})`,
+      ];
 
-      return [
-        `## ${component.title}`,
-        `- id: ${component.id}`,
-        `- slug: ${component.slug}`,
-        `- category: ${component.category}`,
-        `- status: ${component.status}`,
-        `- docsStatus: ${component.docsStatus}`,
-        `- sourcePath: ${component.sourcePath ?? "n/a"}`,
-        `- sourceExport: ${component.sourceExport ?? "n/a"}`,
-        `- tags: ${component.tags.join(", ") || "n/a"}`,
-        `- related: ${component.relatedComponents.join(", ") || "n/a"}`,
-        `- summary: ${component.llmSummary}`,
-        `- description: ${component.description}`,
-        docBlock,
-      ]
-        .filter(Boolean)
-        .join("\n");
-    }),
-  );
+      if (markdownDoc) {
+        extraLinks.push(`[Registry Markdown](${getRegistryMarkdownUrl(component.slug)})`);
+      }
 
-  return `${[
-    `${SITE_BRAND_NAME} full registry export for LLM consumption.`,
-    `Canonical package: ${SITE_PACKAGE_NAME}`,
-    `Canonical CLI: npx ${SITE_CLI_COMMAND}`,
-    `Site: ${SITE_URL}`,
-    `GitHub: ${SITE_GITHUB_URL}`,
-    "",
-    sections.join("\n\n"),
-  ].join("\n")}\n`;
+      lines.push(
+        `- [${component.title}](${getComponentDocsUrl(component.slug)}): ${component.llmSummary}`,
+        `  - slug: \`${component.slug}\``,
+        `  - status: ${component.status}`,
+        `  - docs: ${component.docsStatus}`,
+        `  - links: ${extraLinks.join(" | ")}`,
+      );
+
+      if (component.tags.length > 0) {
+        lines.push(`  - tags: ${component.tags.join(", ")}`);
+      }
+
+      if (component.relatedComponents.length > 0) {
+        lines.push(`  - related: ${component.relatedComponents.join(", ")}`);
+      }
+    }
+
+    lines.push("");
+  }
+
+  return `${lines.join("\n")}\n`;
 };
 
 const writeJson = async (filePath: string, value: unknown): Promise<void> => {

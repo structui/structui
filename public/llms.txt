@@ -1,66 +1,106 @@
-StructUI is a React component registry and docs system for reusable UI primitives and higher-level blocks.
+# StructUI
 
-Canonical package: struct-ui
-Canonical CLI: npx strui
-Registry URL: https://structui.com/registry.json
-GitHub: https://github.com/structui/structui
+> StructUI is a registry-first React UI system with reusable components, public docs, structured registry exports, and LLM-friendly discovery surfaces.
 
-Metrics: 56 total components, 3 documented, 56 stable, 8 categories.
+## Overview
 
-Component index:
-- 3d-pin: 3D Pin (Advanced, stable) - 3D Pin: Interactive 3D hover card for standout links and showcases.
-- accordion: Accordion (Data Display, stable) - Use Accordion for FAQs, settings panels, and dense content sections. Supports single or multiple expanded items and keyboard navigation.
-- alert: Alert (Feedback, stable) - Alert: Inline status and warning messaging.
-- alert-dialog: Alert Dialog (Overlay, stable) - Alert Dialog: High-stakes confirmation dialog for destructive actions.
-- aspect-ratio: Aspect Ratio (Layout, stable) - Aspect Ratio: Constrain media and embeds to a fixed aspect ratio.
-- avatar: Avatar (Data Display, stable) - Avatar: Profile image primitive with fallback states.
-- badge: Badge (General, stable) - Use Badge to communicate status, category, or small metadata labels. Suitable for filters, labels, and inline semantic emphasis.
-- bento-grid: Bento Grid (Layout, stable) - Bento Grid: Editorial grid layout for feature sections and dashboards.
-- breadcrumbs: Breadcrumbs (Navigation, stable) - Breadcrumbs: Hierarchy-based navigation trail for nested pages.
-- button: Button (General, stable) - Use Button for primary and secondary actions. Supports variants, sizes, icons, loading states, and polymorphic rendering via asChild.
-- calendar: Calendar (Data Display, stable) - Calendar: Date and schedule UI for picking and browsing dates.
-- card: Card (Layout, stable) - Card: Flexible container for grouped content, metadata, and actions.
-- charts: Charts (Data Display, stable) - Charts: Composable chart components for visualizing trends and distributions.
-- checkbox: Checkbox (Forms, stable) - Checkbox: Binary input for multi-select and consent flows.
-- combobox: Combobox (Forms, stable) - Combobox: Searchable selection UI for larger option sets.
-- command-palette: Command Palette (Advanced, stable) - Command Palette: Keyboard-driven search and action launcher.
-- context-menu: Context Menu (Overlay, stable) - Context Menu: Right-click menu for contextual actions.
-- cookies-banner: Cookies Banner (Overlay, stable) - Cookies Banner: Consent banner for privacy and cookie preferences.
-- data-table-advanced: Data Table Advanced (Data Display, stable) - Data Table Advanced: Feature-rich table with sorting, filtering, and large dataset support.
-- device-mockups: Device Mockups (Layout, stable) - Device Mockups: Device frames for product previews across desktop and mobile form factors.
-- dialogs: Dialogs (Overlay, stable) - Dialogs: Modal flows for auth, confirmation, and focused interaction.
-- dropdown-menu: Dropdown Menu (Overlay, stable) - Dropdown Menu: Action menu for compact contextual choices.
-- file-upload: File Upload (Forms, stable) - File Upload: Drag-and-drop upload field for files and attachments.
-- hero: Hero (Advanced, stable) - Hero: Landing page hero section for high-impact product messaging.
-- hover-card: Hover Card (Overlay, stable) - Hover Card: Preview card shown on hover for linked entities and metadata.
-- input: Input (Forms, stable) - Input: Standard text input field for forms and filters.
-- input-otp: Input OTP (Forms, stable) - Input OTP: Segmented one-time password input for auth flows.
-- input-tag: Input Tag (Forms, stable) - Input Tag: Tag entry input for labels, recipients, and multi-value fields.
-- kanban: Kanban (Data Display, stable) - Kanban: Board-style workflow layout for task and pipeline management.
-- loaders: Loaders & Spinners (General, stable) - Loaders & Spinners: Animated loading indicators for async states and pending screens.
-- markdown-editor: Markdown Editor (Forms, stable) - Markdown Editor: Markdown editor with live preview for content workflows.
-- menubar: Menubar (Navigation, stable) - Menubar: Desktop-style application menu bar.
-- navigation-menu: Navigation Menu (Navigation, stable) - Navigation Menu: Advanced site navigation menus for headers and mega menus.
-- pagination: Pagination (Navigation, stable) - Pagination: Paging controls for list and table navigation.
-- popover: Popover (Overlay, stable) - Popover: Floating panel anchored to a trigger element.
-- pricing: Pricing (Data Display, stable) - Pricing: Pricing cards and plan comparison layouts.
-- progress: Progress (Feedback, stable) - Progress: Progress indicators for uploads, steps, and async work.
-- radio-group: Radio Group (Forms, stable) - Radio Group: Single-selection input for mutually exclusive choices.
-- scroll-area: Scroll Area (Layout, stable) - Scroll Area: Styled scroll container for overflow-heavy content.
-- select: Select (Forms, stable) - Select: Dropdown selection menu for predefined options.
-- separator: Separator (Layout, stable) - Separator: Visual divider for grouping content and actions.
-- sheet: Sheet (Overlay, stable) - Sheet: Slide-over panel for secondary flows and contextual tasks.
-- skeleton: Skeleton (Data Display, stable) - Skeleton: Loading placeholder blocks for content still in flight.
-- slider: Slider (Forms, stable) - Slider: Range input for numeric selection and tuning.
-- spinner: Spinner (Feedback, stable) - Spinner: Compact loading spinner for buttons and small placeholders.
-- stats: Stats (Data Display, stable) - Stats: Metric cards and summary layouts for dashboards.
-- stepper: Stepper (Navigation, stable) - Stepper: Step-based progress indicator for multi-stage flows.
-- switch: Switch (Forms, stable) - Switch: Toggle control for on/off settings.
-- table: Table (Data Display, stable) - Table: Standard table primitives for structured data.
-- tabs: Tabs (Navigation, stable) - Tabs: Tabbed navigation for switching between related content panels.
-- textarea: Textarea (Forms, stable) - Textarea: Multiline text field for messages, notes, and descriptions.
-- timeline: Timeline (Data Display, stable) - Timeline: Sequential activity and event display for history-heavy screens.
-- toast: Toast (Feedback, stable) - Toast: Transient notification system for success, error, and info messages.
-- toggle: Toggle (Forms, stable) - Toggle: Pressed-state control for compact option toggles.
-- tooltip: Tooltip (Overlay, stable) - Tooltip: Short contextual hint shown on hover or focus.
-- typography: Typography (General, stable) - Typography: Type styles and content patterns for structured text layouts.
+- [Docs](https://structui.com/docs): Product and usage documentation.
+- [Components](https://structui.com/components): Browse the component catalog.
+- [Blocks](https://structui.com/blocks): Explore higher-level UI patterns and page sections.
+- [Theme Creator](https://structui.com/theme-creator): Build and export design token themes.
+- [GitHub](https://github.com/structui/structui): Source code, issues, and project history.
+
+## Installation
+
+- [Docs Installation](https://structui.com/docs#installation): Install struct-ui in a React app.
+- [CLI Usage](https://structui.com/docs#cli): Canonical `npx strui` command surface.
+- [Registry & LLMs](https://structui.com/docs#registry): Public machine-readable registry and LLM endpoints.
+
+## Registry
+
+- [registry.json](https://structui.com/registry.json): Global registry export with metrics and component index.
+- [registry/index.json](https://structui.com/registry/index.json): Mirrored registry index export.
+- [llms-full.txt](https://structui.com/llms-full.txt): Expanded LLM reference with per-component links and summaries.
+
+## Components (56)
+
+### Advanced
+
+- [3D Pin](https://structui.com/components/3d-pin): Interactive 3D hover card for standout links and showcases.
+- [Command Palette](https://structui.com/components/command-palette): Keyboard-driven search and action launcher.
+- [Hero](https://structui.com/components/hero): Landing page hero section for high-impact product messaging.
+
+### Data Display
+
+- [Accordion](https://structui.com/components/accordion): Collapsible sections for progressively revealing content.
+- [Avatar](https://structui.com/components/avatar): Profile image primitive with fallback states.
+- [Calendar](https://structui.com/components/calendar): Date and schedule UI for picking and browsing dates.
+- [Charts](https://structui.com/components/charts): Composable chart components for visualizing trends and distributions.
+- [Data Table Advanced](https://structui.com/components/data-table-advanced): Feature-rich table with sorting, filtering, and large dataset support.
+- [Kanban](https://structui.com/components/kanban): Board-style workflow layout for task and pipeline management.
+- [Pricing](https://structui.com/components/pricing): Pricing cards and plan comparison layouts.
+- [Skeleton](https://structui.com/components/skeleton): Loading placeholder blocks for content still in flight.
+- [Stats](https://structui.com/components/stats): Metric cards and summary layouts for dashboards.
+- [Table](https://structui.com/components/table): Standard table primitives for structured data.
+- [Timeline](https://structui.com/components/timeline): Sequential activity and event display for history-heavy screens.
+
+### Feedback
+
+- [Alert](https://structui.com/components/alert): Inline status and warning messaging.
+- [Progress](https://structui.com/components/progress): Progress indicators for uploads, steps, and async work.
+- [Spinner](https://structui.com/components/spinner): Compact loading spinner for buttons and small placeholders.
+- [Toast](https://structui.com/components/toast): Transient notification system for success, error, and info messages.
+
+### Forms
+
+- [Checkbox](https://structui.com/components/checkbox): Binary input for multi-select and consent flows.
+- [Combobox](https://structui.com/components/combobox): Searchable selection UI for larger option sets.
+- [File Upload](https://structui.com/components/file-upload): Drag-and-drop upload field for files and attachments.
+- [Input](https://structui.com/components/input): Standard text input field for forms and filters.
+- [Input OTP](https://structui.com/components/input-otp): Segmented one-time password input for auth flows.
+- [Input Tag](https://structui.com/components/input-tag): Tag entry input for labels, recipients, and multi-value fields.
+- [Markdown Editor](https://structui.com/components/markdown-editor): Markdown editor with live preview for content workflows.
+- [Radio Group](https://structui.com/components/radio-group): Single-selection input for mutually exclusive choices.
+- [Select](https://structui.com/components/select): Dropdown selection menu for predefined options.
+- [Slider](https://structui.com/components/slider): Range input for numeric selection and tuning.
+- [Switch](https://structui.com/components/switch): Toggle control for on/off settings.
+- [Textarea](https://structui.com/components/textarea): Multiline text field for messages, notes, and descriptions.
+- [Toggle](https://structui.com/components/toggle): Pressed-state control for compact option toggles.
+
+### General
+
+- [Badge](https://structui.com/components/badge): Compact status indicator for labels, states, and metadata.
+- [Button](https://structui.com/components/button): Interactive button with multiple variants and sizes.
+- [Loaders & Spinners](https://structui.com/components/loaders): Animated loading indicators for async states and pending screens.
+- [Typography](https://structui.com/components/typography): Type styles and content patterns for structured text layouts.
+
+### Layout
+
+- [Aspect Ratio](https://structui.com/components/aspect-ratio): Constrain media and embeds to a fixed aspect ratio.
+- [Bento Grid](https://structui.com/components/bento-grid): Editorial grid layout for feature sections and dashboards.
+- [Card](https://structui.com/components/card): Flexible container for grouped content, metadata, and actions.
+- [Device Mockups](https://structui.com/components/device-mockups): Device frames for product previews across desktop and mobile form factors.
+- [Scroll Area](https://structui.com/components/scroll-area): Styled scroll container for overflow-heavy content.
+- [Separator](https://structui.com/components/separator): Visual divider for grouping content and actions.
+
+### Navigation
+
+- [Breadcrumbs](https://structui.com/components/breadcrumbs): Hierarchy-based navigation trail for nested pages.
+- [Menubar](https://structui.com/components/menubar): Desktop-style application menu bar.
+- [Navigation Menu](https://structui.com/components/navigation-menu): Advanced site navigation menus for headers and mega menus.
+- [Pagination](https://structui.com/components/pagination): Paging controls for list and table navigation.
+- [Stepper](https://structui.com/components/stepper): Step-based progress indicator for multi-stage flows.
+- [Tabs](https://structui.com/components/tabs): Tabbed navigation for switching between related content panels.
+
+### Overlay
+
+- [Alert Dialog](https://structui.com/components/alert-dialog): High-stakes confirmation dialog for destructive actions.
+- [Context Menu](https://structui.com/components/context-menu): Right-click menu for contextual actions.
+- [Cookies Banner](https://structui.com/components/cookies-banner): Consent banner for privacy and cookie preferences.
+- [Dialogs](https://structui.com/components/dialogs): Modal flows for auth, confirmation, and focused interaction.
+- [Dropdown Menu](https://structui.com/components/dropdown-menu): Action menu for compact contextual choices.
+- [Hover Card](https://structui.com/components/hover-card): Preview card shown on hover for linked entities and metadata.
+- [Popover](https://structui.com/components/popover): Floating panel anchored to a trigger element.
+- [Sheet](https://structui.com/components/sheet): Slide-over panel for secondary flows and contextual tasks.
+- [Tooltip](https://structui.com/components/tooltip): Short contextual hint shown on hover or focus.
+
