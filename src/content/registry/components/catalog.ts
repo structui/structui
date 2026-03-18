@@ -70,16 +70,26 @@ export const catalogComponents: ComponentRegistryEntry[] = [
     title: "Input",
     description: "Standard text input field for forms and filters.",
     category: "Forms",
+    llmSummary:
+      "Use Input for single-line text entry, filtering, and compact form controls.",
+    docsStatus: "ready",
     sourcePath: "src/components/ui/input.tsx",
     sourceExport: "Input",
+    tags: ["text", "field", "form", "search"],
+    relatedComponents: ["textarea", "select", "checkbox"],
   }),
   createComponentRegistryEntry({
     id: "textarea",
     title: "Textarea",
     description: "Multiline text field for messages, notes, and descriptions.",
     category: "Forms",
+    llmSummary:
+      "Use Textarea for longer freeform input such as notes, bios, and support messages.",
+    docsStatus: "ready",
     sourcePath: "src/components/ui/textarea.tsx",
     sourceExport: "Textarea",
+    tags: ["multiline", "content", "form", "notes"],
+    relatedComponents: ["input", "markdown-editor"],
   }),
   createComponentRegistryEntry({
     id: "checkbox",
@@ -118,8 +128,13 @@ export const catalogComponents: ComponentRegistryEntry[] = [
     title: "Select",
     description: "Dropdown selection menu for predefined options.",
     category: "Forms",
+    llmSummary:
+      "Use Select when users need to choose one option from a constrained list.",
+    docsStatus: "ready",
     sourcePath: "src/components/ui/select.tsx",
     sourceExport: "Select",
+    tags: ["dropdown", "options", "picker", "form"],
+    relatedComponents: ["combobox", "radio-group", "input"],
   }),
   createComponentRegistryEntry({
     id: "combobox",
@@ -213,8 +228,13 @@ export const catalogComponents: ComponentRegistryEntry[] = [
     title: "Avatar",
     description: "Profile image primitive with fallback states.",
     category: "Data Display",
+    llmSummary:
+      "Use Avatar to represent people, teams, or entities with image and fallback states.",
+    docsStatus: "ready",
     sourcePath: "src/components/ui/avatar.tsx",
     sourceExport: "Avatar",
+    tags: ["profile", "user", "image", "fallback"],
+    relatedComponents: ["badge", "card"],
   }),
   createComponentRegistryEntry({
     id: "stats",
@@ -252,8 +272,13 @@ export const catalogComponents: ComponentRegistryEntry[] = [
     title: "Tabs",
     description: "Tabbed navigation for switching between related content panels.",
     category: "Navigation",
+    llmSummary:
+      "Use Tabs to switch between related views without leaving the current page context.",
+    docsStatus: "ready",
     sourcePath: "src/components/ui/tabs.tsx",
     sourceExport: "Tabs",
+    tags: ["navigation", "panels", "switcher", "layout"],
+    relatedComponents: ["accordion", "navigation-menu"],
   }),
   createComponentRegistryEntry({
     id: "breadcrumbs",

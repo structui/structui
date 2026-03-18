@@ -2057,6 +2057,7 @@ export const ComponentDetail = () => {
   const data = componentId ? componentData[componentId] : null;
   const registryEntry = componentId ? getComponentBySlug(componentId) : undefined;
   const componentDoc = componentId ? getComponentDocBySlug(componentId) : undefined;
+  const hasMarkdownDoc = Boolean(componentDoc);
   const displayCategory = registryEntry?.category ?? data?.category;
   const displayTitle = registryEntry?.title ?? data?.title;
   const displayDescription = registryEntry?.description ?? data?.description;
@@ -2133,7 +2134,7 @@ cp node_modules/${SITE_PACKAGE_NAME}/${sourcePath} src/components/ui/
 
 # 2. Or manually create ${sourcePath}
 # 3. Import the exported symbol into your app`} language="bash" />
-                {data.usage && (
+                {data?.usage && !hasMarkdownDoc && (
                   <div>
                     <p className="text-sm font-medium mb-2">Full source usage:</p>
                     <CodeBlock code={data.usage} />
@@ -2145,7 +2146,7 @@ cp node_modules/${SITE_PACKAGE_NAME}/${sourcePath} src/components/ui/
         </div>
 
         {/* Usage */}
-        {data.usage && (
+        {data?.usage && !hasMarkdownDoc && (
           <div className="space-y-6">
             <h2 className="text-3xl font-bold tracking-tight">Usage</h2>
             <CodeBlock code={data.usage} />
@@ -2222,7 +2223,7 @@ cp node_modules/${SITE_PACKAGE_NAME}/${sourcePath} src/components/ui/
 
       {/* Sidebar */}
       <div className="lg:w-80 space-y-8">
-        {data?.features && (
+        {data?.features && !hasMarkdownDoc && (
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
@@ -2241,7 +2242,7 @@ cp node_modules/${SITE_PACKAGE_NAME}/${sourcePath} src/components/ui/
           </Card>
         )}
 
-        {data?.accessibility && (
+        {data?.accessibility && !hasMarkdownDoc && (
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
