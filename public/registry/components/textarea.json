@@ -1,0 +1,18 @@
+{
+  "id": "textarea",
+  "slug": "textarea",
+  "title": "Textarea",
+  "description": "Multiline text field for messages, notes, and descriptions.",
+  "llmSummary": "Textarea: Multiline text field for messages, notes, and descriptions.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/textarea.tsx",
+  "sourceExport": "Textarea",
+  "docsPath": "src/content/docs/components/textarea.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

@@ -1,0 +1,782 @@
+StructUI full registry export for LLM consumption.
+Canonical package: struct-ui
+Canonical CLI: npx strui
+Site: https://structui.com
+GitHub: https://github.com/structui/structui
+
+## 3D Pin
+- id: 3d-pin
+- slug: 3d-pin
+- category: Advanced
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/3d-pin.tsx
+- sourceExport: PinContainer
+- tags: n/a
+- related: n/a
+- summary: 3D Pin: Interactive 3D hover card for standout links and showcases.
+- description: Interactive 3D hover card for standout links and showcases.
+
+## Accordion
+- id: accordion
+- slug: accordion
+- category: Data Display
+- status: stable
+- docsStatus: ready
+- sourcePath: src/components/ui/accordion.tsx
+- sourceExport: Accordion
+- tags: collapse, faq, disclosure, content
+- related: button
+- summary: Use Accordion for FAQs, settings panels, and dense content sections. Supports single or multiple expanded items and keyboard navigation.
+- description: Collapsible sections for progressively revealing content.
+
+Markdown documentation:
+# Accordion
+
+Use Accordion when content should stay compact until the user asks for more detail.
+
+## Usage
+
+- Group FAQs, settings, or help content.
+- Choose single mode for focused reading.
+- Choose multiple mode for comparison-heavy content.
+
+## Accessibility
+
+- Supports keyboard navigation.
+- Follows the WAI-ARIA accordion pattern through Radix primitives.
+
+## Alert
+- id: alert
+- slug: alert
+- category: Feedback
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/feedback.tsx
+- sourceExport: Alert
+- tags: n/a
+- related: n/a
+- summary: Alert: Inline status and warning messaging.
+- description: Inline status and warning messaging.
+
+## Alert Dialog
+- id: alert-dialog
+- slug: alert-dialog
+- category: Overlay
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/alert-dialog.tsx
+- sourceExport: AlertDialog
+- tags: n/a
+- related: n/a
+- summary: Alert Dialog: High-stakes confirmation dialog for destructive actions.
+- description: High-stakes confirmation dialog for destructive actions.
+
+## Aspect Ratio
+- id: aspect-ratio
+- slug: aspect-ratio
+- category: Layout
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/primitives.tsx
+- sourceExport: AspectRatio
+- tags: n/a
+- related: n/a
+- summary: Aspect Ratio: Constrain media and embeds to a fixed aspect ratio.
+- description: Constrain media and embeds to a fixed aspect ratio.
+
+## Avatar
+- id: avatar
+- slug: avatar
+- category: Data Display
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/avatar.tsx
+- sourceExport: Avatar
+- tags: n/a
+- related: n/a
+- summary: Avatar: Profile image primitive with fallback states.
+- description: Profile image primitive with fallback states.
+
+## Badge
+- id: badge
+- slug: badge
+- category: General
+- status: stable
+- docsStatus: ready
+- sourcePath: src/components/ui/badge.tsx
+- sourceExport: Badge
+- tags: status, label, metadata, pill
+- related: button
+- summary: Use Badge to communicate status, category, or small metadata labels. Suitable for filters, labels, and inline semantic emphasis.
+- description: Compact status indicator for labels, states, and metadata.
+
+Markdown documentation:
+# Badge
+
+Use Badge for lightweight status labels, metadata chips, and inline semantic markers.
+
+## Usage
+
+- Show status such as active, beta, or archived.
+- Pair with cards, filters, or table cells.
+- Keep the label short for better scannability.
+
+## Accessibility
+
+- Keep text meaningful without relying on color alone.
+- Use sufficient contrast for status variants.
+
+## Bento Grid
+- id: bento-grid
+- slug: bento-grid
+- category: Layout
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/bento-grid.tsx
+- sourceExport: BentoGrid
+- tags: n/a
+- related: n/a
+- summary: Bento Grid: Editorial grid layout for feature sections and dashboards.
+- description: Editorial grid layout for feature sections and dashboards.
+
+## Breadcrumbs
+- id: breadcrumbs
+- slug: breadcrumbs
+- category: Navigation
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/navigation.tsx
+- sourceExport: Breadcrumbs
+- tags: n/a
+- related: n/a
+- summary: Breadcrumbs: Hierarchy-based navigation trail for nested pages.
+- description: Hierarchy-based navigation trail for nested pages.
+
+## Button
+- id: button
+- slug: button
+- category: General
+- status: stable
+- docsStatus: ready
+- sourcePath: src/components/ui/button.tsx
+- sourceExport: Button
+- tags: action, trigger, form, cta
+- related: badge, accordion
+- summary: Use Button for primary and secondary actions. Supports variants, sizes, icons, loading states, and polymorphic rendering via asChild.
+- description: Interactive button with multiple variants and sizes.
+
+Markdown documentation:
+# Button
+
+Use Button for primary and secondary actions across forms, dialogs, and page-level calls to action.
+
+## Usage
+
+- Trigger an action or submit a form.
+- Pick a variant to communicate hierarchy.
+- Prefer concise labels and optional leading icons.
+
+## Accessibility
+
+- Preserves keyboard focus styles.
+- Works with semantic button behavior by default.
+- Supports accessible polymorphism through `asChild` when needed.
+
+## Calendar
+- id: calendar
+- slug: calendar
+- category: Data Display
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/calendar.tsx
+- sourceExport: Calendar
+- tags: n/a
+- related: n/a
+- summary: Calendar: Date and schedule UI for picking and browsing dates.
+- description: Date and schedule UI for picking and browsing dates.
+
+## Card
+- id: card
+- slug: card
+- category: Layout
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/card.tsx
+- sourceExport: Card
+- tags: n/a
+- related: badge, button
+- summary: Card: Flexible container for grouped content, metadata, and actions.
+- description: Flexible container for grouped content, metadata, and actions.
+
+## Charts
+- id: charts
+- slug: charts
+- category: Data Display
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/charts.tsx
+- sourceExport: n/a
+- tags: n/a
+- related: n/a
+- summary: Charts: Composable chart components for visualizing trends and distributions.
+- description: Composable chart components for visualizing trends and distributions.
+
+## Checkbox
+- id: checkbox
+- slug: checkbox
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/checkbox.tsx
+- sourceExport: Checkbox
+- tags: n/a
+- related: n/a
+- summary: Checkbox: Binary input for multi-select and consent flows.
+- description: Binary input for multi-select and consent flows.
+
+## Combobox
+- id: combobox
+- slug: combobox
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/combobox.tsx
+- sourceExport: Combobox
+- tags: n/a
+- related: n/a
+- summary: Combobox: Searchable selection UI for larger option sets.
+- description: Searchable selection UI for larger option sets.
+
+## Command Palette
+- id: command-palette
+- slug: command-palette
+- category: Advanced
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/command-palette.tsx
+- sourceExport: CommandPalette
+- tags: n/a
+- related: n/a
+- summary: Command Palette: Keyboard-driven search and action launcher.
+- description: Keyboard-driven search and action launcher.
+
+## Context Menu
+- id: context-menu
+- slug: context-menu
+- category: Overlay
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/overlay-advanced.tsx
+- sourceExport: ContextMenu
+- tags: n/a
+- related: n/a
+- summary: Context Menu: Right-click menu for contextual actions.
+- description: Right-click menu for contextual actions.
+
+## Cookies Banner
+- id: cookies-banner
+- slug: cookies-banner
+- category: Overlay
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/cookies-banner.tsx
+- sourceExport: CookiesBanner
+- tags: n/a
+- related: n/a
+- summary: Cookies Banner: Consent banner for privacy and cookie preferences.
+- description: Consent banner for privacy and cookie preferences.
+
+## Data Table Advanced
+- id: data-table-advanced
+- slug: data-table-advanced
+- category: Data Display
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/data-table-advanced.tsx
+- sourceExport: DataTableAdvanced
+- tags: n/a
+- related: n/a
+- summary: Data Table Advanced: Feature-rich table with sorting, filtering, and large dataset support.
+- description: Feature-rich table with sorting, filtering, and large dataset support.
+
+## Device Mockups
+- id: device-mockups
+- slug: device-mockups
+- category: Layout
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/device-mockups.tsx
+- sourceExport: n/a
+- tags: n/a
+- related: n/a
+- summary: Device Mockups: Device frames for product previews across desktop and mobile form factors.
+- description: Device frames for product previews across desktop and mobile form factors.
+
+## Dialogs
+- id: dialogs
+- slug: dialogs
+- category: Overlay
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/dialogs.tsx
+- sourceExport: n/a
+- tags: n/a
+- related: n/a
+- summary: Dialogs: Modal flows for auth, confirmation, and focused interaction.
+- description: Modal flows for auth, confirmation, and focused interaction.
+
+## Dropdown Menu
+- id: dropdown-menu
+- slug: dropdown-menu
+- category: Overlay
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/dropdown-menu.tsx
+- sourceExport: DropdownMenu
+- tags: n/a
+- related: n/a
+- summary: Dropdown Menu: Action menu for compact contextual choices.
+- description: Action menu for compact contextual choices.
+
+## File Upload
+- id: file-upload
+- slug: file-upload
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/inputs-advanced.tsx
+- sourceExport: FileUpload
+- tags: n/a
+- related: n/a
+- summary: File Upload: Drag-and-drop upload field for files and attachments.
+- description: Drag-and-drop upload field for files and attachments.
+
+## Hero
+- id: hero
+- slug: hero
+- category: Advanced
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/hero.tsx
+- sourceExport: Hero
+- tags: n/a
+- related: n/a
+- summary: Hero: Landing page hero section for high-impact product messaging.
+- description: Landing page hero section for high-impact product messaging.
+
+## Hover Card
+- id: hover-card
+- slug: hover-card
+- category: Overlay
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/overlay-advanced.tsx
+- sourceExport: HoverCard
+- tags: n/a
+- related: n/a
+- summary: Hover Card: Preview card shown on hover for linked entities and metadata.
+- description: Preview card shown on hover for linked entities and metadata.
+
+## Input
+- id: input
+- slug: input
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/input.tsx
+- sourceExport: Input
+- tags: n/a
+- related: n/a
+- summary: Input: Standard text input field for forms and filters.
+- description: Standard text input field for forms and filters.
+
+## Input OTP
+- id: input-otp
+- slug: input-otp
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/inputs-advanced.tsx
+- sourceExport: InputOTP
+- tags: n/a
+- related: n/a
+- summary: Input OTP: Segmented one-time password input for auth flows.
+- description: Segmented one-time password input for auth flows.
+
+## Input Tag
+- id: input-tag
+- slug: input-tag
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/inputs-advanced.tsx
+- sourceExport: InputTag
+- tags: n/a
+- related: n/a
+- summary: Input Tag: Tag entry input for labels, recipients, and multi-value fields.
+- description: Tag entry input for labels, recipients, and multi-value fields.
+
+## Kanban
+- id: kanban
+- slug: kanban
+- category: Data Display
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/kanban.tsx
+- sourceExport: KanbanBoard
+- tags: n/a
+- related: n/a
+- summary: Kanban: Board-style workflow layout for task and pipeline management.
+- description: Board-style workflow layout for task and pipeline management.
+
+## Loaders & Spinners
+- id: loaders
+- slug: loaders
+- category: General
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/loaders.tsx
+- sourceExport: n/a
+- tags: loading, spinner, feedback
+- related: n/a
+- summary: Loaders & Spinners: Animated loading indicators for async states and pending screens.
+- description: Animated loading indicators for async states and pending screens.
+
+## Markdown Editor
+- id: markdown-editor
+- slug: markdown-editor
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/markdown-editor.tsx
+- sourceExport: MarkdownEditor
+- tags: n/a
+- related: n/a
+- summary: Markdown Editor: Markdown editor with live preview for content workflows.
+- description: Markdown editor with live preview for content workflows.
+
+## Menubar
+- id: menubar
+- slug: menubar
+- category: Navigation
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/overlay-advanced.tsx
+- sourceExport: Menubar
+- tags: n/a
+- related: n/a
+- summary: Menubar: Desktop-style application menu bar.
+- description: Desktop-style application menu bar.
+
+## Navigation Menu
+- id: navigation-menu
+- slug: navigation-menu
+- category: Navigation
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/navigation-advanced.tsx
+- sourceExport: NavigationMenu
+- tags: n/a
+- related: n/a
+- summary: Navigation Menu: Advanced site navigation menus for headers and mega menus.
+- description: Advanced site navigation menus for headers and mega menus.
+
+## Pagination
+- id: pagination
+- slug: pagination
+- category: Navigation
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/navigation.tsx
+- sourceExport: Pagination
+- tags: n/a
+- related: n/a
+- summary: Pagination: Paging controls for list and table navigation.
+- description: Paging controls for list and table navigation.
+
+## Popover
+- id: popover
+- slug: popover
+- category: Overlay
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/popover.tsx
+- sourceExport: Popover
+- tags: n/a
+- related: n/a
+- summary: Popover: Floating panel anchored to a trigger element.
+- description: Floating panel anchored to a trigger element.
+
+## Pricing
+- id: pricing
+- slug: pricing
+- category: Data Display
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/pricing.tsx
+- sourceExport: Pricing
+- tags: n/a
+- related: n/a
+- summary: Pricing: Pricing cards and plan comparison layouts.
+- description: Pricing cards and plan comparison layouts.
+
+## Progress
+- id: progress
+- slug: progress
+- category: Feedback
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/feedback.tsx
+- sourceExport: Progress
+- tags: n/a
+- related: n/a
+- summary: Progress: Progress indicators for uploads, steps, and async work.
+- description: Progress indicators for uploads, steps, and async work.
+
+## Radio Group
+- id: radio-group
+- slug: radio-group
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/radio-group.tsx
+- sourceExport: RadioGroup
+- tags: n/a
+- related: n/a
+- summary: Radio Group: Single-selection input for mutually exclusive choices.
+- description: Single-selection input for mutually exclusive choices.
+
+## Scroll Area
+- id: scroll-area
+- slug: scroll-area
+- category: Layout
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/primitives.tsx
+- sourceExport: ScrollArea
+- tags: n/a
+- related: n/a
+- summary: Scroll Area: Styled scroll container for overflow-heavy content.
+- description: Styled scroll container for overflow-heavy content.
+
+## Select
+- id: select
+- slug: select
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/select.tsx
+- sourceExport: Select
+- tags: n/a
+- related: n/a
+- summary: Select: Dropdown selection menu for predefined options.
+- description: Dropdown selection menu for predefined options.
+
+## Separator
+- id: separator
+- slug: separator
+- category: Layout
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/primitives.tsx
+- sourceExport: Separator
+- tags: n/a
+- related: n/a
+- summary: Separator: Visual divider for grouping content and actions.
+- description: Visual divider for grouping content and actions.
+
+## Sheet
+- id: sheet
+- slug: sheet
+- category: Overlay
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/sheet.tsx
+- sourceExport: Sheet
+- tags: n/a
+- related: n/a
+- summary: Sheet: Slide-over panel for secondary flows and contextual tasks.
+- description: Slide-over panel for secondary flows and contextual tasks.
+
+## Skeleton
+- id: skeleton
+- slug: skeleton
+- category: Data Display
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/skeleton.tsx
+- sourceExport: Skeleton
+- tags: n/a
+- related: n/a
+- summary: Skeleton: Loading placeholder blocks for content still in flight.
+- description: Loading placeholder blocks for content still in flight.
+
+## Slider
+- id: slider
+- slug: slider
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/slider.tsx
+- sourceExport: Slider
+- tags: n/a
+- related: n/a
+- summary: Slider: Range input for numeric selection and tuning.
+- description: Range input for numeric selection and tuning.
+
+## Spinner
+- id: spinner
+- slug: spinner
+- category: Feedback
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/spinner.tsx
+- sourceExport: Spinner
+- tags: n/a
+- related: n/a
+- summary: Spinner: Compact loading spinner for buttons and small placeholders.
+- description: Compact loading spinner for buttons and small placeholders.
+
+## Stats
+- id: stats
+- slug: stats
+- category: Data Display
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/stats.tsx
+- sourceExport: n/a
+- tags: n/a
+- related: n/a
+- summary: Stats: Metric cards and summary layouts for dashboards.
+- description: Metric cards and summary layouts for dashboards.
+
+## Stepper
+- id: stepper
+- slug: stepper
+- category: Navigation
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/stepper.tsx
+- sourceExport: Stepper
+- tags: n/a
+- related: n/a
+- summary: Stepper: Step-based progress indicator for multi-stage flows.
+- description: Step-based progress indicator for multi-stage flows.
+
+## Switch
+- id: switch
+- slug: switch
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/switch.tsx
+- sourceExport: Switch
+- tags: n/a
+- related: n/a
+- summary: Switch: Toggle control for on/off settings.
+- description: Toggle control for on/off settings.
+
+## Table
+- id: table
+- slug: table
+- category: Data Display
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/table.tsx
+- sourceExport: Table
+- tags: n/a
+- related: n/a
+- summary: Table: Standard table primitives for structured data.
+- description: Standard table primitives for structured data.
+
+## Tabs
+- id: tabs
+- slug: tabs
+- category: Navigation
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/tabs.tsx
+- sourceExport: Tabs
+- tags: n/a
+- related: n/a
+- summary: Tabs: Tabbed navigation for switching between related content panels.
+- description: Tabbed navigation for switching between related content panels.
+
+## Textarea
+- id: textarea
+- slug: textarea
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/textarea.tsx
+- sourceExport: Textarea
+- tags: n/a
+- related: n/a
+- summary: Textarea: Multiline text field for messages, notes, and descriptions.
+- description: Multiline text field for messages, notes, and descriptions.
+
+## Timeline
+- id: timeline
+- slug: timeline
+- category: Data Display
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/timeline.tsx
+- sourceExport: Timeline
+- tags: n/a
+- related: n/a
+- summary: Timeline: Sequential activity and event display for history-heavy screens.
+- description: Sequential activity and event display for history-heavy screens.
+
+## Toast
+- id: toast
+- slug: toast
+- category: Feedback
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/toast.tsx
+- sourceExport: n/a
+- tags: n/a
+- related: n/a
+- summary: Toast: Transient notification system for success, error, and info messages.
+- description: Transient notification system for success, error, and info messages.
+
+## Toggle
+- id: toggle
+- slug: toggle
+- category: Forms
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/inputs-advanced.tsx
+- sourceExport: Toggle
+- tags: n/a
+- related: n/a
+- summary: Toggle: Pressed-state control for compact option toggles.
+- description: Pressed-state control for compact option toggles.
+
+## Tooltip
+- id: tooltip
+- slug: tooltip
+- category: Overlay
+- status: stable
+- docsStatus: draft
+- sourcePath: src/components/ui/tooltip.tsx
+- sourceExport: Tooltip
+- tags: n/a
+- related: n/a
+- summary: Tooltip: Short contextual hint shown on hover or focus.
+- description: Short contextual hint shown on hover or focus.
+
+## Typography
+- id: typography
+- slug: typography
+- category: General
+- status: stable
+- docsStatus: draft
+- sourcePath: n/a
+- sourceExport: n/a
+- tags: text, content, heading
+- related: n/a
+- summary: Typography: Type styles and content patterns for structured text layouts.
+- description: Type styles and content patterns for structured text layouts.

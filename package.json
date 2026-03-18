@@ -7,8 +7,9 @@
     "strui": "./bin/strui.js"
   },
   "scripts": {
+    "generate:registry": "tsx scripts/generate-registry-artifacts.ts",
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
+    "build": "npm run generate:registry && vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"

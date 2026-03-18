@@ -32,7 +32,7 @@ export const createComponentRegistryEntry = (
   llmSummary: seed.llmSummary ?? `${seed.title}: ${seed.description}`,
   category: seed.category,
   status: seed.status ?? "stable",
-  docsStatus: seed.docsStatus ?? "ready",
+  docsStatus: seed.docsStatus ?? "draft",
   visibility: "public",
   tags: seed.tags ?? [],
   sourcePath: seed.sourcePath,

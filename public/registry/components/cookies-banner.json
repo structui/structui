@@ -1,0 +1,18 @@
+{
+  "id": "cookies-banner",
+  "slug": "cookies-banner",
+  "title": "Cookies Banner",
+  "description": "Consent banner for privacy and cookie preferences.",
+  "llmSummary": "Cookies Banner: Consent banner for privacy and cookie preferences.",
+  "category": "Overlay",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/cookies-banner.tsx",
+  "sourceExport": "CookiesBanner",
+  "docsPath": "src/content/docs/components/cookies-banner.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

@@ -1,0 +1,18 @@
+{
+  "id": "switch",
+  "slug": "switch",
+  "title": "Switch",
+  "description": "Toggle control for on/off settings.",
+  "llmSummary": "Switch: Toggle control for on/off settings.",
+  "category": "Forms",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/switch.tsx",
+  "sourceExport": "Switch",
+  "docsPath": "src/content/docs/components/switch.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

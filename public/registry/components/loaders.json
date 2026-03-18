@@ -1,0 +1,21 @@
+{
+  "id": "loaders",
+  "slug": "loaders",
+  "title": "Loaders & Spinners",
+  "description": "Animated loading indicators for async states and pending screens.",
+  "llmSummary": "Loaders & Spinners: Animated loading indicators for async states and pending screens.",
+  "category": "General",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [
+    "loading",
+    "spinner",
+    "feedback"
+  ],
+  "sourcePath": "src/components/ui/loaders.tsx",
+  "docsPath": "src/content/docs/components/loaders.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

@@ -1,0 +1,17 @@
+{
+  "id": "dialogs",
+  "slug": "dialogs",
+  "title": "Dialogs",
+  "description": "Modal flows for auth, confirmation, and focused interaction.",
+  "llmSummary": "Dialogs: Modal flows for auth, confirmation, and focused interaction.",
+  "category": "Overlay",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/dialogs.tsx",
+  "docsPath": "src/content/docs/components/dialogs.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

@@ -1,0 +1,18 @@
+{
+  "id": "tabs",
+  "slug": "tabs",
+  "title": "Tabs",
+  "description": "Tabbed navigation for switching between related content panels.",
+  "llmSummary": "Tabs: Tabbed navigation for switching between related content panels.",
+  "category": "Navigation",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/tabs.tsx",
+  "sourceExport": "Tabs",
+  "docsPath": "src/content/docs/components/tabs.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

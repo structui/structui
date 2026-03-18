@@ -1,0 +1,18 @@
+{
+  "id": "menubar",
+  "slug": "menubar",
+  "title": "Menubar",
+  "description": "Desktop-style application menu bar.",
+  "llmSummary": "Menubar: Desktop-style application menu bar.",
+  "category": "Navigation",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/overlay-advanced.tsx",
+  "sourceExport": "Menubar",
+  "docsPath": "src/content/docs/components/menubar.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

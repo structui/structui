@@ -1,0 +1,18 @@
+{
+  "id": "sheet",
+  "slug": "sheet",
+  "title": "Sheet",
+  "description": "Slide-over panel for secondary flows and contextual tasks.",
+  "llmSummary": "Sheet: Slide-over panel for secondary flows and contextual tasks.",
+  "category": "Overlay",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/sheet.tsx",
+  "sourceExport": "Sheet",
+  "docsPath": "src/content/docs/components/sheet.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

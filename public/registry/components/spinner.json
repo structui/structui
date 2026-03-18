@@ -1,0 +1,18 @@
+{
+  "id": "spinner",
+  "slug": "spinner",
+  "title": "Spinner",
+  "description": "Compact loading spinner for buttons and small placeholders.",
+  "llmSummary": "Spinner: Compact loading spinner for buttons and small placeholders.",
+  "category": "Feedback",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/spinner.tsx",
+  "sourceExport": "Spinner",
+  "docsPath": "src/content/docs/components/spinner.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

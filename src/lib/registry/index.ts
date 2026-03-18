@@ -12,6 +12,7 @@ export {
   SITE_GITHUB_URL,
   SITE_ISSUES_URL,
   SITE_PACKAGE_NAME,
+  SITE_URL,
 } from "./constants";
 export { createComponentRegistryEntry } from "./factories";
 export { getSiteMetrics } from "./metrics";

@@ -1,0 +1,18 @@
+{
+  "id": "bento-grid",
+  "slug": "bento-grid",
+  "title": "Bento Grid",
+  "description": "Editorial grid layout for feature sections and dashboards.",
+  "llmSummary": "Bento Grid: Editorial grid layout for feature sections and dashboards.",
+  "category": "Layout",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/bento-grid.tsx",
+  "sourceExport": "BentoGrid",
+  "docsPath": "src/content/docs/components/bento-grid.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

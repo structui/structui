@@ -1,0 +1,18 @@
+{
+  "id": "dropdown-menu",
+  "slug": "dropdown-menu",
+  "title": "Dropdown Menu",
+  "description": "Action menu for compact contextual choices.",
+  "llmSummary": "Dropdown Menu: Action menu for compact contextual choices.",
+  "category": "Overlay",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/dropdown-menu.tsx",
+  "sourceExport": "DropdownMenu",
+  "docsPath": "src/content/docs/components/dropdown-menu.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

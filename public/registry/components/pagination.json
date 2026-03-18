@@ -1,0 +1,18 @@
+{
+  "id": "pagination",
+  "slug": "pagination",
+  "title": "Pagination",
+  "description": "Paging controls for list and table navigation.",
+  "llmSummary": "Pagination: Paging controls for list and table navigation.",
+  "category": "Navigation",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/navigation.tsx",
+  "sourceExport": "Pagination",
+  "docsPath": "src/content/docs/components/pagination.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}

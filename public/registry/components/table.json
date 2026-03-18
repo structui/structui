@@ -1,0 +1,18 @@
+{
+  "id": "table",
+  "slug": "table",
+  "title": "Table",
+  "description": "Standard table primitives for structured data.",
+  "llmSummary": "Table: Standard table primitives for structured data.",
+  "category": "Data Display",
+  "status": "stable",
+  "docsStatus": "draft",
+  "tags": [],
+  "sourcePath": "src/components/ui/table.tsx",
+  "sourceExport": "Table",
+  "docsPath": "src/content/docs/components/table.md",
+  "dependencies": [],
+  "registryDependencies": [],
+  "relatedComponents": [],
+  "hasMarkdownDoc": false
+}
