@@ -1,4 +1,4 @@
 import React from "react";
-import { DocsOverviewPage } from "@/src/pages/docs/shared";
+import { DocsOverviewPage } from "./docs/shared";
 
 export const DocsPage = (): React.JSX.Element => <DocsOverviewPage />;

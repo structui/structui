@@ -1,5 +1,5 @@
 import React from "react";
-import { CliDocsContent, DocsPageShell } from "@/src/pages/docs/shared";
+import { CliDocsContent, DocsPageShell } from "./shared";
 
 export const CliPage = (): React.JSX.Element => (
   <DocsPageShell

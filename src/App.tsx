@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/navbar";
 import { Footer } from "./components/footer";
 import { Floatbar } from "./components/floatbar";
-import { HomePage } from "./pages/home";
-import { BlocksPage } from "./pages/blocks";
-import { ComponentsPage } from "./pages/components";
-import { DocsPage } from "./pages/docs";
-import { ComponentDocPage } from "./pages/docs/component-doc-page";
-import { CliPage } from "./pages/docs/cli";
-import { DocsSectionPage } from "./pages/docs/section-page";
-import { ThemingPage } from "./pages/docs/theming";
-import { ThemeCreatorPage } from "./pages/theme-creator";
+import { HomePage } from "./legacy-pages/home";
+import { BlocksPage } from "./legacy-pages/blocks";
+import { ComponentsPage } from "./legacy-pages/components";
+import { DocsPage } from "./legacy-pages/docs";
+import { ComponentDocPage } from "./legacy-pages/docs/component-doc-page";
+import { CliPage } from "./legacy-pages/docs/cli";
+import { DocsSectionPage } from "./legacy-pages/docs/section-page";
+import { ThemingPage } from "./legacy-pages/docs/theming";
+import { ThemeCreatorPage } from "./legacy-pages/theme-creator";
 import { R2GoPage } from "./pages/r2go";
 import { cn } from "./lib/utils";
 import { ToastProvider } from "./components/ui/toast";
@@ -77,4 +77,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-

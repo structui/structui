@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, useParams } from "react-router-dom";
 
-import { DocsPageShell, DOC_SECTION_CONTENT } from "@/src/pages/docs/shared";
+import { DocsPageShell, DOC_SECTION_CONTENT } from "./shared";
 
 type DocSectionId = keyof typeof DOC_SECTION_CONTENT;
 

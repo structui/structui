@@ -1,5 +1,5 @@
 import React from "react";
-import { DocsPageShell, ThemingDocsContent } from "@/src/pages/docs/shared";
+import { DocsPageShell, ThemingDocsContent } from "./shared";
 
 export const ThemingPage = (): React.JSX.Element => (
   <DocsPageShell
