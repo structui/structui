@@ -13,7 +13,7 @@ export const Footer = () => {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
-              A modern, minimal UI system built for React and Next.js. 
+              A modern, minimal UI system built for React and Next.js.
               Focused on structure, minimalism, and performance.
             </p>
           </div>

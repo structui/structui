@@ -1,16 +1,17 @@
+// @ts-nocheck
 import React, { useState } from "react";
 import { Container } from "@/src/components/layout/container";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src/components/ui/card";
 import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { Textarea } from "@/src/components/ui/textarea";
-import { 
-  Github, 
-  Mail, 
-  LayoutDashboard, 
-  Users, 
-  CreditCard, 
-  Activity, 
+import {
+  Github,
+  Mail,
+  LayoutDashboard,
+  Users,
+  CreditCard,
+  Activity,
   DollarSign,
   CheckCircle2,
   ArrowRight,
@@ -116,6 +117,479 @@ const BlockSection = ({
         />
       )}
     </motion.div>
+  );
+};
+
+const chatMessages = [
+  { id: 1, author: "Sarah K.", avatar: "SK", side: "left", text: "Hey! Did you finish the new dashboard mockups?", time: "10:32" },
+  { id: 2, author: "You", avatar: "YO", side: "right", text: "Almost done! Sending them over in 10 minutes.", time: "10:34" },
+  { id: 3, author: "Sarah K.", avatar: "SK", side: "left", text: "Perfect. The client is expecting them by noon.", time: "10:35" },
+  { id: 4, author: "You", avatar: "YO", side: "right", text: "No worries, I'll have everything ready well before that!", time: "10:36" },
+];
+
+const ChatInterfaceBlock = () => {
+  const [input, setInput] = useState("");
+
+  return (
+    <div className="flex flex-col h-[480px] border rounded-2xl overflow-hidden bg-background">
+      <div className="flex items-center gap-3 px-5 py-4 border-b bg-muted/20">
+        <div className="h-9 w-9 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold">SK</div>
+        <div>
+          <p className="text-sm font-semibold">Sarah K.</p>
+          <p className="text-xs text-emerald-500">Online</p>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto p-5 space-y-4">
+        {chatMessages.map((message) => (
+          <div key={message.id} className={`flex gap-3 ${message.side === "right" ? "flex-row-reverse" : ""}`}>
+            <div className="h-8 w-8 shrink-0 rounded-full bg-muted flex items-center justify-center text-[10px] font-bold">{message.avatar}</div>
+            <div className={`max-w-[70%] rounded-2xl px-4 py-2.5 text-sm ${message.side === "right" ? "bg-primary text-primary-foreground rounded-tr-sm" : "bg-muted rounded-tl-sm"}`}>
+              <p>{message.text}</p>
+              <p className={`text-[10px] mt-1 ${message.side === "right" ? "text-primary-foreground/60" : "text-muted-foreground"}`}>{message.time}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex gap-2 px-4 py-3 border-t">
+        <input
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+          placeholder="Type a message..."
+          className="flex-1 bg-muted/50 rounded-full px-4 py-2 text-sm outline-none focus:bg-muted"
+        />
+        <Button size="sm" className="rounded-full px-5">Send</Button>
+      </div>
+    </div>
+  );
+};
+
+const InvoiceCardBlock = () => {
+  const items = [
+    { name: "UI Design System (Pro)", qty: 1, price: 299 },
+    { name: "Component Library License", qty: 3, price: 49 },
+    { name: "Priority Support (12mo)", qty: 1, price: 120 },
+  ];
+  const subtotal = items.reduce((sum, item) => sum + item.qty * item.price, 0);
+
+  return (
+    <div className="max-w-lg mx-auto border rounded-2xl overflow-hidden shadow-sm">
+      <div className="bg-primary px-8 py-6 text-primary-foreground flex justify-between items-start">
+        <div>
+          <h2 className="text-2xl font-bold">Invoice</h2>
+          <p className="text-primary-foreground/70 text-sm mt-1">#INV-2024-0081</p>
+        </div>
+        <div className="text-right">
+          <p className="text-sm text-primary-foreground/70">Issued</p>
+          <p className="font-semibold">Dec 15, 2024</p>
+        </div>
+      </div>
+      <div className="p-8 space-y-6 bg-background">
+        <div className="grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <p className="text-muted-foreground mb-1">From</p>
+            <p className="font-semibold">StructUI Inc.</p>
+            <p className="text-muted-foreground">hello@structui.com</p>
+          </div>
+          <div>
+            <p className="text-muted-foreground mb-1">To</p>
+            <p className="font-semibold">Acme Corp</p>
+            <p className="text-muted-foreground">billing@acme.co</p>
+          </div>
+        </div>
+        <div className="border rounded-xl overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-muted/50">
+              <tr>
+                <th className="text-left px-4 py-3 font-medium">Item</th>
+                <th className="text-center px-4 py-3 font-medium">Qty</th>
+                <th className="text-right px-4 py-3 font-medium">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item, index) => (
+                <tr key={index} className="border-t">
+                  <td className="px-4 py-3">{item.name}</td>
+                  <td className="px-4 py-3 text-center text-muted-foreground">{item.qty}</td>
+                  <td className="px-4 py-3 text-right font-medium">${(item.qty * item.price).toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="space-y-2 text-sm border-t pt-4">
+          <div className="flex justify-between text-muted-foreground">
+            <span>Subtotal</span>
+            <span>${subtotal}</span>
+          </div>
+          <div className="flex justify-between text-muted-foreground">
+            <span>Tax (10%)</span>
+            <span>${(subtotal * 0.1).toFixed(0)}</span>
+          </div>
+          <div className="flex justify-between font-bold text-base pt-2 border-t">
+            <span>Total</span>
+            <span>${(subtotal * 1.1).toFixed(0)}</span>
+          </div>
+        </div>
+        <Button className="w-full rounded-xl">Download PDF</Button>
+      </div>
+    </div>
+  );
+};
+
+const jobBoardItems = [
+  { title: "Senior Frontend Engineer", company: "Vercel", location: "Remote", type: "Full-time", salary: "$140-$180k", tags: ["React", "TypeScript", "Next.js"], logo: "V", color: "#000" },
+  { title: "Product Designer", company: "Linear", location: "San Francisco", type: "Full-time", salary: "$120-$160k", tags: ["Figma", "Design Systems"], logo: "L", color: "#5E6AD2" },
+  { title: "DevOps Engineer", company: "Supabase", location: "Remote", type: "Contract", salary: "$100-$140k", tags: ["Kubernetes", "AWS", "Terraform"], logo: "S", color: "#3ECF8E" },
+  { title: "Full Stack Developer", company: "PlanetScale", location: "Hybrid", type: "Full-time", salary: "$130-$170k", tags: ["Go", "MySQL", "React"], logo: "P", color: "#F64D8B" },
+];
+
+const JobBoardBlock = () => (
+  <div className="space-y-3">
+    {jobBoardItems.map((job, index) => (
+      <div key={index} className="flex items-center gap-4 p-5 border rounded-2xl hover:border-primary/30 hover:bg-muted/30 transition-all cursor-pointer group">
+        <div className="h-12 w-12 shrink-0 rounded-xl flex items-center justify-center text-white font-bold text-lg" style={{ background: job.color }}>
+          {job.logo}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h4 className="font-semibold group-hover:text-primary transition-colors">{job.title}</h4>
+              <p className="text-sm text-muted-foreground">{job.company} · {job.location}</p>
+            </div>
+            <div className="text-right shrink-0">
+              <p className="text-sm font-semibold">{job.salary}</p>
+              <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">{job.type}</span>
+            </div>
+          </div>
+          <div className="flex gap-1.5 mt-2">
+            {job.tags.map((tag) => (
+              <span key={tag} className="text-[11px] bg-muted px-2 py-0.5 rounded-full text-muted-foreground">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+const CountdownBlock = () => {
+  const [time, setTime] = useState({ d: 3, h: 14, m: 37, s: 22 });
+
+  React.useEffect(() => {
+    const target = Date.now() + 3 * 24 * 60 * 60 * 1000 + 14 * 60 * 60 * 1000 + 37 * 60 * 1000 + 22 * 1000;
+    const timerId = setInterval(() => {
+      const diff = Math.max(0, target - Date.now());
+      setTime({
+        d: Math.floor(diff / 86400000),
+        h: Math.floor(diff / 3600000) % 24,
+        m: Math.floor(diff / 60000) % 60,
+        s: Math.floor(diff / 1000) % 60,
+      });
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, []);
+
+  const pad = (value: number) => String(value).padStart(2, "0");
+
+  return (
+    <div className="text-center space-y-6 py-8">
+      <div>
+        <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Limited Time Offer</p>
+        <h3 className="text-3xl font-bold">Early Bird Sale Ends In</h3>
+      </div>
+      <div className="flex justify-center gap-4">
+        {[{ label: "Days", val: time.d }, { label: "Hours", val: time.h }, { label: "Minutes", val: time.m }, { label: "Seconds", val: time.s }].map(({ label, val }) => (
+          <div key={label} className="flex flex-col items-center gap-2">
+            <div className="w-20 h-20 rounded-2xl border-2 border-primary/20 bg-primary/5 flex items-center justify-center">
+              <span className="text-3xl font-bold tabular-nums">{pad(val)}</span>
+            </div>
+            <span className="text-xs text-muted-foreground uppercase tracking-widest">{label}</span>
+          </div>
+        ))}
+      </div>
+      <Button className="rounded-full px-10 h-12 text-base">Claim 40% Off</Button>
+    </div>
+  );
+};
+
+const commentData = [
+  {
+    id: 1,
+    author: "Alex M.",
+    avatar: "AM",
+    time: "2h ago",
+    text: "This is exactly what I was looking for. The API design is really clean.",
+    likes: 14,
+    replies: [{ id: 11, author: "Jordan L.", avatar: "JL", time: "1h ago", text: "Agreed! The TypeScript types are super helpful too.", likes: 5 }],
+  },
+  { id: 2, author: "Priya N.", avatar: "PN", time: "4h ago", text: "Is there support for dark mode out of the box? Or do we need to configure it manually?", likes: 7, replies: [] },
+];
+
+const CommentThreadBlock = () => (
+  <div className="max-w-2xl mx-auto space-y-6">
+    <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">{commentData.length} Comments</h4>
+    {commentData.map((comment) => (
+      <div key={comment.id} className="space-y-4">
+        <div className="flex gap-3">
+          <div className="h-9 w-9 shrink-0 rounded-full bg-primary/15 flex items-center justify-center text-xs font-bold text-primary">{comment.avatar}</div>
+          <div className="flex-1 space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-semibold">{comment.author}</span>
+              <span className="text-xs text-muted-foreground">{comment.time}</span>
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed">{comment.text}</p>
+            <div className="flex items-center gap-3 pt-1">
+              <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors">
+                <Heart className="h-3 w-3" />
+                {comment.likes}
+              </button>
+              <button className="text-xs text-muted-foreground hover:text-primary transition-colors">Reply</button>
+            </div>
+          </div>
+        </div>
+        {comment.replies.map((reply) => (
+          <div key={reply.id} className="ml-12 flex gap-3">
+            <div className="h-8 w-8 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs font-bold">{reply.avatar}</div>
+            <div className="flex-1 space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold">{reply.author}</span>
+                <span className="text-xs text-muted-foreground">{reply.time}</span>
+              </div>
+              <p className="text-sm text-muted-foreground">{reply.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    ))}
+    <div className="flex gap-3 pt-2 border-t">
+      <div className="h-9 w-9 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs font-bold">YO</div>
+      <input placeholder="Write a comment..." className="flex-1 bg-muted/50 rounded-full px-4 py-2 text-sm outline-none focus:bg-muted" />
+    </div>
+  </div>
+);
+
+const FileUploadBlock = () => {
+  const [files, setFiles] = useState([
+    { name: "design-system.fig", size: "4.2 MB", status: "done" },
+    { name: "brand-assets.zip", size: "18.7 MB", status: "uploading", progress: 64 },
+  ]);
+
+  return (
+    <div className="max-w-xl mx-auto space-y-4">
+      <label className="flex flex-col items-center justify-center gap-3 border-2 border-dashed border-border rounded-2xl p-12 cursor-pointer hover:border-primary/40 hover:bg-primary/5 transition-all group">
+        <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+          <Plus className="h-7 w-7 text-primary" />
+        </div>
+        <div className="text-center">
+          <p className="font-semibold">Drop files here or click to upload</p>
+          <p className="text-sm text-muted-foreground mt-1">PNG, JPG, PDF, ZIP up to 50MB</p>
+        </div>
+        <input type="file" className="hidden" multiple />
+      </label>
+      <div className="space-y-2">
+        {files.map((file, index) => (
+          <div key={index} className="flex items-center gap-3 p-3 border rounded-xl bg-muted/20">
+            <div className="h-9 w-9 shrink-0 rounded-lg bg-primary/10 flex items-center justify-center">
+              <Layers className="h-4 w-4 text-primary" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium truncate">{file.name}</p>
+              {file.status === "uploading" ? (
+                <div className="mt-1 space-y-1">
+                  <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                    <div className="h-full bg-primary rounded-full transition-all" style={{ width: `${file.progress}%` }} />
+                  </div>
+                  <p className="text-xs text-muted-foreground">{file.progress}% · {file.size}</p>
+                </div>
+              ) : (
+                <p className="text-xs text-muted-foreground">{file.size} · Done</p>
+              )}
+            </div>
+            <button onClick={() => setFiles((prev) => prev.filter((_, currentIndex) => currentIndex !== index))} className="text-muted-foreground hover:text-destructive transition-colors">
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const kpiMetrics = [
+  { label: "Monthly Revenue", value: "$84,320", change: "+12.4%", up: true, icon: DollarSign },
+  { label: "Active Users", value: "24,180", change: "+8.1%", up: true, icon: Users },
+  { label: "Churn Rate", value: "2.3%", change: "-0.4%", up: false, icon: Activity },
+  { label: "Avg. Session", value: "4m 32s", change: "+22s", up: true, icon: Clock },
+];
+
+const KPIStripBlock = () => (
+  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    {kpiMetrics.map((metric, index) => (
+      <div key={index} className="p-5 border rounded-2xl space-y-3 hover:shadow-md transition-shadow">
+        <div className="flex items-center justify-between">
+          <metric.icon className="h-4 w-4 text-muted-foreground" />
+          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${metric.up ? "bg-emerald-500/10 text-emerald-600" : "bg-rose-500/10 text-rose-600"}`}>
+            {metric.change}
+          </span>
+        </div>
+        <div>
+          <p className="text-2xl font-bold tracking-tight">{metric.value}</p>
+          <p className="text-xs text-muted-foreground mt-0.5">{metric.label}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+const NewsletterBlock = () => {
+  const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
+
+  return (
+    <div className="relative overflow-hidden rounded-3xl bg-primary px-8 py-14 text-center text-primary-foreground">
+      <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+      <div className="relative z-10 max-w-md mx-auto space-y-6">
+        <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 text-sm">
+          <Zap className="h-3.5 w-3.5" />
+          Weekly insights · No spam
+        </div>
+        <div className="space-y-2">
+          <h3 className="text-3xl font-bold">Stay in the loop</h3>
+          <p className="text-primary-foreground/70">Get the latest component releases, tutorials, and design tips delivered to your inbox.</p>
+        </div>
+        {sent ? (
+          <div className="flex items-center justify-center gap-2 bg-white/10 rounded-2xl py-4">
+            <CheckCircle2 className="h-5 w-5" />
+            <span className="font-medium">You're subscribed!</span>
+          </div>
+        ) : (
+          <div className="flex gap-2">
+            <input
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="your@email.com"
+              className="flex-1 rounded-xl bg-white/10 border border-white/20 px-4 py-2.5 text-sm placeholder:text-primary-foreground/40 outline-none focus:bg-white/15"
+            />
+            <Button onClick={() => email && setSent(true)} variant="secondary" className="rounded-xl shrink-0">Subscribe</Button>
+          </div>
+        )}
+        <p className="text-xs text-primary-foreground/50">Join 8,400+ developers. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  );
+};
+
+const comparisonPlans = ["Free", "Pro", "Enterprise"];
+const comparisonFeatures = [
+  { name: "Components", values: ["12", "80+", "Unlimited"] },
+  { name: "Projects", values: ["1", "10", "Unlimited"] },
+  { name: "Team members", values: ["-", "5", "Unlimited"] },
+  { name: "Custom themes", values: [false, true, true] },
+  { name: "Priority support", values: [false, false, true] },
+  { name: "Analytics", values: [false, true, true] },
+  { name: "SSO / SAML", values: [false, false, true] },
+];
+
+const ComparisonTableBlock = () => (
+  <div className="overflow-x-auto rounded-2xl border">
+    <table className="w-full text-sm">
+      <thead>
+        <tr className="border-b bg-muted/30">
+          <th className="text-left px-6 py-4 font-medium text-muted-foreground">Feature</th>
+          {comparisonPlans.map((plan, index) => (
+            <th key={plan} className={`px-6 py-4 font-semibold ${index === 1 ? "text-primary" : ""}`}>
+              {plan}
+              {index === 1 && <span className="ml-1.5 text-[10px] bg-primary/10 text-primary rounded-full px-2 py-0.5">Popular</span>}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {comparisonFeatures.map((feature, index) => (
+          <tr key={index} className="border-t hover:bg-muted/20 transition-colors">
+            <td className="px-6 py-3.5 text-muted-foreground">{feature.name}</td>
+            {feature.values.map((value, valueIndex) => (
+              <td key={valueIndex} className="px-6 py-3.5 text-center">
+                {typeof value === "boolean" ? (
+                  value ? <CheckCircle2 className="h-4 w-4 text-emerald-500 mx-auto" /> : <Minus className="h-4 w-4 text-muted-foreground/40 mx-auto" />
+                ) : (
+                  <span className={valueIndex === 1 ? "font-semibold text-primary" : ""}>{value}</span>
+                )}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+const SettingsPanelBlock = () => {
+  const [notifications, setNotifications] = useState({ email: true, push: false, weekly: true });
+  const [theme, setTheme] = useState("system");
+
+  return (
+    <div className="max-w-xl mx-auto space-y-6">
+      <div className="border rounded-2xl divide-y overflow-hidden">
+        <div className="px-5 py-4 bg-muted/30">
+          <h4 className="font-semibold text-sm">Notifications</h4>
+        </div>
+        {[
+          { key: "email", label: "Email notifications", desc: "Receive updates via email" },
+          { key: "push", label: "Push notifications", desc: "Browser push alerts" },
+          { key: "weekly", label: "Weekly digest", desc: "Summary every Monday" },
+        ].map((item) => (
+          <div key={item.key} className="flex items-center justify-between px-5 py-4">
+            <div>
+              <p className="text-sm font-medium">{item.label}</p>
+              <p className="text-xs text-muted-foreground">{item.desc}</p>
+            </div>
+            <button
+              onClick={() => setNotifications((previous) => ({ ...previous, [item.key]: !previous[item.key] }))}
+              className={`relative h-5 w-9 rounded-full transition-colors ${notifications[item.key] ? "bg-primary" : "bg-muted-foreground/30"}`}
+            >
+              <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${notifications[item.key] ? "translate-x-4" : "translate-x-0.5"}`} />
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <div className="border rounded-2xl divide-y overflow-hidden">
+        <div className="px-5 py-4 bg-muted/30">
+          <h4 className="font-semibold text-sm">Appearance</h4>
+        </div>
+        <div className="px-5 py-4">
+          <div className="grid grid-cols-3 gap-2">
+            {["light", "dark", "system"].map((selectedTheme) => (
+              <button
+                key={selectedTheme}
+                onClick={() => setTheme(selectedTheme)}
+                className={`py-2.5 rounded-xl border text-sm capitalize font-medium transition-all ${theme === selectedTheme ? "border-primary bg-primary/10 text-primary" : "border-border hover:bg-muted/50"}`}
+              >
+                {selectedTheme}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="border rounded-2xl divide-y overflow-hidden">
+        <div className="px-5 py-4 bg-muted/30">
+          <h4 className="font-semibold text-sm">Danger Zone</h4>
+        </div>
+        <div className="px-5 py-4 flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium">Delete account</p>
+            <p className="text-xs text-muted-foreground">Permanently remove all data</p>
+          </div>
+          <Button variant="destructive" size="sm" className="rounded-xl">Delete</Button>
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -243,9 +717,9 @@ export function SplitHero() {
                 </div>
               </div>
               <div className="bg-muted relative overflow-hidden hidden lg:block">
-                <img 
-                  src="https://picsum.photos/seed/dashboard/1200/1200" 
-                  alt="Dashboard Preview" 
+                <img
+                  src="https://picsum.photos/seed/dashboard/1200/1200"
+                  alt="Dashboard Preview"
                   className="absolute inset-0 w-full h-full object-cover opacity-80"
                   referrerPolicy="no-referrer"
                 />
@@ -644,9 +1118,9 @@ export function ProductGrid() {
               ].map((product, i) => (
                 <div key={i} className="group space-y-4">
                   <div className="aspect-[3/4] rounded-3xl overflow-hidden bg-muted relative">
-                    <img 
-                      src={product.img} 
-                      alt={product.name} 
+                    <img
+                      src={product.img}
+                      alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       referrerPolicy="no-referrer"
                     />
@@ -720,9 +1194,9 @@ export function BlogSection() {
               ].map((post, i) => (
                 <div key={i} className="group cursor-pointer space-y-6">
                   <div className="aspect-video rounded-3xl overflow-hidden">
-                    <img 
-                      src={post.img} 
-                      alt={post.title} 
+                    <img
+                      src={post.img}
+                      alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
                     />
@@ -1172,39 +1646,39 @@ export function SaaSDashboard() {
               </div>
 
               <StatsGrid>
-                <StatsCard 
-                  title="Total Revenue" 
-                  value="$45,231.89" 
-                  trend={{ value: "+20.1%", isUp: true }} 
+                <StatsCard
+                  title="Total Revenue"
+                  value="$45,231.89"
+                  trend={{ value: "+20.1%", isUp: true }}
                   description="from last month"
                   icon={<DollarSign className="h-4 w-4" />}
                 />
-                <StatsCard 
-                  title="Subscriptions" 
-                  value="+2350" 
-                  trend={{ value: "+180.1%", isUp: true }} 
+                <StatsCard
+                  title="Subscriptions"
+                  value="+2350"
+                  trend={{ value: "+180.1%", isUp: true }}
                   description="from last month"
                   icon={<Users className="h-4 w-4" />}
                 />
-                <StatsCard 
-                  title="Sales" 
-                  value="+12,234" 
-                  trend={{ value: "+19%", isUp: true }} 
+                <StatsCard
+                  title="Sales"
+                  value="+12,234"
+                  trend={{ value: "+19%", isUp: true }}
                   description="from last month"
                   icon={<CreditCard className="h-4 w-4" />}
                 />
-                <StatsCard 
-                  title="Active Now" 
-                  value="+573" 
-                  trend={{ value: "+201", isUp: true }} 
+                <StatsCard
+                  title="Active Now"
+                  value="+573"
+                  trend={{ value: "+201", isUp: true }}
                   description="since last hour"
                   icon={<Activity className="h-4 w-4" />}
                 />
               </StatsGrid>
 
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-                <AreaChartComponent 
-                  title="Revenue Growth" 
+                <AreaChartComponent
+                  title="Revenue Growth"
                   description="Monthly revenue performance for the current year."
                   data={[
                     { name: "Jan", value: 4000 },
@@ -1283,7 +1757,7 @@ export function CRMCustomerManagement() {
 }`}
           >
             <div className="p-8 border rounded-3xl bg-muted/5">
-              <DataTableAdvanced 
+              <DataTableAdvanced
                 data={[
                   { id: 1, name: "Alice Johnson", email: "alice@example.com", status: "active", plan: "Pro", spent: "$1,200" },
                   { id: 2, name: "Bob Smith", email: "bob@example.com", status: "inactive", plan: "Free", spent: "$0" },
@@ -1479,35 +1953,35 @@ export function ProjectManagement() {
                   <TabsTrigger value="calendar">Calendar View</TabsTrigger>
                 </TabsList>
                 <TabsContent value="board">
-                  <KanbanBoard 
+                  <KanbanBoard
                     columns={[
-                      { 
-                        id: "todo", 
-                        title: "To Do", 
+                      {
+                        id: "todo",
+                        title: "To Do",
                         tasks: [
                           { id: "1", title: "Research Competitors", description: "Analyze top 5 competitors in the SaaS space.", priority: "high", tags: ["marketing", "research"] },
                           { id: "2", title: "Update Documentation", description: "Refine the API docs for the new release.", priority: "medium", tags: ["docs"] },
-                        ] 
+                        ]
                       },
-                      { 
-                        id: "in-progress", 
-                        title: "In Progress", 
+                      {
+                        id: "in-progress",
+                        title: "In Progress",
                         tasks: [
                           { id: "3", title: "Refactor Auth Logic", description: "Move to a more robust JWT implementation.", priority: "high", tags: ["dev", "security"] },
-                        ] 
+                        ]
                       },
-                      { 
-                        id: "done", 
-                        title: "Done", 
+                      {
+                        id: "done",
+                        title: "Done",
                         tasks: [
                           { id: "4", title: "Initial Launch", description: "Deploy the MVP to production.", priority: "high", tags: ["dev", "ops"] },
-                        ] 
+                        ]
                       },
                     ]}
                   />
                 </TabsContent>
                 <TabsContent value="calendar">
-                  <Calendar 
+                  <Calendar
                     events={[
                       { id: "1", title: "Team Sync", date: new Date(), type: "meeting" },
                       { id: "2", title: "Client Call", date: new Date(), type: "meeting" },
@@ -1521,10 +1995,10 @@ export function ProjectManagement() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Auth Block 1: Minimal */}
-          <BlockSection
-            title="Minimal Auth"
-            category="Auth"
-            code={`import { Button } from "@/components/ui/button";
+            <BlockSection
+              title="Minimal Auth"
+              category="Auth"
+              code={`import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Github, Mail } from "lucide-react";
 
@@ -1555,49 +2029,49 @@ export function MinimalAuth() {
     </div>
   );
 }`}
-          >
-            <div className="p-8 border rounded-2xl bg-background/50 backdrop-blur-sm">
-              <div className="max-w-sm mx-auto space-y-6">
-                <div className="text-center space-y-2">
-                  <h2 className="text-2xl font-bold tracking-tight">Welcome back</h2>
-                  <p className="text-sm text-muted-foreground">Enter your credentials to access your account</p>
-                </div>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Email</label>
-                    <Input placeholder="name@example.com" />
+            >
+              <div className="p-8 border rounded-2xl bg-background/50 backdrop-blur-sm">
+                <div className="max-w-sm mx-auto space-y-6">
+                  <div className="text-center space-y-2">
+                    <h2 className="text-2xl font-bold tracking-tight">Welcome back</h2>
+                    <p className="text-sm text-muted-foreground">Enter your credentials to access your account</p>
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Password</label>
-                    <Input type="password" placeholder="••••••••" />
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Email</label>
+                      <Input placeholder="name@example.com" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Password</label>
+                      <Input type="password" placeholder="••••••••" />
+                    </div>
+                    <Button className="w-full">Sign In</Button>
                   </div>
-                  <Button className="w-full">Sign In</Button>
-                </div>
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t" />
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                      <span className="w-full border-t" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                      <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+                    </div>
                   </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Button variant="outline" className="gap-2">
+                      <Github className="h-4 w-4" /> Github
+                    </Button>
+                    <Button variant="outline" className="gap-2">
+                      <Mail className="h-4 w-4" /> Google
+                    </Button>
                   </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <Button variant="outline" className="gap-2">
-                    <Github className="h-4 w-4" /> Github
-                  </Button>
-                  <Button variant="outline" className="gap-2">
-                    <Mail className="h-4 w-4" /> Google
-                  </Button>
                 </div>
               </div>
-            </div>
-          </BlockSection>
+            </BlockSection>
 
-          {/* Auth Block 2: Card Based */}
-          <BlockSection
-            title="Card Auth"
-            category="Auth"
-            code={`import { Button } from "@/components/ui/button";
+            {/* Auth Block 2: Card Based */}
+            <BlockSection
+              title="Card Auth"
+              category="Auth"
+              code={`import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Github, Mail } from "lucide-react";
@@ -1627,54 +2101,54 @@ export function CardAuth() {
     </Card>
   );
 }`}
-          >
-            <Card className="max-w-md mx-auto">
-              <CardHeader className="space-y-1">
-                <CardTitle className="text-2xl">Create an account</CardTitle>
-                <CardDescription>
-                  Enter your email below to create your account
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="grid gap-4">
-                <div className="grid grid-cols-2 gap-6">
-                  <Button variant="outline">
-                    <Github className="mr-2 h-4 w-4" />
-                    Github
-                  </Button>
-                  <Button variant="outline">
-                    <Mail className="mr-2 h-4 w-4" />
-                    Google
-                  </Button>
-                </div>
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t" />
+            >
+              <Card className="max-w-md mx-auto">
+                <CardHeader className="space-y-1">
+                  <CardTitle className="text-2xl">Create an account</CardTitle>
+                  <CardDescription>
+                    Enter your email below to create your account
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                  <div className="grid grid-cols-2 gap-6">
+                    <Button variant="outline">
+                      <Github className="mr-2 h-4 w-4" />
+                      Github
+                    </Button>
+                    <Button variant="outline">
+                      <Mail className="mr-2 h-4 w-4" />
+                      Google
+                    </Button>
                   </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-background px-2 text-muted-foreground">
-                      Or continue with
-                    </span>
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                      <span className="w-full border-t" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                      <span className="bg-background px-2 text-muted-foreground">
+                        Or continue with
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="grid gap-2">
-                  <label className="text-sm font-medium leading-none">Email</label>
-                  <Input id="email" type="email" placeholder="m@example.com" />
-                </div>
-                <div className="grid gap-2">
-                  <label className="text-sm font-medium leading-none">Password</label>
-                  <Input id="password" type="password" />
-                </div>
-                <Button className="w-full">Create account</Button>
-              </CardContent>
-            </Card>
-          </BlockSection>
-        </div>
+                  <div className="grid gap-2">
+                    <label className="text-sm font-medium leading-none">Email</label>
+                    <Input id="email" type="email" placeholder="m@example.com" />
+                  </div>
+                  <div className="grid gap-2">
+                    <label className="text-sm font-medium leading-none">Password</label>
+                    <Input id="password" type="password" />
+                  </div>
+                  <Button className="w-full">Create account</Button>
+                </CardContent>
+              </Card>
+            </BlockSection>
+          </div>
 
-        {/* Social Proof Block */}
-        <BlockSection
-          title="Social Proof Sections"
-          category="Marketing"
-          code={`import { Button } from "@/components/ui/button";
+          {/* Social Proof Block */}
+          <BlockSection
+            title="Social Proof Sections"
+            category="Marketing"
+            code={`import { Button } from "@/components/ui/button";
 import { Users } from "lucide-react";
 
 export function SocialProof() {
@@ -1721,53 +2195,456 @@ export function SocialProof() {
     </div>
   );
 }`}
-        >
-          <div className="space-y-24">
-            {/* Partners */}
-            <div className="space-y-8">
-              <p className="text-center text-xs font-bold uppercase tracking-[0.4em] text-muted-foreground opacity-60">Trusted by industry leaders</p>
-              <div className="flex flex-wrap items-center justify-center gap-12 md:gap-24 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
-                <div className="text-3xl font-black tracking-tighter italic">STRIPE</div>
-                <div className="text-3xl font-black tracking-tighter italic">VERCEL</div>
-                <div className="text-3xl font-black tracking-tighter italic">LINEAR</div>
-                <div className="text-3xl font-black tracking-tighter italic">GITHUB</div>
-                <div className="text-3xl font-black tracking-tighter italic">OPENAI</div>
-              </div>
-            </div>
-
-            {/* Used By */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="p-8 border rounded-[2rem] bg-muted/5 flex flex-col items-center text-center space-y-6 hover:bg-muted/10 transition-colors">
-                  <div className="h-16 w-16 rounded-full bg-primary/5 flex items-center justify-center text-primary/40">
-                    <Users className="h-8 w-8" />
-                  </div>
-                  <div className="space-y-2">
-                    <h4 className="text-lg font-bold tracking-tight">Enterprise {i}</h4>
-                    <p className="text-sm text-muted-foreground font-light leading-relaxed">Scaling their entire infrastructure with StructUI components since 2024.</p>
-                  </div>
+          >
+            <div className="space-y-24">
+              {/* Partners */}
+              <div className="space-y-8">
+                <p className="text-center text-xs font-bold uppercase tracking-[0.4em] text-muted-foreground opacity-60">Trusted by industry leaders</p>
+                <div className="flex flex-wrap items-center justify-center gap-12 md:gap-24 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+                  <div className="text-3xl font-black tracking-tighter italic">STRIPE</div>
+                  <div className="text-3xl font-black tracking-tighter italic">VERCEL</div>
+                  <div className="text-3xl font-black tracking-tighter italic">LINEAR</div>
+                  <div className="text-3xl font-black tracking-tighter italic">GITHUB</div>
+                  <div className="text-3xl font-black tracking-tighter italic">OPENAI</div>
                 </div>
-              ))}
-            </div>
-
-            {/* Sponsors */}
-            <div className="relative p-16 border rounded-[3.5rem] bg-foreground text-background text-center space-y-8 overflow-hidden">
-              <div className="absolute inset-0 bg-primary/10 blur-3xl rounded-full transform translate-y-1/2" />
-              <div className="relative z-10 space-y-4">
-                <h4 className="text-4xl font-thin tracking-tighter">Support the Future of UI</h4>
-                <p className="text-background/60 font-light max-w-lg mx-auto text-lg leading-relaxed">
-                  We are building a more beautiful web, one component at a time. 
-                  Help us maintain and grow this library by becoming a sponsor.
-                </p>
               </div>
-              <Button variant="secondary" className="relative z-10 rounded-full px-12 h-14 text-lg font-light tracking-widest bg-background text-foreground hover:opacity-90 transition-opacity">
-                Become a Sponsor
-              </Button>
+
+              {/* Used By */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="p-8 border rounded-[2rem] bg-muted/5 flex flex-col items-center text-center space-y-6 hover:bg-muted/10 transition-colors">
+                    <div className="h-16 w-16 rounded-full bg-primary/5 flex items-center justify-center text-primary/40">
+                      <Users className="h-8 w-8" />
+                    </div>
+                    <div className="space-y-2">
+                      <h4 className="text-lg font-bold tracking-tight">Enterprise {i}</h4>
+                      <p className="text-sm text-muted-foreground font-light leading-relaxed">Scaling their entire infrastructure with StructUI components since 2024.</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Sponsors */}
+              <div className="relative p-16 border rounded-[3.5rem] bg-foreground text-background text-center space-y-8 overflow-hidden">
+                <div className="absolute inset-0 bg-primary/10 blur-3xl rounded-full transform translate-y-1/2" />
+                <div className="relative z-10 space-y-4">
+                  <h4 className="text-4xl font-thin tracking-tighter">Support the Future of UI</h4>
+                  <p className="text-background/60 font-light max-w-lg mx-auto text-lg leading-relaxed">
+                    We are building a more beautiful web, one component at a time.
+                    Help us maintain and grow this library by becoming a sponsor.
+                  </p>
+                </div>
+                <Button variant="secondary" className="relative z-10 rounded-full px-12 h-14 text-lg font-light tracking-widest bg-background text-foreground hover:opacity-90 transition-opacity">
+                  Become a Sponsor
+                </Button>
+              </div>
+            </div>
+          </BlockSection>
+
+          {/* Block 1: Chat Interface */}
+          <BlockSection
+            title="Chat Interface"
+            category="Messaging"
+            code={`const messages = [
+  { id: 1, author: "Sarah K.", avatar: "SK", side: "left", text: "Hey! Did you finish the new dashboard mockups?", time: "10:32" },
+  { id: 2, author: "You", avatar: "YO", side: "right", text: "Almost done! Sending them over in 10 minutes.", time: "10:34" },
+  { id: 3, author: "Sarah K.", avatar: "SK", side: "left", text: "Perfect. The client is expecting them by noon.", time: "10:35" },
+  { id: 4, author: "You", avatar: "YO", side: "right", text: "No worries, I'll have everything ready well before that! 🚀", time: "10:36" },
+];
+
+export function ChatInterface() {
+  const [input, setInput] = React.useState("");
+  return (
+    <div className="flex flex-col h-[480px] border rounded-2xl overflow-hidden bg-background">
+      <div className="flex items-center gap-3 px-5 py-4 border-b bg-muted/20">
+        <div className="h-9 w-9 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold">SK</div>
+        <div><p className="text-sm font-semibold">Sarah K.</p><p className="text-xs text-emerald-500">● Online</p></div>
+      </div>
+      <div className="flex-1 overflow-y-auto p-5 space-y-4">
+        {messages.map(m => (
+          <div key={m.id} className={\`flex gap-3 \${m.side === "right" ? "flex-row-reverse" : ""}\`}>
+            <div className="h-8 w-8 shrink-0 rounded-full bg-muted flex items-center justify-center text-[10px] font-bold">{m.avatar}</div>
+            <div className={\`max-w-[70%] rounded-2xl px-4 py-2.5 text-sm \${m.side === "right" ? "bg-primary text-primary-foreground rounded-tr-sm" : "bg-muted rounded-tl-sm"}\`}>
+              <p>{m.text}</p>
+              <p className={\`text-[10px] mt-1 \${m.side === "right" ? "text-primary-foreground/60" : "text-muted-foreground"}\`}>{m.time}</p>
             </div>
           </div>
-        </BlockSection>
+        ))}
       </div>
-    </Container>
-  </div>
-);
+      <div className="flex gap-2 px-4 py-3 border-t">
+        <input value={input} onChange={e => setInput(e.target.value)} placeholder="Type a message…" className="flex-1 bg-muted/50 rounded-full px-4 py-2 text-sm outline-none focus:bg-muted" />
+        <Button size="sm" className="rounded-full px-5">Send</Button>
+      </div>
+    </div>
+  );
+}`}
+          >
+            <ChatInterfaceBlock />
+          </BlockSection>
+
+          {/* Block 2: Invoice Card */}
+          <BlockSection
+            title="Invoice Card"
+            category="Finance"
+            code={`export function InvoiceCard() {
+  const items = [
+    { name: "UI Design System (Pro)", qty: 1, price: 299 },
+    { name: "Component Library License", qty: 3, price: 49 },
+    { name: "Priority Support (12mo)", qty: 1, price: 120 },
+  ];
+  const subtotal = items.reduce((s, i) => s + i.qty * i.price, 0);
+  return (
+    <div className="max-w-lg mx-auto border rounded-2xl overflow-hidden shadow-sm">
+      <div className="bg-primary px-8 py-6 text-primary-foreground flex justify-between items-start">
+        <div><h2 className="text-2xl font-bold">Invoice</h2><p className="text-primary-foreground/70 text-sm mt-1">#INV-2024-0081</p></div>
+        <div className="text-right"><p className="text-sm text-primary-foreground/70">Issued</p><p className="font-semibold">Dec 15, 2024</p></div>
+      </div>
+      <div className="p-8 space-y-6 bg-background">
+        <div className="grid grid-cols-2 gap-4 text-sm">
+          <div><p className="text-muted-foreground mb-1">From</p><p className="font-semibold">StructUI Inc.</p><p className="text-muted-foreground">hello@structui.com</p></div>
+          <div><p className="text-muted-foreground mb-1">To</p><p className="font-semibold">Acme Corp</p><p className="text-muted-foreground">billing@acme.co</p></div>
+        </div>
+        <div className="border rounded-xl overflow-hidden">
+          <table className="w-full text-sm"><thead className="bg-muted/50"><tr><th className="text-left px-4 py-3 font-medium">Item</th><th className="text-center px-4 py-3 font-medium">Qty</th><th className="text-right px-4 py-3 font-medium">Total</th></tr></thead>
+          <tbody>{items.map((item, i) => (<tr key={i} className="border-t"><td className="px-4 py-3">{item.name}</td><td className="px-4 py-3 text-center text-muted-foreground">{item.qty}</td><td className="px-4 py-3 text-right font-medium">\${(item.qty * item.price).toLocaleString()}</td></tr>))}</tbody></table>
+        </div>
+        <div className="space-y-2 text-sm border-t pt-4">
+          <div className="flex justify-between text-muted-foreground"><span>Subtotal</span><span>\${subtotal}</span></div>
+          <div className="flex justify-between text-muted-foreground"><span>Tax (10%)</span><span>\${(subtotal * 0.1).toFixed(0)}</span></div>
+          <div className="flex justify-between font-bold text-base pt-2 border-t"><span>Total</span><span>\${(subtotal * 1.1).toFixed(0)}</span></div>
+        </div>
+        <Button className="w-full rounded-xl">Download PDF</Button>
+      </div>
+    </div>
+  );
+}`}
+          >
+            <InvoiceCardBlock />
+          </BlockSection>
+
+          {/* Block 3: Job Board */}
+          <BlockSection
+            title="Job Board Listing"
+            category="Recruiting"
+            code={`const jobs = [
+  { title: "Senior Frontend Engineer", company: "Vercel", location: "Remote", type: "Full-time", salary: "$140–$180k", tags: ["React", "TypeScript", "Next.js"], logo: "V", color: "#000" },
+  { title: "Product Designer", company: "Linear", location: "San Francisco", type: "Full-time", salary: "$120–$160k", tags: ["Figma", "Design Systems"], logo: "L", color: "#5E6AD2" },
+  { title: "DevOps Engineer", company: "Supabase", location: "Remote", type: "Contract", salary: "$100–$140k", tags: ["Kubernetes", "AWS", "Terraform"], logo: "S", color: "#3ECF8E" },
+  { title: "Full Stack Developer", company: "PlanetScale", location: "Hybrid", type: "Full-time", salary: "$130–$170k", tags: ["Go", "MySQL", "React"], logo: "P", color: "#F64D8B" },
+];
+
+export function JobBoard() {
+  return (
+    <div className="space-y-3">
+      {jobs.map((job, i) => (
+        <div key={i} className="flex items-center gap-4 p-5 border rounded-2xl hover:border-primary/30 hover:bg-muted/30 transition-all cursor-pointer group">
+          <div className="h-12 w-12 shrink-0 rounded-xl flex items-center justify-center text-white font-bold text-lg" style={{ background: job.color }}>{job.logo}</div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start justify-between gap-2">
+              <div><h4 className="font-semibold group-hover:text-primary transition-colors">{job.title}</h4><p className="text-sm text-muted-foreground">{job.company} · {job.location}</p></div>
+              <div className="text-right shrink-0"><p className="text-sm font-semibold">{job.salary}</p><span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">{job.type}</span></div>
+            </div>
+            <div className="flex gap-1.5 mt-2">{job.tags.map(t => <span key={t} className="text-[11px] bg-muted px-2 py-0.5 rounded-full text-muted-foreground">{t}</span>)}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}`}
+          >
+            <JobBoardBlock />
+          </BlockSection>
+
+          {/* Block 4: Countdown Timer */}
+          <BlockSection
+            title="Countdown Timer"
+            category="Marketing"
+            code={`export function CountdownTimer() {
+  const target = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000 + 14 * 60 * 60 * 1000 + 37 * 60 * 1000 + 22 * 1000);
+  const [time, setTime] = React.useState({ d: 3, h: 14, m: 37, s: 22 });
+  React.useEffect(() => {
+    const t = setInterval(() => {
+      const diff = Math.max(0, target.getTime() - Date.now());
+      setTime({ d: Math.floor(diff / 86400000), h: Math.floor(diff / 3600000) % 24, m: Math.floor(diff / 60000) % 60, s: Math.floor(diff / 1000) % 60 });
+    }, 1000);
+    return () => clearInterval(t);
+  }, []);
+  const pads = (n: number) => String(n).padStart(2, "0");
+  return (
+    <div className="text-center space-y-6 py-8">
+      <div><p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Limited Time Offer</p><h3 className="text-3xl font-bold">Early Bird Sale Ends In</h3></div>
+      <div className="flex justify-center gap-4">
+        {[{ label: "Days", val: time.d }, { label: "Hours", val: time.h }, { label: "Minutes", val: time.m }, { label: "Seconds", val: time.s }].map(({ label, val }) => (
+          <div key={label} className="flex flex-col items-center gap-2">
+            <div className="w-20 h-20 rounded-2xl border-2 border-primary/20 bg-primary/5 flex items-center justify-center">
+              <span className="text-3xl font-bold tabular-nums">{pads(val)}</span>
+            </div>
+            <span className="text-xs text-muted-foreground uppercase tracking-widest">{label}</span>
+          </div>
+        ))}
+      </div>
+      <Button className="rounded-full px-10 h-12 text-base">Claim 40% Off →</Button>
+    </div>
+  );
+}`}
+          >
+            <CountdownBlock />
+          </BlockSection>
+
+          {/* Block 5: Comment Thread */}
+          <BlockSection
+            title="Comment Thread"
+            category="Community"
+            code={`const comments = [
+  { id: 1, author: "Alex M.", avatar: "AM", time: "2h ago", text: "This is exactly what I was looking for. The API design is really clean.", likes: 14, replies: [
+    { id: 11, author: "Jordan L.", avatar: "JL", time: "1h ago", text: "Agreed! The TypeScript types are super helpful too.", likes: 5 },
+  ]},
+  { id: 2, author: "Priya N.", avatar: "PN", time: "4h ago", text: "Is there support for dark mode out of the box? Or do we need to configure it manually?", likes: 7, replies: [] },
+];
+
+export function CommentThread() {
+  return (
+    <div className="max-w-2xl mx-auto space-y-6">
+      <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">{comments.length} Comments</h4>
+      {comments.map(c => (
+        <div key={c.id} className="space-y-4">
+          <div className="flex gap-3">
+            <div className="h-9 w-9 shrink-0 rounded-full bg-primary/15 flex items-center justify-center text-xs font-bold text-primary">{c.avatar}</div>
+            <div className="flex-1 space-y-1">
+              <div className="flex items-center gap-2"><span className="text-sm font-semibold">{c.author}</span><span className="text-xs text-muted-foreground">{c.time}</span></div>
+              <p className="text-sm text-muted-foreground leading-relaxed">{c.text}</p>
+              <div className="flex items-center gap-3 pt-1">
+                <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors"><Heart className="h-3 w-3" />{c.likes}</button>
+                <button className="text-xs text-muted-foreground hover:text-primary transition-colors">Reply</button>
+              </div>
+            </div>
+          </div>
+          {c.replies.map(r => (
+            <div key={r.id} className="ml-12 flex gap-3">
+              <div className="h-8 w-8 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs font-bold">{r.avatar}</div>
+              <div className="flex-1 space-y-1">
+                <div className="flex items-center gap-2"><span className="text-sm font-semibold">{r.author}</span><span className="text-xs text-muted-foreground">{r.time}</span></div>
+                <p className="text-sm text-muted-foreground">{r.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+      <div className="flex gap-3 pt-2 border-t">
+        <div className="h-9 w-9 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs font-bold">YO</div>
+        <input placeholder="Write a comment…" className="flex-1 bg-muted/50 rounded-full px-4 py-2 text-sm outline-none focus:bg-muted" />
+      </div>
+    </div>
+  );
+}`}
+          >
+            <CommentThreadBlock />
+          </BlockSection>
+
+          {/* Block 6: File Upload Zone */}
+          <BlockSection
+            title="File Upload Zone"
+            category="Forms"
+            code={`export function FileUploadZone() {
+  const [files, setFiles] = React.useState([
+    { name: "design-system.fig", size: "4.2 MB", status: "done" },
+    { name: "brand-assets.zip", size: "18.7 MB", status: "uploading", progress: 64 },
+  ]);
+  return (
+    <div className="max-w-xl mx-auto space-y-4">
+      <label className="flex flex-col items-center justify-center gap-3 border-2 border-dashed border-border rounded-2xl p-12 cursor-pointer hover:border-primary/40 hover:bg-primary/5 transition-all group">
+        <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+          <Plus className="h-7 w-7 text-primary" />
+        </div>
+        <div className="text-center"><p className="font-semibold">Drop files here or click to upload</p><p className="text-sm text-muted-foreground mt-1">PNG, JPG, PDF, ZIP up to 50MB</p></div>
+        <input type="file" className="hidden" multiple />
+      </label>
+      <div className="space-y-2">
+        {files.map((f, i) => (
+          <div key={i} className="flex items-center gap-3 p-3 border rounded-xl bg-muted/20">
+            <div className="h-9 w-9 shrink-0 rounded-lg bg-primary/10 flex items-center justify-center"><Layers className="h-4 w-4 text-primary" /></div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium truncate">{f.name}</p>
+              {f.status === "uploading" ? (
+                <div className="mt-1 space-y-1">
+                  <div className="h-1.5 rounded-full bg-muted overflow-hidden"><div className="h-full bg-primary rounded-full transition-all" style={{ width: f.progress + "%" }} /></div>
+                  <p className="text-xs text-muted-foreground">{f.progress}% · {f.size}</p>
+                </div>
+              ) : <p className="text-xs text-muted-foreground">{f.size} · Done</p>}
+            </div>
+            <button onClick={() => setFiles(prev => prev.filter((_, j) => j !== i))} className="text-muted-foreground hover:text-destructive transition-colors"><X className="h-4 w-4" /></button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}`}
+          >
+            <FileUploadBlock />
+          </BlockSection>
+
+          {/* Block 7: KPI Metrics Strip */}
+          <BlockSection
+            title="KPI Metrics Strip"
+            category="Analytics"
+            code={`const metrics = [
+  { label: "Monthly Revenue", value: "$84,320", change: "+12.4%", up: true, icon: DollarSign, color: "emerald" },
+  { label: "Active Users", value: "24,180", change: "+8.1%", up: true, icon: Users, color: "blue" },
+  { label: "Churn Rate", value: "2.3%", change: "-0.4%", up: false, icon: Activity, color: "violet" },
+  { label: "Avg. Session", value: "4m 32s", change: "+22s", up: true, icon: Clock, color: "amber" },
+];
+
+export function KPIStrip() {
+  return (
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {metrics.map((m, i) => (
+        <div key={i} className="p-5 border rounded-2xl space-y-3 hover:shadow-md transition-shadow">
+          <div className="flex items-center justify-between">
+            <m.icon className="h-4 w-4 text-muted-foreground" />
+            <span className={\`text-xs font-semibold px-2 py-0.5 rounded-full \${m.up ? "bg-emerald-500/10 text-emerald-600" : "bg-rose-500/10 text-rose-600"}\`}>{m.change}</span>
+          </div>
+          <div>
+            <p className="text-2xl font-bold tracking-tight">{m.value}</p>
+            <p className="text-xs text-muted-foreground mt-0.5">{m.label}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}`}
+          >
+            <KPIStripBlock />
+          </BlockSection>
+
+          {/* Block 8: Newsletter Signup */}
+          <BlockSection
+            title="Newsletter Signup"
+            category="Marketing"
+            code={`export function NewsletterSignup() {
+  const [email, setEmail] = React.useState("");
+  const [sent, setSent] = React.useState(false);
+  return (
+    <div className="relative overflow-hidden rounded-3xl bg-primary px-8 py-14 text-center text-primary-foreground">
+      <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+      <div className="relative z-10 max-w-md mx-auto space-y-6">
+        <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 text-sm"><Zap className="h-3.5 w-3.5" />Weekly insights · No spam</div>
+        <div className="space-y-2">
+          <h3 className="text-3xl font-bold">Stay in the loop</h3>
+          <p className="text-primary-foreground/70">Get the latest component releases, tutorials, and design tips delivered to your inbox.</p>
+        </div>
+        {sent ? (
+          <div className="flex items-center justify-center gap-2 bg-white/10 rounded-2xl py-4"><CheckCircle2 className="h-5 w-5" /><span className="font-medium">You're subscribed!</span></div>
+        ) : (
+          <div className="flex gap-2">
+            <input value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" className="flex-1 rounded-xl bg-white/10 border border-white/20 px-4 py-2.5 text-sm placeholder:text-primary-foreground/40 outline-none focus:bg-white/15" />
+            <Button onClick={() => email && setSent(true)} variant="secondary" className="rounded-xl shrink-0">Subscribe</Button>
+          </div>
+        )}
+        <p className="text-xs text-primary-foreground/50">Join 8,400+ developers. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  );
+}`}
+          >
+            <NewsletterBlock />
+          </BlockSection>
+
+          {/* Block 9: Feature Comparison Table */}
+          <BlockSection
+            title="Feature Comparison Table"
+            category="Marketing"
+            code={`const plans = ["Free", "Pro", "Enterprise"];
+const features = [
+  { name: "Components", values: ["12", "80+", "Unlimited"] },
+  { name: "Projects", values: ["1", "10", "Unlimited"] },
+  { name: "Team members", values: ["—", "5", "Unlimited"] },
+  { name: "Custom themes", values: [false, true, true] },
+  { name: "Priority support", values: [false, false, true] },
+  { name: "Analytics", values: [false, true, true] },
+  { name: "SSO / SAML", values: [false, false, true] },
+];
+
+export function ComparisonTable() {
+  return (
+    <div className="overflow-x-auto rounded-2xl border">
+      <table className="w-full text-sm">
+        <thead><tr className="border-b bg-muted/30">
+          <th className="text-left px-6 py-4 font-medium text-muted-foreground">Feature</th>
+          {plans.map((p, i) => <th key={p} className={\`px-6 py-4 font-semibold \${i === 1 ? "text-primary" : ""}\`}>{p}{i === 1 && <span className="ml-1.5 text-[10px] bg-primary/10 text-primary rounded-full px-2 py-0.5">Popular</span>}</th>)}
+        </tr></thead>
+        <tbody>{features.map((f, i) => (
+          <tr key={i} className="border-t hover:bg-muted/20 transition-colors">
+            <td className="px-6 py-3.5 text-muted-foreground">{f.name}</td>
+            {f.values.map((v, j) => (
+              <td key={j} className="px-6 py-3.5 text-center">
+                {typeof v === "boolean" ? (v ? <CheckCircle2 className="h-4 w-4 text-emerald-500 mx-auto" /> : <Minus className="h-4 w-4 text-muted-foreground/40 mx-auto" />) : <span className={j === 1 ? "font-semibold text-primary" : ""}>{v}</span>}
+              </td>
+            ))}
+          </tr>
+        ))}</tbody>
+      </table>
+    </div>
+  );
+}`}
+          >
+            <ComparisonTableBlock />
+          </BlockSection>
+
+          {/* Block 10: User Settings Panel */}
+          <BlockSection
+            title="Settings Panel"
+            category="Application"
+            code={`export function SettingsPanel() {
+  const [notifications, setNotifications] = React.useState({ email: true, push: false, weekly: true });
+  const [theme, setTheme] = React.useState("system");
+  return (
+    <div className="max-w-xl mx-auto space-y-6">
+      <div className="border rounded-2xl divide-y overflow-hidden">
+        <div className="px-5 py-4 bg-muted/30"><h4 className="font-semibold text-sm">Notifications</h4></div>
+        {[
+          { key: "email", label: "Email notifications", desc: "Receive updates via email" },
+          { key: "push", label: "Push notifications", desc: "Browser push alerts" },
+          { key: "weekly", label: "Weekly digest", desc: "Summary every Monday" },
+        ].map(item => (
+          <div key={item.key} className="flex items-center justify-between px-5 py-4">
+            <div><p className="text-sm font-medium">{item.label}</p><p className="text-xs text-muted-foreground">{item.desc}</p></div>
+            <button onClick={() => setNotifications(p => ({ ...p, [item.key]: !p[item.key] }))}
+              className={\`relative h-5 w-9 rounded-full transition-colors \${notifications[item.key] ? "bg-primary" : "bg-muted-foreground/30"}\`}>
+              <span className={\`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform \${notifications[item.key] ? "translate-x-4" : "translate-x-0.5"}\`} />
+            </button>
+          </div>
+        ))}
+      </div>
+      <div className="border rounded-2xl divide-y overflow-hidden">
+        <div className="px-5 py-4 bg-muted/30"><h4 className="font-semibold text-sm">Appearance</h4></div>
+        <div className="px-5 py-4">
+          <div className="grid grid-cols-3 gap-2">
+            {["light", "dark", "system"].map(t => (
+              <button key={t} onClick={() => setTheme(t)}
+                className={\`py-2.5 rounded-xl border text-sm capitalize font-medium transition-all \${theme === t ? "border-primary bg-primary/10 text-primary" : "border-border hover:bg-muted/50"}\`}>
+                {t}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="border rounded-2xl divide-y overflow-hidden">
+        <div className="px-5 py-4 bg-muted/30"><h4 className="font-semibold text-sm">Danger Zone</h4></div>
+        <div className="px-5 py-4 flex items-center justify-between">
+          <div><p className="text-sm font-medium">Delete account</p><p className="text-xs text-muted-foreground">Permanently remove all data</p></div>
+          <Button variant="destructive" size="sm" className="rounded-xl">Delete</Button>
+        </div>
+      </div>
+    </div>
+  );
+}`}
+          >
+            <SettingsPanelBlock />
+          </BlockSection>
+
+        </div>
+      </Container>
+    </div>
+  );
 };

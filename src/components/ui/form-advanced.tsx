@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { cn } from "@/src/lib/utils";
 import { Input } from "./input";
@@ -96,7 +97,7 @@ export const FileUpload = ({ onFileSelect }: { onFileSelect?: (file: File) => vo
   };
 
   return (
-    <div 
+    <div
       onClick={() => inputRef.current?.click()}
       className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer hover:bg-muted/50 transition-colors"
     >

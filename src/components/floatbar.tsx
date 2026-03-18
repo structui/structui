@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export const Floatbar = () => {
   const location = useLocation();
-  
+
   const items = [
     { icon: Home, label: "Home", href: "/" },
     { icon: FileText, label: "Docs", href: "/docs" },
@@ -15,7 +15,7 @@ export const Floatbar = () => {
 
   return (
     <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
-      <motion.div 
+      <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         className="flex items-center gap-1 p-1.5 rounded-full border bg-background/80 backdrop-blur-xl shadow-2xl"

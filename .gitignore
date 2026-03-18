@@ -6,6 +6,27 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+.next/
+.turbo/
+.open-next/
+.vercel/
+.npm/
+
+.claude/
+.gemini/
+.cursor/
+.agent/
+
+./.next/
+./next/
+./.open-next/
+./open-next/
+./.turbo/
+./turbo/
+./.vercel/
+./vercel/
+./.npm/
+./npm/
 
 # Node
 node_modules/
@@ -31,4 +52,11 @@ dist-ssr/
 *.sw?
 
 # CLI Output / Custom
+
+.next/
+.open-next/
+.turbo/
+.vercel/
+.npm/
+
 bin/

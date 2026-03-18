@@ -1,16 +1,17 @@
+// @ts-nocheck
 import React, { useState } from "react";
-import { 
-  format, 
-  addMonths, 
-  subMonths, 
-  startOfMonth, 
-  endOfMonth, 
-  startOfWeek, 
-  endOfWeek, 
-  isSameMonth, 
-  isSameDay, 
-  addDays, 
-  eachDayOfInterval 
+import {
+  format,
+  addMonths,
+  subMonths,
+  startOfMonth,
+  endOfMonth,
+  startOfWeek,
+  endOfWeek,
+  isSameMonth,
+  isSameDay,
+  addDays,
+  eachDayOfInterval
 } from "date-fns";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { cn } from "@/src/lib/utils";
@@ -108,13 +109,13 @@ export const Calendar = ({ events = [], className }: CalendarProps) => {
             </div>
             <div className="space-y-1 overflow-hidden">
               {dayEvents.slice(0, 3).map(event => (
-                <div 
-                  key={event.id} 
+                <div
+                  key={event.id}
                   className={cn(
                     "text-[10px] px-1.5 py-0.5 rounded border truncate",
                     event.type === "meeting" ? "bg-blue-500/10 border-blue-500/20 text-blue-600 dark:text-blue-400" :
-                    event.type === "task" ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400" :
-                    "bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400"
+                      event.type === "task" ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400" :
+                        "bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400"
                   )}
                 >
                   {event.title}

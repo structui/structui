@@ -36,9 +36,9 @@ export const Timeline = ({ items, className }: TimelineProps) => {
           )}>
             {item.icon || (
               item.status === "completed" ? <Check className="h-5 w-5" /> :
-              item.status === "current" ? <Clock className="h-5 w-5" /> :
-              item.status === "error" ? <AlertCircle className="h-5 w-5" /> :
-              <Circle className="h-3 w-3 fill-current" />
+                item.status === "current" ? <Clock className="h-5 w-5" /> :
+                  item.status === "error" ? <AlertCircle className="h-5 w-5" /> :
+                    <Circle className="h-3 w-3 fill-current" />
             )}
           </div>
 

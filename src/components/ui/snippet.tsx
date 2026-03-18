@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { cn } from "@/src/lib/utils";
@@ -20,29 +22,29 @@ type Token = { type: TokenType; value: string };
 
 // ─── Color Map ────────────────────────────────────────────────────────────────
 const TOKEN_COLOR: Record<TokenType, string> = {
-  keyword:  "#c792ea",
-  string:   "#c3e88d",
-  comment:  "#546e7a",
-  number:   "#f78c6c",
-  tag:      "#89ddff",
-  attr:     "#ffcb6b",
-  plain:    "#cdd3de",
+  keyword: "#c792ea",
+  string: "#c3e88d",
+  comment: "#546e7a",
+  number: "#f78c6c",
+  tag: "#89ddff",
+  attr: "#ffcb6b",
+  plain: "#cdd3de",
   operator: "#89ddff",
-  prop:     "#80cbc4",
-  cssvar:   "#89ddff",
-  command:  "#82aaff",
+  prop: "#80cbc4",
+  cssvar: "#89ddff",
+  command: "#82aaff",
 };
 
 // ─── JS/TS/JSX Tokenizer ─────────────────────────────────────────────────────
 const JS_KW = new Set([
-  "import","export","from","const","let","var","function","return","if","else",
-  "for","while","do","switch","case","break","continue","class","extends","new",
-  "this","super","typeof","instanceof","in","of","async","await","try","catch",
-  "finally","throw","null","undefined","true","false","default","type",
-  "interface","enum","as","readonly","abstract","implements","public","private",
-  "protected","static","declare","namespace","module","keyof","infer","never",
-  "any","unknown","void","React","useState","useEffect","useRef","useMemo",
-  "useCallback","useContext",
+  "import", "export", "from", "const", "let", "var", "function", "return", "if", "else",
+  "for", "while", "do", "switch", "case", "break", "continue", "class", "extends", "new",
+  "this", "super", "typeof", "instanceof", "in", "of", "async", "await", "try", "catch",
+  "finally", "throw", "null", "undefined", "true", "false", "default", "type",
+  "interface", "enum", "as", "readonly", "abstract", "implements", "public", "private",
+  "protected", "static", "declare", "namespace", "module", "keyof", "infer", "never",
+  "any", "unknown", "void", "React", "useState", "useEffect", "useRef", "useMemo",
+  "useCallback", "useContext",
 ]);
 
 function tokenizeJS(code: string): Token[] {
@@ -153,8 +155,8 @@ function tokenizeCSS(code: string): Token[] {
 
 // ─── Bash Tokenizer ───────────────────────────────────────────────────────────
 const BASH_CMDS = new Set([
-  "npx","npm","pnpm","yarn","node","strui","ls","cd","mkdir","git","echo",
-  "export","source","curl","wget","sudo","chmod","cat","touch","cp","mv","rm",
+  "npx", "npm", "pnpm", "yarn", "node", "strui", "ls", "cd", "mkdir", "git", "echo",
+  "export", "source", "curl", "wget", "sudo", "chmod", "cat", "touch", "cp", "mv", "rm",
 ]);
 
 function tokenizeBash(code: string): Token[] {

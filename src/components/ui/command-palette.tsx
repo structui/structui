@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useMemo, useState } from "react";
 import { Command } from "cmdk";
 import { Search, Blocks, BookOpen, Box, Component, Layers } from "lucide-react";

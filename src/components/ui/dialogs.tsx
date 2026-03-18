@@ -16,7 +16,7 @@ export const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "ui-overlay fixed inset-0 z-50 bg-black/55 backdrop-blur-[2px]",
       className
     )}
     {...props}
@@ -33,7 +33,7 @@ export const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] rounded-3xl",
+        "ui-dialog-content fixed inset-0 z-50 m-auto grid h-fit w-[calc(100%-2rem)] max-w-lg gap-4 rounded-3xl border border-border/70 bg-background/95 p-6 shadow-2xl will-change-transform",
         className
       )}
       {...props}
@@ -48,6 +48,55 @@ export const DialogContent = React.forwardRef<
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
+export const DialogHeader = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn("flex flex-col space-y-2 text-center sm:text-left", className)}
+    {...props}
+  />
+);
+DialogHeader.displayName = "DialogHeader";
+
+export const DialogFooter = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      className,
+    )}
+    {...props}
+  />
+);
+DialogFooter.displayName = "DialogFooter";
+
+export const DialogTitle = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Title
+    ref={ref}
+    className={cn("text-lg font-semibold leading-none tracking-tight", className)}
+    {...props}
+  />
+));
+DialogTitle.displayName = DialogPrimitive.Title.displayName;
+
+export const DialogDescription = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={cn("text-sm text-muted-foreground", className)}
+    {...props}
+  />
+));
+DialogDescription.displayName = DialogPrimitive.Description.displayName;
+
 // --- Specialized Modals ---
 
 export const SignInModal = () => (
@@ -61,8 +110,10 @@ export const SignInModal = () => (
           <span className="text-xl font-bold tracking-tighter">S<span className="text-primary/60">U</span></span>
         </div>
         <div className="space-y-1">
-          <h2 className="text-2xl font-bold tracking-tight">Welcome back</h2>
-          <p className="text-sm text-muted-foreground">Enter your credentials to access your account</p>
+          <DialogTitle className="text-2xl font-bold tracking-tight">Welcome back</DialogTitle>
+          <DialogDescription className="text-sm text-muted-foreground">
+            Enter your credentials to access your account
+          </DialogDescription>
         </div>
       </div>
       <div className="space-y-4 py-4">
@@ -98,17 +149,17 @@ export const SignInModal = () => (
   </Dialog>
 );
 
-export const AlertDialog = ({ 
-  title, 
-  description, 
-  cancelText = "Cancel", 
-  actionText = "Continue", 
-  onAction 
-}: { 
-  title: string; 
-  description: string; 
-  cancelText?: string; 
-  actionText?: string; 
+export const AlertDialog = ({
+  title,
+  description,
+  cancelText = "Cancel",
+  actionText = "Continue",
+  onAction
+}: {
+  title: string;
+  description: string;
+  cancelText?: string;
+  actionText?: string;
   onAction?: () => void;
 }) => (
   <Dialog>
@@ -117,8 +168,10 @@ export const AlertDialog = ({
     </DialogTrigger>
     <DialogContent className="sm:max-w-[425px]">
       <div className="space-y-2">
-        <h2 className="text-xl font-bold tracking-tight">{title}</h2>
-        <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
+        <DialogTitle className="text-xl font-bold tracking-tight">{title}</DialogTitle>
+        <DialogDescription className="text-sm leading-relaxed">
+          {description}
+        </DialogDescription>
       </div>
       <div className="flex justify-end gap-3 mt-6">
         <DialogPrimitive.Close asChild>

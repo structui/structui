@@ -55,10 +55,10 @@ export const KanbanBoard = ({ columns: initialColumns, className }: KanbanBoardP
               <Card key={task.id} className="cursor-grab active:cursor-grabbing hover:border-primary/50 transition-colors shadow-sm">
                 <CardHeader className="p-4 pb-2">
                   <div className="flex justify-between items-start">
-                    <Badge 
+                    <Badge
                       variant={
-                        task.priority === "high" ? "destructive" : 
-                        task.priority === "medium" ? "default" : "secondary"
+                        task.priority === "high" ? "destructive" :
+                          task.priority === "medium" ? "default" : "secondary"
                       }
                       className="text-[10px] px-1.5 py-0"
                     >

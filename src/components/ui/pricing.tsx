@@ -52,7 +52,7 @@ export const Pricing = () => {
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Choose the plan that's right for you. All plans include a 14-day free trial.
         </p>
-        
+
         <div className="flex items-center justify-center gap-4 pt-4">
           <span className={cn("text-sm font-medium", !isYearly ? "text-foreground" : "text-muted-foreground")}>Monthly</span>
           <button
@@ -111,8 +111,8 @@ export const Pricing = () => {
               ))}
             </div>
 
-            <Button 
-              variant={plan.isPopular ? "default" : "outline"} 
+            <Button
+              variant={plan.isPopular ? "default" : "outline"}
               className={cn("w-full rounded-xl h-12 text-base font-semibold", plan.isPopular && "shadow-lg shadow-primary/25")}
             >
               {plan.buttonText}

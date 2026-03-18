@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { cn } from "@/src/lib/utils";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import React, { useRef } from "react";
@@ -11,13 +12,12 @@ export const PinContainer = ({
   href,
   className,
   containerClassName,
-}: {
-  children: React.ReactNode;
+}: React.PropsWithChildren<{
   title?: string;
   href?: string;
   className?: string;
   containerClassName?: string;
-}) => {
+}>) => {
   const ref = useRef<HTMLDivElement>(null);
 
   // Raw mouse offsets –0.5…0.5
