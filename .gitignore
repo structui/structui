@@ -30,6 +30,7 @@ lerna-debug.log*
 
 # Node
 node_modules/
+*.tsbuildinfo
 
 # Production
 dist/
