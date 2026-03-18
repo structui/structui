@@ -141,6 +141,37 @@ const getRegistryJsonUrl = (slug: string): string =>
 const getRegistryMarkdownUrl = (slug: string): string =>
   `${SITE_URL}/registry/components/${slug}.md`;
 
+const getDocSectionUrl = (section: string): string => `${SITE_URL}/docs#${section}`;
+
+const getDocsOverviewLinks = (): string[] => [
+  `- [Introduction](${getDocSectionUrl("introduction")}): What ${SITE_BRAND_NAME} is and how the registry-first model works.`,
+  `- [Installation](${getDocSectionUrl("installation")}): Add ${SITE_PACKAGE_NAME} and configure the base setup.`,
+  `- [Registry & LLMs](${getDocSectionUrl("registry")}): Public machine-readable endpoints and LLM discovery surfaces.`,
+  `- [Theming](${getDocSectionUrl("theming")}): CSS variable driven theming and token customization.`,
+  `- [CLI Usage](${getDocSectionUrl("cli")}): Canonical ${SITE_CLI_COMMAND} command surface and examples.`,
+  `- [Design Principles](${getDocSectionUrl("principles")}): System principles behind composition, consistency, and scale.`,
+  `- [Styling System](${getDocSectionUrl("styling")}): Tailwind and token-level styling approach.`,
+  `- [Accessibility](${getDocSectionUrl("accessibility")}): Accessibility guarantees and expectations.`,
+];
+
+const getProductLinks = (): string[] => [
+  `- [Components](${SITE_URL}/components): Browse the component catalog.`,
+  `- [Blocks](${SITE_URL}/blocks): Explore composable blocks and section patterns.`,
+  `- [Ready to Go](${SITE_URL}/r2go): Browse starter templates and builder flows.`,
+  `- [Theme Creator](${SITE_URL}/theme-creator): Build and export design token themes.`,
+  `- [CLI Page](${SITE_URL}/docs/cli): Dedicated CLI docs surface.`,
+  `- [GitHub](${SITE_GITHUB_URL}): Source code, issues, and project history.`,
+];
+
+const getRegistryLinks = (): string[] => [
+  `- [registry.json](${SITE_URL}/registry.json): Global registry export with metrics and component index.`,
+  `- [registry/index.json](${SITE_URL}/registry/index.json): Mirrored registry index export.`,
+  `- [Component JSON](${getRegistryJsonUrl("button")}): Example per-component structured record.`,
+  `- [Component Markdown](${getRegistryMarkdownUrl("button")}): Example component markdown document when available.`,
+  `- [llms.txt](${SITE_URL}/llms.txt): Compact discovery-oriented LLM file.`,
+  `- [llms-full.txt](${SITE_URL}/llms-full.txt): Expanded LLM reference with grouped component links.`,
+];
+
 const buildLlmsTxt = (components: ComponentExport[]): string => {
   const metrics = getSiteMetrics();
   const groups = getComponentGroups(components);
@@ -151,23 +182,15 @@ const buildLlmsTxt = (components: ComponentExport[]): string => {
     "",
     "## Overview",
     "",
-    `- [Docs](${SITE_URL}/docs): Product and usage documentation.`,
-    `- [Components](${SITE_URL}/components): Browse the component catalog.`,
-    `- [Blocks](${SITE_URL}/blocks): Explore higher-level UI patterns and page sections.`,
-    `- [Theme Creator](${SITE_URL}/theme-creator): Build and export design token themes.`,
-    `- [GitHub](${SITE_GITHUB_URL}): Source code, issues, and project history.`,
+    ...getProductLinks(),
     "",
-    "## Installation",
+    "## Getting Started",
     "",
-    `- [Docs Installation](${SITE_URL}/docs#installation): Install ${SITE_PACKAGE_NAME} in a React app.`,
-    `- [CLI Usage](${SITE_URL}/docs#cli): Canonical \`npx ${SITE_CLI_COMMAND}\` command surface.`,
-    `- [Registry & LLMs](${SITE_URL}/docs#registry): Public machine-readable registry and LLM endpoints.`,
+    ...getDocsOverviewLinks(),
     "",
     "## Registry",
     "",
-    `- [registry.json](${SITE_URL}/registry.json): Global registry export with metrics and component index.`,
-    `- [registry/index.json](${SITE_URL}/registry/index.json): Mirrored registry index export.`,
-    `- [llms-full.txt](${SITE_URL}/llms-full.txt): Expanded LLM reference with per-component links and summaries.`,
+    ...getRegistryLinks(),
     "",
     `## Components (${metrics.totalComponents})`,
     "",
@@ -198,10 +221,11 @@ const buildLlmsFullTxt = async (components: ComponentExport[]): Promise<string> 
     "",
     "## Overview",
     "",
-    `- [Docs](${SITE_URL}/docs): Product overview, installation, theming, and CLI guidance.`,
-    `- [Components](${SITE_URL}/components): Human-facing catalog for all registry entries.`,
-    `- [Registry JSON](${SITE_URL}/registry.json): Structured registry export for tools and integrations.`,
-    `- [GitHub](${SITE_GITHUB_URL}): Source repository and issue tracker.`,
+    ...getProductLinks(),
+    "",
+    "## Getting Started",
+    "",
+    ...getDocsOverviewLinks(),
     "",
     "## Package",
     "",
@@ -211,10 +235,7 @@ const buildLlmsFullTxt = async (components: ComponentExport[]): Promise<string> 
     "",
     "## Registry Surfaces",
     "",
-    `- [registry.json](${SITE_URL}/registry.json): Global registry export with metrics and all components.`,
-    `- [registry/index.json](${SITE_URL}/registry/index.json): Mirrored registry index.`,
-    `- [llms.txt](${SITE_URL}/llms.txt): Compact discovery-oriented LLM file.`,
-    `- [llms-full.txt](${SITE_URL}/llms-full.txt): Expanded LLM file.`,
+    ...getRegistryLinks(),
     "",
     `## Components (${metrics.totalComponents})`,
     "",

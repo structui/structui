@@ -4,23 +4,32 @@
 
 ## Overview
 
-- [Docs](https://structui.com/docs): Product and usage documentation.
 - [Components](https://structui.com/components): Browse the component catalog.
-- [Blocks](https://structui.com/blocks): Explore higher-level UI patterns and page sections.
+- [Blocks](https://structui.com/blocks): Explore composable blocks and section patterns.
+- [Ready to Go](https://structui.com/r2go): Browse starter templates and builder flows.
 - [Theme Creator](https://structui.com/theme-creator): Build and export design token themes.
+- [CLI Page](https://structui.com/docs/cli): Dedicated CLI docs surface.
 - [GitHub](https://github.com/structui/structui): Source code, issues, and project history.
 
-## Installation
+## Getting Started
 
-- [Docs Installation](https://structui.com/docs#installation): Install struct-ui in a React app.
-- [CLI Usage](https://structui.com/docs#cli): Canonical `npx strui` command surface.
-- [Registry & LLMs](https://structui.com/docs#registry): Public machine-readable registry and LLM endpoints.
+- [Introduction](https://structui.com/docs#introduction): What StructUI is and how the registry-first model works.
+- [Installation](https://structui.com/docs#installation): Add struct-ui and configure the base setup.
+- [Registry & LLMs](https://structui.com/docs#registry): Public machine-readable endpoints and LLM discovery surfaces.
+- [Theming](https://structui.com/docs#theming): CSS variable driven theming and token customization.
+- [CLI Usage](https://structui.com/docs#cli): Canonical strui command surface and examples.
+- [Design Principles](https://structui.com/docs#principles): System principles behind composition, consistency, and scale.
+- [Styling System](https://structui.com/docs#styling): Tailwind and token-level styling approach.
+- [Accessibility](https://structui.com/docs#accessibility): Accessibility guarantees and expectations.
 
 ## Registry
 
 - [registry.json](https://structui.com/registry.json): Global registry export with metrics and component index.
 - [registry/index.json](https://structui.com/registry/index.json): Mirrored registry index export.
-- [llms-full.txt](https://structui.com/llms-full.txt): Expanded LLM reference with per-component links and summaries.
+- [Component JSON](https://structui.com/registry/components/button.json): Example per-component structured record.
+- [Component Markdown](https://structui.com/registry/components/button.md): Example component markdown document when available.
+- [llms.txt](https://structui.com/llms.txt): Compact discovery-oriented LLM file.
+- [llms-full.txt](https://structui.com/llms-full.txt): Expanded LLM reference with grouped component links.
 
 ## Components (56)
 
