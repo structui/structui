@@ -54,3 +54,8 @@ export interface SiteMetrics {
   plannedComponents: number;
   categories: number;
 }
+
+export interface ComponentDoc {
+  path: string;
+  content: string;
+}

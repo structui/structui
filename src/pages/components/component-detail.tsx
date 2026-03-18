@@ -46,9 +46,12 @@ import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger, H
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/src/components/ui/navigation-advanced";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/src/components/ui/sheet";
 import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/src/components/ui/alert-dialog";
+import ReactMarkdown from "react-markdown";
 import {
   getComponentBySlug,
+  getComponentDocBySlug,
   SITE_CLI_COMMAND,
+  SITE_ISSUES_URL,
   SITE_PACKAGE_NAME,
 } from "@/src/lib/registry";
 import { ExternalLink, Info, Layers, MousePointer2, Type, BarChart3, Calendar as CalendarIcon, LayoutDashboard, Trello, CreditCard, ListTree, Command as CommandIcon, Smartphone, Laptop, Tablet, Monitor, ChevronRight, MoreHorizontal, AlertCircle, CheckCircle2, Terminal } from "lucide-react";
@@ -2053,6 +2056,7 @@ export const ComponentDetail = () => {
   const { componentId } = useParams();
   const data = componentId ? componentData[componentId] : null;
   const registryEntry = componentId ? getComponentBySlug(componentId) : undefined;
+  const componentDoc = componentId ? getComponentDocBySlug(componentId) : undefined;
   const displayCategory = registryEntry?.category ?? data?.category;
   const displayTitle = registryEntry?.title ?? data?.title;
   const displayDescription = registryEntry?.description ?? data?.description;
@@ -2061,7 +2065,7 @@ export const ComponentDetail = () => {
     ? `${SITE_PACKAGE_NAME}/${registryEntry.slug}`
     : SITE_PACKAGE_NAME;
 
-  if (!data) {
+  if (!data && !registryEntry) {
     // Fallback for components not yet fully documented in this detailed view
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -2100,7 +2104,7 @@ export const ComponentDetail = () => {
             </Button>
             <Button variant="outline" size="sm" className="gap-2" asChild>
               <a
-                href="https://github.com/structui/structui/issues"
+                href={SITE_ISSUES_URL}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -2148,64 +2152,77 @@ cp node_modules/${SITE_PACKAGE_NAME}/${sourcePath} src/components/ui/
           </div>
         )}
 
-        {/* Examples */}
-        <div className="space-y-12">
-          <h2 className="text-3xl font-bold tracking-tight">Examples</h2>
-          {data.examples.map((example, index) => (
-            <div key={index} className="space-y-4">
-              <div className="space-y-1">
-                <h3 className="text-xl font-bold">{example.title}</h3>
-                <p className="text-muted-foreground">{example.description}</p>
-              </div>
-              <Tabs defaultValue="preview" className="w-full">
-                <TabsList className="grid w-[200px] grid-cols-2">
-                  <TabsTrigger value="preview">Preview</TabsTrigger>
-                  <TabsTrigger value="code">Code</TabsTrigger>
-                </TabsList>
-                <TabsContent value="preview" className="mt-4">
-                  <div className="flex items-center justify-center p-12 border rounded-xl bg-muted/10 min-h-[200px]">
-                    {example.render}
-                  </div>
-                </TabsContent>
-                <TabsContent value="code">
-                  <CodeBlock code={example.code} />
-                </TabsContent>
-              </Tabs>
+        {componentDoc && (
+          <div className="space-y-6">
+            <h2 className="text-3xl font-bold tracking-tight">Documentation</h2>
+            <div className="min-h-[200px] rounded-xl border bg-muted/10 p-6 prose prose-sm dark:prose-invert max-w-none">
+              <ReactMarkdown>{componentDoc.content}</ReactMarkdown>
             </div>
-          ))}
-        </div>
+          </div>
+        )}
+
+        {/* Examples */}
+        {data && (
+          <div className="space-y-12">
+            <h2 className="text-3xl font-bold tracking-tight">Examples</h2>
+            {data.examples.map((example, index) => (
+              <div key={index} className="space-y-4">
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold">{example.title}</h3>
+                  <p className="text-muted-foreground">{example.description}</p>
+                </div>
+                <Tabs defaultValue="preview" className="w-full">
+                  <TabsList className="grid w-[200px] grid-cols-2">
+                    <TabsTrigger value="preview">Preview</TabsTrigger>
+                    <TabsTrigger value="code">Code</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="preview" className="mt-4">
+                    <div className="flex items-center justify-center p-12 border rounded-xl bg-muted/10 min-h-[200px]">
+                      {example.render}
+                    </div>
+                  </TabsContent>
+                  <TabsContent value="code">
+                    <CodeBlock code={example.code} />
+                  </TabsContent>
+                </Tabs>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Props */}
-        <div className="space-y-6">
-          <h2 className="text-3xl font-bold tracking-tight">Props</h2>
-          <div className="border rounded-lg overflow-hidden">
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-muted/50">
-                  <TableHead className="w-[150px]">Prop</TableHead>
-                  <TableHead className="w-[200px]">Type</TableHead>
-                  <TableHead className="w-[100px]">Default</TableHead>
-                  <TableHead>Description</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {data.props.map((prop) => (
-                  <TableRow key={prop.name}>
-                    <TableCell className="font-mono text-sm font-bold text-primary">{prop.name}</TableCell>
-                    <TableCell className="font-mono text-xs text-muted-foreground">{prop.type}</TableCell>
-                    <TableCell className="font-mono text-xs">{prop.default}</TableCell>
-                    <TableCell className="text-sm">{prop.description}</TableCell>
+        {data && (
+          <div className="space-y-6">
+            <h2 className="text-3xl font-bold tracking-tight">Props</h2>
+            <div className="border rounded-lg overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/50">
+                    <TableHead className="w-[150px]">Prop</TableHead>
+                    <TableHead className="w-[200px]">Type</TableHead>
+                    <TableHead className="w-[100px]">Default</TableHead>
+                    <TableHead>Description</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {data.props.map((prop) => (
+                    <TableRow key={prop.name}>
+                      <TableCell className="font-mono text-sm font-bold text-primary">{prop.name}</TableCell>
+                      <TableCell className="font-mono text-xs text-muted-foreground">{prop.type}</TableCell>
+                      <TableCell className="font-mono text-xs">{prop.default}</TableCell>
+                      <TableCell className="text-sm">{prop.description}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Sidebar */}
       <div className="lg:w-80 space-y-8">
-        {data.features && (
+        {data?.features && (
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
@@ -2224,7 +2241,7 @@ cp node_modules/${SITE_PACKAGE_NAME}/${sourcePath} src/components/ui/
           </Card>
         )}
 
-        {data.accessibility && (
+        {data?.accessibility && (
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">

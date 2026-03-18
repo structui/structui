@@ -5,6 +5,7 @@ export {
   getComponentSidebarSections,
   getPublicComponents,
 } from "./components";
+export { getComponentDocByPath, getComponentDocBySlug } from "./docs";
 export {
   SITE_BRAND_NAME,
   SITE_CLI_COMMAND,
@@ -16,6 +17,7 @@ export { createComponentRegistryEntry } from "./factories";
 export { getSiteMetrics } from "./metrics";
 export type {
   ComponentCategory,
+  ComponentDoc,
   ComponentRegistryEntry,
   ComponentStatus,
   DocsStatus,
