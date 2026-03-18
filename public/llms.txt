@@ -13,14 +13,14 @@
 
 ## Getting Started
 
-- [Introduction](https://structui.com/docs#introduction): What StructUI is and how the registry-first model works.
-- [Installation](https://structui.com/docs#installation): Add struct-ui and configure the base setup.
-- [Registry & LLMs](https://structui.com/docs#registry): Public machine-readable endpoints and LLM discovery surfaces.
-- [Theming](https://structui.com/docs#theming): CSS variable driven theming and token customization.
-- [CLI Usage](https://structui.com/docs#cli): Canonical strui command surface and examples.
-- [Design Principles](https://structui.com/docs#principles): System principles behind composition, consistency, and scale.
-- [Styling System](https://structui.com/docs#styling): Tailwind and token-level styling approach.
-- [Accessibility](https://structui.com/docs#accessibility): Accessibility guarantees and expectations.
+- [Introduction](https://structui.com/docs/introduction): What StructUI is and how the registry-first model works.
+- [Installation](https://structui.com/docs/installation): Add struct-ui and configure the base setup.
+- [Registry & LLMs](https://structui.com/docs/registry): Public machine-readable endpoints and LLM discovery surfaces.
+- [Theming](https://structui.com/docs/theming): CSS variable driven theming and token customization.
+- [CLI Usage](https://structui.com/docs/cli): Canonical strui command surface and examples.
+- [Design Principles](https://structui.com/docs/principles): System principles behind composition, consistency, and scale.
+- [Styling System](https://structui.com/docs/styling): Tailwind and token-level styling approach.
+- [Accessibility](https://structui.com/docs/accessibility): Accessibility guarantees and expectations.
 
 ## Registry
 
@@ -33,13 +33,20 @@
 
 ## Components (56)
 
-### Advanced
+### Advanced Patterns
 
 - [3D Pin](https://structui.com/components/3d-pin): Interactive 3D hover card for standout links and showcases.
 - [Command Palette](https://structui.com/components/command-palette): Keyboard-driven search and action launcher.
 - [Hero](https://structui.com/components/hero): Landing page hero section for high-impact product messaging.
 
-### Data Display
+### Core
+
+- [Badge](https://structui.com/components/badge): Compact status indicator for labels, states, and metadata.
+- [Button](https://structui.com/components/button): Interactive button with multiple variants and sizes.
+- [Loaders & Spinners](https://structui.com/components/loaders): Animated loading indicators for async states and pending screens.
+- [Typography](https://structui.com/components/typography): Type styles and content patterns for structured text layouts.
+
+### Data Views
 
 - [Accordion](https://structui.com/components/accordion): Collapsible sections for progressively revealing content.
 - [Avatar](https://structui.com/components/avatar): Profile image primitive with fallback states.
@@ -53,14 +60,14 @@
 - [Table](https://structui.com/components/table): Standard table primitives for structured data.
 - [Timeline](https://structui.com/components/timeline): Sequential activity and event display for history-heavy screens.
 
-### Feedback
+### Feedback & Status
 
 - [Alert](https://structui.com/components/alert): Inline status and warning messaging.
 - [Progress](https://structui.com/components/progress): Progress indicators for uploads, steps, and async work.
 - [Spinner](https://structui.com/components/spinner): Compact loading spinner for buttons and small placeholders.
 - [Toast](https://structui.com/components/toast): Transient notification system for success, error, and info messages.
 
-### Forms
+### Inputs & Forms
 
 - [Checkbox](https://structui.com/components/checkbox): Binary input for multi-select and consent flows.
 - [Combobox](https://structui.com/components/combobox): Searchable selection UI for larger option sets.
@@ -76,14 +83,7 @@
 - [Textarea](https://structui.com/components/textarea): Multiline text field for messages, notes, and descriptions.
 - [Toggle](https://structui.com/components/toggle): Pressed-state control for compact option toggles.
 
-### General
-
-- [Badge](https://structui.com/components/badge): Compact status indicator for labels, states, and metadata.
-- [Button](https://structui.com/components/button): Interactive button with multiple variants and sizes.
-- [Loaders & Spinners](https://structui.com/components/loaders): Animated loading indicators for async states and pending screens.
-- [Typography](https://structui.com/components/typography): Type styles and content patterns for structured text layouts.
-
-### Layout
+### Layout & Structure
 
 - [Aspect Ratio](https://structui.com/components/aspect-ratio): Constrain media and embeds to a fixed aspect ratio.
 - [Bento Grid](https://structui.com/components/bento-grid): Editorial grid layout for feature sections and dashboards.
@@ -101,7 +101,7 @@
 - [Stepper](https://structui.com/components/stepper): Step-based progress indicator for multi-stage flows.
 - [Tabs](https://structui.com/components/tabs): Tabbed navigation for switching between related content panels.
 
-### Overlay
+### Overlays
 
 - [Alert Dialog](https://structui.com/components/alert-dialog): High-stakes confirmation dialog for destructive actions.
 - [Context Menu](https://structui.com/components/context-menu): Right-click menu for contextual actions.

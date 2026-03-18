@@ -4,12 +4,14 @@ import { fileURLToPath } from "node:url";
 
 import { componentRegistryEntries } from "../src/content/registry/components/index";
 import {
+  COMPONENT_CATEGORY_LABELS,
   SITE_BRAND_NAME,
   SITE_CLI_COMMAND,
   SITE_GITHUB_URL,
   SITE_PACKAGE_NAME,
   SITE_URL,
 } from "../src/lib/registry/constants";
+import { DOCS_NAV_ITEMS } from "../src/lib/registry/docs-nav";
 import { getSiteMetrics } from "../src/lib/registry/metrics";
 import type { ComponentRegistryEntry } from "../src/lib/registry/types";
 
@@ -117,9 +119,10 @@ const getComponentGroups = (components: ComponentExport[]): ComponentGroup[] => 
   const groups = new Map<string, ComponentExport[]>();
 
   for (const component of components) {
-    const categoryComponents = groups.get(component.category) ?? [];
+    const categoryLabel = COMPONENT_CATEGORY_LABELS[component.category as keyof typeof COMPONENT_CATEGORY_LABELS] ?? component.category;
+    const categoryComponents = groups.get(categoryLabel) ?? [];
     categoryComponents.push(component);
-    groups.set(component.category, categoryComponents);
+    groups.set(categoryLabel, categoryComponents);
   }
 
   return [...groups.entries()]
@@ -141,18 +144,23 @@ const getRegistryJsonUrl = (slug: string): string =>
 const getRegistryMarkdownUrl = (slug: string): string =>
   `${SITE_URL}/registry/components/${slug}.md`;
 
-const getDocSectionUrl = (section: string): string => `${SITE_URL}/docs#${section}`;
+const getDocSectionUrl = (section: string): string => `${SITE_URL}${section}`;
 
-const getDocsOverviewLinks = (): string[] => [
-  `- [Introduction](${getDocSectionUrl("introduction")}): What ${SITE_BRAND_NAME} is and how the registry-first model works.`,
-  `- [Installation](${getDocSectionUrl("installation")}): Add ${SITE_PACKAGE_NAME} and configure the base setup.`,
-  `- [Registry & LLMs](${getDocSectionUrl("registry")}): Public machine-readable endpoints and LLM discovery surfaces.`,
-  `- [Theming](${getDocSectionUrl("theming")}): CSS variable driven theming and token customization.`,
-  `- [CLI Usage](${getDocSectionUrl("cli")}): Canonical ${SITE_CLI_COMMAND} command surface and examples.`,
-  `- [Design Principles](${getDocSectionUrl("principles")}): System principles behind composition, consistency, and scale.`,
-  `- [Styling System](${getDocSectionUrl("styling")}): Tailwind and token-level styling approach.`,
-  `- [Accessibility](${getDocSectionUrl("accessibility")}): Accessibility guarantees and expectations.`,
-];
+const DOC_LINK_DESCRIPTIONS: Record<string, string> = {
+  introduction: `What ${SITE_BRAND_NAME} is and how the registry-first model works.`,
+  installation: `Add ${SITE_PACKAGE_NAME} and configure the base setup.`,
+  registry: "Public machine-readable endpoints and LLM discovery surfaces.",
+  theming: "CSS variable driven theming and token customization.",
+  cli: `Canonical ${SITE_CLI_COMMAND} command surface and examples.`,
+  principles: "System principles behind composition, consistency, and scale.",
+  styling: "Tailwind and token-level styling approach.",
+  accessibility: "Accessibility guarantees and expectations.",
+};
+
+const getDocsOverviewLinks = (): string[] =>
+  DOCS_NAV_ITEMS.map(
+    (item) => `- [${item.label}](${getDocSectionUrl(item.path)}): ${DOC_LINK_DESCRIPTIONS[item.id]}`,
+  );
 
 const getProductLinks = (): string[] => [
   `- [Components](${SITE_URL}/components): Browse the component catalog.`,
@@ -265,9 +273,6 @@ const buildLlmsFullTxt = async (components: ComponentExport[]): Promise<string> 
 
       lines.push(
         `- [${component.title}](${getComponentDocsUrl(component.slug)}): ${component.llmSummary}`,
-        `  - slug: \`${component.slug}\``,
-        `  - status: ${component.status}`,
-        `  - docs: ${component.docsStatus}`,
         `  - links: ${extraLinks.join(" | ")}`,
       );
 

@@ -8,6 +8,7 @@ import { BlocksPage } from "./pages/blocks";
 import { ComponentsPage } from "./pages/components";
 import { DocsPage } from "./pages/docs";
 import { CliPage } from "./pages/docs/cli";
+import { DocsSectionPage } from "./pages/docs/section-page";
 import { ThemingPage } from "./pages/docs/theming";
 import { ThemeCreatorPage } from "./pages/theme-creator";
 import { R2GoPage } from "./pages/r2go";
@@ -37,6 +38,7 @@ const App: React.FC = () => {
               <Route path="/blocks" element={<BlocksPage />} />
               <Route path="/components/*" element={<ComponentsPage />} />
               <Route path="/docs" element={<DocsPage />} />
+              <Route path="/docs/:sectionId" element={<DocsSectionPage />} />
               <Route path="/docs/cli" element={<CliPage />} />
               <Route path="/docs/theming" element={<ThemingPage />} />
               <Route path="/theme-creator" element={<ThemeCreatorPage />} />
