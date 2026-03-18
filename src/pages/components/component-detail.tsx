@@ -46,6 +46,11 @@ import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger, H
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/src/components/ui/navigation-advanced";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/src/components/ui/sheet";
 import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/src/components/ui/alert-dialog";
+import {
+  getComponentBySlug,
+  SITE_CLI_COMMAND,
+  SITE_PACKAGE_NAME,
+} from "@/src/lib/registry";
 import { ExternalLink, Info, Layers, MousePointer2, Type, BarChart3, Calendar as CalendarIcon, LayoutDashboard, Trello, CreditCard, ListTree, Command as CommandIcon, Smartphone, Laptop, Tablet, Monitor, ChevronRight, MoreHorizontal, AlertCircle, CheckCircle2, Terminal } from "lucide-react";
 
 interface ComponentExample {
@@ -2047,6 +2052,14 @@ export default function LandingPage() {
 export const ComponentDetail = () => {
   const { componentId } = useParams();
   const data = componentId ? componentData[componentId] : null;
+  const registryEntry = componentId ? getComponentBySlug(componentId) : undefined;
+  const displayCategory = registryEntry?.category ?? data?.category;
+  const displayTitle = registryEntry?.title ?? data?.title;
+  const displayDescription = registryEntry?.description ?? data?.description;
+  const sourcePath = registryEntry?.sourcePath ?? `src/components/ui/${componentId}.tsx`;
+  const packageName = registryEntry?.sourceExport
+    ? `${SITE_PACKAGE_NAME}/${registryEntry.slug}`
+    : SITE_PACKAGE_NAME;
 
   if (!data) {
     // Fallback for components not yet fully documented in this detailed view
@@ -2068,18 +2081,31 @@ export const ComponentDetail = () => {
         {/* Header */}
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="rounded-sm px-1.5">{data.category}</Badge>
+            <Badge variant="secondary" className="rounded-sm px-1.5">{displayCategory}</Badge>
+            {registryEntry && (
+              <Badge variant="outline" className="rounded-sm px-1.5 uppercase">
+                {registryEntry.status}
+              </Badge>
+            )}
           </div>
-          <h1 className="text-5xl font-extrabold tracking-tight">{data.title}</h1>
+          <h1 className="text-5xl font-extrabold tracking-tight">{displayTitle}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl leading-relaxed">
-            {data.description}
+            {displayDescription}
           </p>
           <div className="flex gap-4 pt-2">
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button variant="outline" size="sm" className="gap-2" asChild>
+              <Link to="/docs">
               <ExternalLink className="h-4 w-4" /> Docs
+              </Link>
             </Button>
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button variant="outline" size="sm" className="gap-2" asChild>
+              <a
+                href="https://github.com/structui/structui/issues"
+                target="_blank"
+                rel="noreferrer"
+              >
               <Info className="h-4 w-4" /> Report Issue
+              </a>
             </Button>
           </div>
         </div>
@@ -2093,16 +2119,16 @@ export const ComponentDetail = () => {
               <TabsTrigger value="manual">Manual</TabsTrigger>
             </TabsList>
             <TabsContent value="cli">
-              <CodeBlock code={`npx struct-ui add ${componentId}`} language="bash" />
+              <CodeBlock code={`npx ${SITE_CLI_COMMAND} add ${componentId}`} language="bash" />
             </TabsContent>
             <TabsContent value="manual">
               <div className="space-y-3">
                 <p className="text-sm text-muted-foreground">Copy the source file into your <code className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono">src/components/ui/</code> directory:</p>
                 <CodeBlock code={`# 1. Copy the component file
-cp node_modules/struct-ui/src/components/ui/${componentId}.tsx src/components/ui/
+cp node_modules/${SITE_PACKAGE_NAME}/${sourcePath} src/components/ui/
 
-# 2. Or manually create src/components/ui/${componentId}.tsx
-# 3. Import as: import { ... } from "@/components/ui/${componentId}"`} language="bash" />
+# 2. Or manually create ${sourcePath}
+# 3. Import the exported symbol into your app`} language="bash" />
                 {data.usage && (
                   <div>
                     <p className="text-sm font-medium mb-2">Full source usage:</p>
@@ -2226,12 +2252,54 @@ cp node_modules/struct-ui/src/components/ui/${componentId}.tsx src/components/ui
           <CardContent className="space-y-4">
             <div className="space-y-1">
               <p className="text-xs font-bold uppercase text-muted-foreground">Category</p>
-              <p className="text-sm">{data.category}</p>
+              <p className="text-sm">{displayCategory}</p>
             </div>
             <div className="space-y-1">
               <p className="text-xs font-bold uppercase text-muted-foreground">Package</p>
-              <p className="text-sm font-mono">@struct-ui/{componentId}</p>
+              <p className="text-sm font-mono">{packageName}</p>
             </div>
+            {registryEntry?.sourcePath && (
+              <div className="space-y-1">
+                <p className="text-xs font-bold uppercase text-muted-foreground">Source</p>
+                <p className="text-sm font-mono break-all">{registryEntry.sourcePath}</p>
+              </div>
+            )}
+            {registryEntry && (
+              <div className="space-y-1">
+                <p className="text-xs font-bold uppercase text-muted-foreground">Docs Status</p>
+                <p className="text-sm">{registryEntry.docsStatus}</p>
+              </div>
+            )}
+            {registryEntry?.tags.length ? (
+              <div className="space-y-2">
+                <p className="text-xs font-bold uppercase text-muted-foreground">Tags</p>
+                <div className="flex flex-wrap gap-2">
+                  {registryEntry.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary" className="rounded-full">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+            {registryEntry?.llmSummary && (
+              <div className="space-y-1">
+                <p className="text-xs font-bold uppercase text-muted-foreground">LLM Summary</p>
+                <p className="text-sm text-muted-foreground">{registryEntry.llmSummary}</p>
+              </div>
+            )}
+            {registryEntry?.relatedComponents.length ? (
+              <div className="space-y-2">
+                <p className="text-xs font-bold uppercase text-muted-foreground">Related</p>
+                <div className="flex flex-wrap gap-2">
+                  {registryEntry.relatedComponents.map((relatedComponent) => (
+                    <Button key={relatedComponent} variant="outline" size="sm" asChild>
+                      <Link to={`/components/${relatedComponent}`}>{relatedComponent}</Link>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </CardContent>
         </Card>
       </div>
