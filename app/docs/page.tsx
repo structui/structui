@@ -468,7 +468,7 @@ npx sui search pricing`}
                   {KEY_FILES.map((file) => (
                     <div key={file} className="flex items-center gap-2 px-4 py-2">
                       <FileCode2 className="h-3 w-3 shrink-0 text-muted-foreground/50" />
-                      <span className="font-mono text-xs text-muted-foreground">{file}</span>
+                      <span className="font-mono truncate text-xs text-muted-foreground">{file}</span>
                     </div>
                   ))}
                 </div>

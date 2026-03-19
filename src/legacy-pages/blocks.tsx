@@ -68,14 +68,16 @@ const BlockSection = ({
   category,
   children,
   noPad = false,
+  cliName,
 }: {
   title: string;
   code: string;
   category?: string;
   children: React.ReactNode;
   noPad?: boolean;
+  cliName?: string;
 }) => {
-  const [tab, setTab] = useState<"preview" | "code">("preview");
+  const [tab, setTab] = useState<"preview" | "code" | "cli">("preview");
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -87,7 +89,14 @@ const BlockSection = ({
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           {category && <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 mb-0.5">{category}</p>}
-          <h3 className="text-sm font-semibold text-foreground">{title}</h3>
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-foreground">{title}</h3>
+            {cliName && (
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-primary/10 text-primary text-[10px] font-mono font-medium border border-primary/20">
+                sui add {cliName}
+              </span>
+            )}
+          </div>
         </div>
         <div className="flex items-center gap-1 bg-muted/50 rounded-lg p-0.5">
           <button
@@ -102,6 +111,14 @@ const BlockSection = ({
           >
             Code
           </button>
+          {cliName && (
+            <button
+              onClick={() => setTab("cli")}
+              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${tab === "cli" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              CLI
+            </button>
+          )}
         </div>
       </div>
 
@@ -109,6 +126,12 @@ const BlockSection = ({
         <div className={`border rounded-2xl overflow-hidden bg-muted/5 ${noPad ? "" : "p-8"}`}>
           {children}
         </div>
+      ) : tab === "cli" && cliName ? (
+        <Snippet
+          code={`npx sui add ${cliName}`}
+          language="bash"
+          filename="terminal"
+        />
       ) : (
         <Snippet
           code={code}
@@ -599,9 +622,22 @@ export const BlocksPage = () => {
   return (
     <div className="py-12">
       <Container>
-        <div className="mb-12">
+        <div className="mb-10">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Blocks</h1>
           <p className="text-muted-foreground">Ready-to-use UI blocks for your next project.</p>
+        </div>
+
+        <div className="mb-12 rounded-2xl border border-primary/20 bg-primary/5 px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-foreground mb-0.5">Install blocks with the CLI</p>
+            <p className="text-xs text-muted-foreground">
+              Blocks marked with a <span className="font-mono bg-primary/10 text-primary px-1 py-0.5 rounded text-[10px] border border-primary/20">sui add</span> badge can be installed directly into your project. All other blocks can be copied from the Code tab.
+            </p>
+          </div>
+          <div className="shrink-0 flex flex-col gap-1.5 font-mono text-xs">
+            <span className="px-3 py-1.5 rounded-lg bg-background border text-muted-foreground">npx sui search --blocks</span>
+            <span className="px-3 py-1.5 rounded-lg bg-background border text-muted-foreground">npx sui add &lt;block-name&gt;</span>
+          </div>
         </div>
 
         <div className="space-y-20">
@@ -1569,6 +1605,7 @@ export function ComplexFooter() {
           <BlockSection
             title="Modern Hero Section"
             category="Marketing"
+            cliName="hero-section"
             noPad
             code={`import { Hero } from "@/components/ui/hero";
 
@@ -1585,6 +1622,7 @@ export function ModernHeroSection() {
           <BlockSection
             title="Pricing Table"
             category="Marketing"
+            cliName="pricing-section"
             code={`import { Pricing } from "@/components/ui/pricing";
 
 export function PricingTable() {

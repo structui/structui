@@ -38,7 +38,7 @@ export function SiteNavbar({ starCount }: SiteNavbarProps) {
     { name: "Blocks", href: "/blocks" },
     { name: "Setups", href: "/setups" },
     { name: "Theme", href: "/theme-creator" },
-    { name: "R2Go (Beta)", href: "/r2go" },
+    { name: "Ready 2 Go (Beta)", href: "/r2go" },
   ];
 
   return (
@@ -46,7 +46,7 @@ export function SiteNavbar({ starCount }: SiteNavbarProps) {
       <div
         className={cn(
           "flex h-12 items-center justify-between gap-4 px-3 sm:px-5 lg:px-6",
-          isDocsRoute ? "w-full" : "mx-auto ",
+          isDocsRoute ? "w-full" : "max-w-7xl mx-auto",
         )}
       >
         <div className="flex items-center gap-5">
