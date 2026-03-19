@@ -37,15 +37,15 @@ export const PinContainer = ({
   const glowY = useTransform(smoothY, [-0.5, 0.5], [0, 100]);
 
   // Computed style values
-  const glowBg = useTransform<number, string>(
-    [glowX, glowY] as any,
-    ([x, y]: [number, number]) =>
+  const glowBg = useTransform(
+    [glowX, glowY],
+    ([x, y]: number[]) =>
       `radial-gradient(circle at ${x}% ${y}%, color-mix(in srgb, var(--primary) 20%, transparent) 0%, transparent 70%)`
   );
 
-  const sheenBg = useTransform<number, string>(
-    [rotateX, rotateY] as any,
-    ([rx, ry]: [number, number]) =>
+  const sheenBg = useTransform(
+    [rotateX, rotateY],
+    ([rx, ry]: number[]) =>
       `linear-gradient(${135 + ry * 1.5}deg, rgba(255,255,255,${Math.max(0, 0.03 + Math.abs(rx) * 0.006)}) 0%, transparent 55%)`
   );
 
