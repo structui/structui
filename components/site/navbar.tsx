@@ -36,6 +36,7 @@ export function SiteNavbar({ starCount }: SiteNavbarProps) {
     { name: "Docs", href: "/docs" },
     { name: "Components", href: "/components" },
     { name: "Blocks", href: "/blocks" },
+    { name: "Setups", href: "/setups" },
     { name: "Theme", href: "/theme-creator" },
     { name: "R2Go (Beta)", href: "/r2go" },
   ];

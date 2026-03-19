@@ -1,3 +1,5 @@
+"use client";
+
 // @ts-nocheck
 import { cn } from "@/src/lib/utils";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";

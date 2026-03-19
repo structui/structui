@@ -6,6 +6,7 @@ import {
   Code2,
   Component,
   Layers,
+  Layers2,
   ShieldCheck,
   Sparkles,
   TerminalSquare,
@@ -66,6 +67,15 @@ const BUILD_TRACKS = [
     color: "text-emerald-500",
     bg: "bg-emerald-500/10",
     border: "group-hover:border-emerald-500/30",
+  },
+  {
+    title: "Setups",
+    description: "Full-stack Next.js starter kits — CRM, ERP, SaaS, Auth. One command, instant scaffold.",
+    href: "/setups",
+    icon: Layers2,
+    color: "text-teal-500",
+    bg: "bg-teal-500/10",
+    border: "group-hover:border-teal-500/30",
   },
   {
     title: "Auth Demo",
