@@ -32,7 +32,7 @@ export default async function Page() {
     operatingSystem: "Any",
     description:
       "Source-first React component library with 50+ components, theme creator, blocks, and CLI.",
-    url: "https://structui.dev",
+    url: "https://structui.com",
     offers: {
       "@type": "Offer",
       price: "0",

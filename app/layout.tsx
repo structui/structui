@@ -7,7 +7,7 @@ import { auth } from "@/src/auth";
 import { AppShell } from "@/src/components/site/app-shell";
 import { getGitHubStarCount } from "@/src/lib/github";
 
-const BASE_URL = "https://structui.dev";
+const BASE_URL = "https://structui.com";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -42,6 +42,26 @@ export const metadata: Metadata = {
     "headless UI",
     "accessible components",
     "theme creator",
+    "CSS variables",
+    "design tokens",
+    "color palette",
+    "inline CSS components",
+    "bento grid",
+    "glassmorphism",
+    "dark mode",
+    "light mode",
+    "source-first",
+    "CLI installer",
+    "npx sui add",
+    "UI blocks",
+    "React inline styles",
+    "Vue components",
+    "Astro components",
+    "DESIGN_PATTERN.md",
+    "AI design system",
+    "CSS color system",
+    "ready to go components",
+    "production ready UI",
   ],
   authors: [{ name: "StructUI", url: BASE_URL }],
   creator: "StructUI",
@@ -113,6 +133,7 @@ export default async function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <meta name="format-detection" content="telephone=no" />
       </head>
       <body>

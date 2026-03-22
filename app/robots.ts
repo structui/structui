@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/dashboard/", "/auth/"],
       },
     ],
-    sitemap: "https://structui.dev/sitemap.xml",
-    host: "https://structui.dev",
+    sitemap: "https://structui.com/sitemap.xml",
+    host: "https://structui.com",
   };
 }

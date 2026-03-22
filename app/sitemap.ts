@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 import { getPublicComponentCatalog } from "@/src/lib/registry/catalog";
 import { getAllMarkdownDocs } from "@/src/lib/content/docs";
 
-const BASE_URL = "https://structui.dev";
+const BASE_URL = "https://structui.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [components, docs] = await Promise.all([
@@ -25,10 +25,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${BASE_URL}/docs`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${BASE_URL}/blocks`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.8,
+      priority: 0.85,
     },
     {
       url: `${BASE_URL}/theme-creator`,
@@ -37,10 +43,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/docs`,
+      url: `${BASE_URL}/inline-components`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/palettes`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/setups`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/r2go`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
   ];
 

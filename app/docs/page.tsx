@@ -185,23 +185,60 @@ const API_ENDPOINTS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Docs",
+  title: "Documentation — CLI, Registry, and Framework Guides",
   description:
-    "SUI documentation — CLI reference, framework support, registry contract, and component-level markdown docs.",
+    "Complete SUI documentation: CLI reference (sui init, sui add, sui update), framework setup guides for Next.js, Remix, Astro, and Vite, registry contract, and all component-level markdown docs.",
+  keywords: [
+    "SUI documentation",
+    "StructUI docs",
+    "sui CLI reference",
+    "sui init",
+    "sui add command",
+    "React component CLI",
+    "Next.js component library docs",
+    "Tailwind CSS v4 setup",
+    "Radix UI docs",
+    "component registry docs",
+    "TypeScript UI library docs",
+    "headless component docs",
+    "framework setup guide",
+    "Astro setup",
+    "Remix setup",
+  ],
   alternates: { canonical: "/docs" },
   openGraph: {
+    type: "website",
     title: "Documentation — SUI",
     description:
-      "CLI reference, framework support, registry contract, and component-level markdown docs.",
+      "Complete SUI docs: CLI reference, framework setup guides, registry contract, and component markdown docs.",
     url: "/docs",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SUI Documentation",
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Documentation — SUI",
+    description:
+      "CLI reference, framework guides and component docs for SUI.",
+    images: ["/og-image.png"],
+    creator: "@structui",
+    site: "@structui",
   },
 };
+
 
 export default async function Page() {
   const docs = await getAllMarkdownDocs();
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex max-w-7xl mx-auto min-h-screen">
       {/* Sidebar */}
       <SiteSidebar
         items={[
