@@ -49,7 +49,7 @@ export default async function Page() {
   };
 
   return (
-    <>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -59,6 +59,6 @@ export default async function Page() {
         docsCount={docs.length}
         categoryCount={categoryCount}
       />
-    </>
+    </div>
   );
 }

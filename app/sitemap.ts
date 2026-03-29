@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { getPublicComponentCatalog } from "@/src/lib/registry/catalog";
 import { getAllMarkdownDocs } from "@/src/lib/content/docs";
+import { OPS_SCHEMES } from "@/src/setups/ops-schemes";
 
 const BASE_URL = "https://structui.com";
 
@@ -61,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/r2go`,
+      url: `${BASE_URL}/schemes`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
@@ -82,5 +83,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...componentRoutes, ...docRoutes];
+  const schemeRoutes: MetadataRoute.Sitemap = OPS_SCHEMES.map((scheme) => ({
+    url: `${BASE_URL}/setups/ops/${scheme.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.65,
+  }));
+
+  return [...staticRoutes, ...componentRoutes, ...docRoutes, ...schemeRoutes];
 }

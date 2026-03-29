@@ -15,20 +15,18 @@ import {
   Zap,
 } from "lucide-react";
 
-import { cn } from "@/src/lib/utils";
-
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const NAV_COLUMNS = [
   {
     title: "Library",
-    links: [
-      { label: "Components", href: "/components", icon: Component },
-      { label: "Blocks", href: "/blocks", icon: Blocks },
-      { label: "Theme Creator", href: "/theme-creator", icon: Palette },
-      { label: "R2Go Playground", href: "/r2go", icon: LayoutGrid },
-    ],
-  },
+      links: [
+        { label: "Components", href: "/components", icon: Component },
+        { label: "Blocks", href: "/blocks", icon: Blocks },
+        { label: "Theme Creator", href: "/theme-creator", icon: Palette },
+        { label: "Schemes", href: "/schemes", icon: LayoutGrid },
+      ],
+    },
   {
     title: "Docs",
     links: [

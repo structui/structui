@@ -56,7 +56,7 @@ export function authLayout(options: SetupOptions): SetupFile {
     path: "app/(auth)/layout.tsx",
     content: `export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-${colorPalette}-50 dark:bg-gray-950 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-${colorPalette}-100/40 dark:bg-gray-950 px-4">
       <div className="w-full max-w-md">{children}</div>
     </div>
   )
@@ -106,7 +106,7 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-8 space-y-6">
+    <div className="space-y-6 border border-gray-200 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900">
       <div className="text-center space-y-1">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome back</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400">Sign in to ${projectTitle}</p>
@@ -131,7 +131,7 @@ export default function SignInPage() {
             type="email"
             required
             placeholder="you@example.com"
-            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-${colorPalette}-500 focus:border-transparent transition"
+            className="w-full border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-${colorPalette}-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
           />
         </div>
         <div className="space-y-1">
@@ -147,13 +147,13 @@ export default function SignInPage() {
             type="password"
             required
             placeholder="••••••••"
-            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-${colorPalette}-500 focus:border-transparent transition"
+            className="w-full border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-${colorPalette}-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
           />
         </div>
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 px-4 bg-${colorPalette}-600 hover:bg-${colorPalette}-700 disabled:opacity-60 text-white font-medium rounded-lg text-sm transition-colors"
+          className="w-full bg-${colorPalette}-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-${colorPalette}-700 disabled:opacity-60"
         >
           {loading ? "Signing in…" : "Sign in"}
         </button>
@@ -217,7 +217,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-8 space-y-6">
+    <div className="space-y-6 border border-gray-200 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900">
       <div className="text-center space-y-1">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Create an account</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400">Get started with ${projectTitle}</p>
@@ -239,7 +239,7 @@ export default function SignUpPage() {
             type="text"
             required
             placeholder="Jane Doe"
-            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-${colorPalette}-500 focus:border-transparent transition"
+            className="w-full border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-${colorPalette}-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
           />
         </div>
         <div className="space-y-1">
@@ -252,7 +252,7 @@ export default function SignUpPage() {
             type="email"
             required
             placeholder="you@example.com"
-            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-${colorPalette}-500 focus:border-transparent transition"
+            className="w-full border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-${colorPalette}-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
           />
         </div>
         <div className="space-y-1">
@@ -266,13 +266,13 @@ export default function SignUpPage() {
             required
             minLength={8}
             placeholder="Min. 8 characters"
-            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-${colorPalette}-500 focus:border-transparent transition"
+            className="w-full border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-${colorPalette}-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
           />
         </div>
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 px-4 bg-${colorPalette}-600 hover:bg-${colorPalette}-700 disabled:opacity-60 text-white font-medium rounded-lg text-sm transition-colors"
+          className="w-full bg-${colorPalette}-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-${colorPalette}-700 disabled:opacity-60"
         >
           {loading ? "Creating account…" : "Create account"}
         </button>
@@ -349,9 +349,9 @@ export function Sidebar() {
             <Link
               key={item.name}
               href={item.href}
-              className={\`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors \${
+              className={\`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-colors \${
                 isActive
-                  ? "bg-${colorPalette}-50 dark:bg-${colorPalette}-950/50 text-${colorPalette}-700 dark:text-${colorPalette}-300"
+                  ? "border border-${colorPalette}-200 bg-${colorPalette}-50 text-${colorPalette}-700 dark:border-${colorPalette}-900 dark:bg-${colorPalette}-950/50 dark:text-${colorPalette}-300"
                   : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white"
               }\`}
             >
@@ -364,16 +364,16 @@ export function Sidebar() {
 
       {/* Footer */}
       <div className="p-3 border-t border-gray-200 dark:border-gray-800 space-y-0.5">
-        <Link
-          href="/profile"
-          className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-colors"
-        >
+          <Link
+            href="/profile"
+            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+          >
           <span className="text-base leading-none">👤</span>
           Profile
         </Link>
         <button
           onClick={handleSignOut}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-950/50 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+          className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-red-50 hover:text-red-600 dark:text-gray-400 dark:hover:bg-red-950/50 dark:hover:text-red-400"
         >
           <span className="text-base leading-none">↩</span>
           Sign out
@@ -403,11 +403,11 @@ export function Header({ title = "${pageTitle}" }: HeaderProps) {
     <header className="h-16 shrink-0 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 flex items-center justify-between px-6">
       <h2 className="text-sm font-semibold text-gray-900 dark:text-white">{title}</h2>
       <div className="flex items-center gap-3">
-        <button className="relative p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+        <button className="relative border border-gray-200 p-1.5 text-gray-500 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800">
           <span className="text-lg leading-none">🔔</span>
           <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-${colorPalette}-500" />
         </button>
-        <div className="w-8 h-8 rounded-full bg-${colorPalette}-100 dark:bg-${colorPalette}-900 flex items-center justify-center text-${colorPalette}-700 dark:text-${colorPalette}-300 text-xs font-semibold">
+        <div className="flex h-8 w-8 items-center justify-center bg-${colorPalette}-100 text-xs font-semibold text-${colorPalette}-700 dark:bg-${colorPalette}-900 dark:text-${colorPalette}-300">
           A
         </div>
       </div>
@@ -426,7 +426,7 @@ export function footer(options: SetupOptions): SetupFile {
     path: "components/layout/footer.tsx",
     content: `export function Footer() {
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-6 py-4">
+    <footer className="border-t border-gray-200 bg-white px-6 py-4 dark:border-gray-800 dark:bg-gray-900">
       <p className="text-xs text-gray-400 dark:text-gray-600">
         &copy; {new Date().getFullYear()}{" "}
         <span className="font-medium text-${colorPalette}-600 dark:text-${colorPalette}-400">
@@ -462,8 +462,8 @@ export default function ProfilePage() {
       </div>
 
       {/* Avatar */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 flex items-center gap-5">
-        <div className="w-16 h-16 rounded-full bg-${colorPalette}-100 dark:bg-${colorPalette}-900 flex items-center justify-center text-${colorPalette}-700 dark:text-${colorPalette}-300 text-2xl font-bold">
+      <div className="flex items-center gap-5 border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
+        <div className="flex h-16 w-16 items-center justify-center bg-${colorPalette}-100 text-2xl font-bold text-${colorPalette}-700 dark:bg-${colorPalette}-900 dark:text-${colorPalette}-300">
           A
         </div>
         <div>
@@ -473,7 +473,7 @@ export default function ProfilePage() {
       </div>
 
       {/* Personal Info */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 space-y-4">
+      <div className="space-y-4 border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
         <h2 className="text-sm font-semibold text-gray-900 dark:text-white">Personal Information</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
@@ -491,12 +491,12 @@ export default function ProfilePage() {
       </div>
 
       {/* Danger zone */}
-      <div className="bg-white dark:bg-gray-900 border border-red-200 dark:border-red-900 rounded-xl p-6 space-y-3">
+      <div className="space-y-3 border border-red-200 bg-white p-6 dark:border-red-900 dark:bg-gray-900">
         <h2 className="text-sm font-semibold text-red-700 dark:text-red-400">Danger Zone</h2>
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Permanently delete your account and all associated data.
         </p>
-        <button className="px-4 py-2 rounded-lg border border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 text-sm font-medium hover:bg-red-50 dark:hover:bg-red-950 transition-colors">
+        <button className="border border-red-300 px-4 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-950">
           Delete account
         </button>
       </div>

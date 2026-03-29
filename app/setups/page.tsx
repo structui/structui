@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Terminal, ArrowRight, Layers2 } from "lucide-react";
+import { Terminal, ArrowRight, Layers2, LayoutTemplate } from "lucide-react";
 
 import { Container } from "@/src/components/layout/container";
 import { Badge } from "@/src/components/ui/badge";
@@ -101,6 +101,29 @@ export default function SetupsPage() {
               </Link>
             );
           })}
+        </div>
+
+        <div className="rounded-2xl border border-border bg-card/40 p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-1.5">
+              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                <LayoutTemplate className="h-3.5 w-3.5" />
+                Schemes / OPS
+              </div>
+              <h2 className="text-xl font-semibold">Professional one-page website schemes</h2>
+              <p className="text-sm text-muted-foreground">
+                Review modern scheme packs for company profiles, portfolios, agencies,
+                and sector-specific marketing sites.
+              </p>
+            </div>
+            <Link
+              href="/schemes"
+              className="inline-flex items-center gap-2 border border-border bg-background px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Open schemes
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
         </div>
 
         {/* Auth providers section */}

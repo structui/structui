@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 import { ComponentsIndexClient } from "@/src/components/site/components-index-client";
 import { SiteSidebar } from "@/src/components/site/sidebar";
 import { Container } from "@/src/components/layout/container";
-import { getPublicComponentCatalog } from "@/src/lib/registry/catalog";
+import {
+  getComponentCoverageSummary,
+  getPublicComponentCatalog,
+} from "@/src/lib/registry/catalog";
 
 export const metadata: Metadata = {
   title: "React Components — 50+ Source-First UI Components",
@@ -60,7 +63,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const components = await getPublicComponentCatalog();
+  const [components, coverage] = await Promise.all([
+    getPublicComponentCatalog(),
+    getComponentCoverageSummary(),
+  ]);
   const grouped = Array.from(new Set(components.map((item) => item.category))).map(
     (category) => ({
       title: category,
@@ -87,7 +93,7 @@ export default async function Page() {
       />
       <main className="min-w-0 flex-1 py-12">
         <Container>
-          <ComponentsIndexClient components={components} />
+          <ComponentsIndexClient components={components} coverage={coverage} />
         </Container>
       </main>
     </div>

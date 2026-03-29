@@ -3,11 +3,11 @@ import { generateAuthProvider } from "../auth-providers";
 import { sharedFiles, sidebar, header, footer, profilePage } from "./shared";
 
 const NAV_ITEMS = [
-  { name: "Dashboard", href: "/dashboard", icon: "📊" },
-  { name: "Customers", href: "/customers", icon: "👥" },
-  { name: "Deals", href: "/deals", icon: "💼" },
-  { name: "Activities", href: "/activities", icon: "📅" },
-  { name: "Reports", href: "/reports", icon: "📈" },
+  { name: "Dashboard", href: "/dashboard", icon: "DB" },
+  { name: "Customers", href: "/customers", icon: "CU" },
+  { name: "Deals", href: "/deals", icon: "DL" },
+  { name: "Activities", href: "/activities", icon: "AC" },
+  { name: "Reports", href: "/reports", icon: "RP" },
 ];
 
 export function generateCRM(options: SetupOptions): SetupResult {
@@ -41,7 +41,7 @@ import { Footer } from "@/components/layout/footer"
 
 export default function CRMLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="flex min-h-screen bg-gray-100/40 dark:bg-gray-950">
       <Sidebar />
       <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
         <Header />
@@ -76,13 +76,27 @@ const recentActivity = [
   { action: "Invoice sent", detail: "StartupXYZ — $3,200", time: "5 hr ago" },
 ]
 
+const pipeline = [
+  { name: "Lead", amount: "$36,200", count: 22 },
+  { name: "Qualified", amount: "$44,800", count: 17 },
+  { name: "Proposal", amount: "$31,600", count: 10 },
+  { name: "Negotiation", amount: "$19,400", count: 6 },
+]
+
+const quickActions = [
+  "Create a new lead",
+  "Log an activity note",
+  "Schedule follow-up",
+  "Export weekly report",
+]
+
 export default function DashboardPage() {
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Dashboard</h1>
+        <h1 className="text-xl font-semibold text-gray-900 dark:text-white">CRM Dashboard</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          Welcome back! Here&apos;s what&apos;s happening today.
+          Minimal command center for revenue, activities, and next actions.
         </p>
       </div>
 
@@ -91,7 +105,7 @@ export default function DashboardPage() {
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 space-y-2"
+            className="space-y-2 border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900"
           >
             <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
               {stat.label}
@@ -110,8 +124,41 @@ export default function DashboardPage() {
         ))}
       </div>
 
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div className="space-y-4 border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900 lg:col-span-2">
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-semibold text-gray-900 dark:text-white">Pipeline health</h2>
+            <span className="text-xs text-gray-500 dark:text-gray-400">Current month</span>
+          </div>
+          <div className="space-y-2">
+            {pipeline.map((stage) => (
+              <div key={stage.name} className="flex items-center justify-between border border-gray-100 px-3 py-2 text-sm dark:border-gray-800">
+                <div>
+                  <p className="font-medium text-gray-900 dark:text-white">{stage.name}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{stage.count} deals</p>
+                </div>
+                <p className="font-semibold text-gray-900 dark:text-white">{stage.amount}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="space-y-3 border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+          <h2 className="text-sm font-semibold text-gray-900 dark:text-white">Quick actions</h2>
+          <div className="space-y-2">
+            {quickActions.map((entry) => (
+              <button
+                key={entry}
+                className="w-full border border-gray-200 px-3 py-2 text-left text-xs text-gray-600 transition-colors hover:border-${colorPalette}-300 hover:text-${colorPalette}-700 dark:border-gray-700 dark:text-gray-300 dark:hover:border-${colorPalette}-800 dark:hover:text-${colorPalette}-300"
+              >
+                {entry}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Recent Activity */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl">
+      <div className="border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
         <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
           <h2 className="text-sm font-semibold text-gray-900 dark:text-white">Recent Activity</h2>
         </div>
@@ -164,12 +211,12 @@ export default function CustomersPage() {
           <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Customers</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{customers.length} total customers</p>
         </div>
-        <button className="px-4 py-2 bg-${colorPalette}-600 hover:bg-${colorPalette}-700 text-white text-sm font-medium rounded-lg transition-colors">
+        <button className="bg-${colorPalette}-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-${colorPalette}-700">
           + Add Customer
         </button>
       </div>
 
-      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden">
+      <div className="overflow-hidden border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-800">
             <tr>
@@ -189,7 +236,7 @@ export default function CustomersPage() {
                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{c.name}</td>
                 <td className="px-6 py-4 text-gray-500 dark:text-gray-400">{c.contact}</td>
                 <td className="px-6 py-4">
-                  <span className={\`px-2 py-0.5 rounded-full text-xs font-medium \${statusColor[c.status]}\`}>
+                  <span className={\`px-2 py-0.5 text-xs font-medium \${statusColor[c.status]}\`}>
                     {c.status}
                   </span>
                 </td>
@@ -237,12 +284,12 @@ export default function DealsPage() {
           <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Deals</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{deals.length} active deals</p>
         </div>
-        <button className="px-4 py-2 bg-${colorPalette}-600 hover:bg-${colorPalette}-700 text-white text-sm font-medium rounded-lg transition-colors">
+        <button className="bg-${colorPalette}-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-${colorPalette}-700">
           + New Deal
         </button>
       </div>
 
-      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden">
+      <div className="overflow-hidden border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-800">
             <tr>
@@ -261,7 +308,7 @@ export default function DealsPage() {
               <tr key={d.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{d.name}</td>
                 <td className="px-6 py-4">
-                  <span className={\`px-2 py-0.5 rounded-full text-xs font-medium \${stageColor[d.stage] ?? ""}\`}>
+                  <span className={\`px-2 py-0.5 text-xs font-medium \${stageColor[d.stage] ?? ""}\`}>
                     {d.stage}
                   </span>
                 </td>
@@ -299,7 +346,7 @@ export default function ReportsPage() {
         {["Revenue Trend", "Customer Growth", "Deal Funnel", "Activity Summary"].map((name) => (
           <div
             key={name}
-            className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 flex items-center justify-center h-48 text-gray-400 dark:text-gray-600 text-sm"
+            className="flex h-48 items-center justify-center border border-gray-200 bg-white p-6 text-sm text-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-600"
           >
             {name} — chart coming soon
           </div>
@@ -334,7 +381,7 @@ export default function ActivitiesPage() {
           <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Activities</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Upcoming tasks and scheduled events</p>
         </div>
-        <button className="px-4 py-2 bg-${colorPalette}-600 hover:bg-${colorPalette}-700 text-white text-sm font-medium rounded-lg transition-colors">
+        <button className="bg-${colorPalette}-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-${colorPalette}-700">
           + Log Activity
         </button>
       </div>
@@ -343,14 +390,14 @@ export default function ActivitiesPage() {
         {activities.map((a, i) => (
           <li
             key={i}
-            className={\`flex items-center gap-4 bg-white dark:bg-gray-900 border rounded-xl px-5 py-4 \${
+            className={\`flex items-center gap-4 border bg-white px-5 py-4 dark:bg-gray-900 \${
               a.done
                 ? "border-gray-100 dark:border-gray-800 opacity-60"
                 : "border-gray-200 dark:border-gray-800"
             }\`}
           >
-            <span className="text-lg leading-none">
-              {a.type === "Call" ? "📞" : a.type === "Email" ? "📧" : a.type === "Meeting" ? "📅" : "✅"}
+            <span className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+              {a.type}
             </span>
             <div className="flex-1 min-w-0">
               <p
@@ -363,7 +410,7 @@ export default function ActivitiesPage() {
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{a.type} · {a.due}</p>
             </div>
             {!a.done && (
-              <span className="text-xs font-medium text-${colorPalette}-600 dark:text-${colorPalette}-400 bg-${colorPalette}-50 dark:bg-${colorPalette}-950 px-2 py-0.5 rounded-full">
+              <span className="bg-${colorPalette}-50 px-2 py-0.5 text-xs font-medium text-${colorPalette}-600 dark:bg-${colorPalette}-950 dark:text-${colorPalette}-400">
                 Pending
               </span>
             )}

@@ -165,7 +165,7 @@ const getDocsOverviewLinks = (): string[] =>
 const getProductLinks = (): string[] => [
   `- [Components](${SITE_URL}/components): Browse the component catalog.`,
   `- [Blocks](${SITE_URL}/blocks): Explore composable blocks and section patterns.`,
-  `- [Ready to Go](${SITE_URL}/r2go): Browse starter templates and builder flows.`,
+  `- [Schemes](${SITE_URL}/schemes): Browse modern one-page template structures.`,
   `- [Theme Creator](${SITE_URL}/theme-creator): Build and export design token themes.`,
   `- [CLI Page](${SITE_URL}/docs/cli): Dedicated CLI docs surface.`,
   `- [GitHub](${SITE_GITHUB_URL}): Source code, issues, and project history.`,

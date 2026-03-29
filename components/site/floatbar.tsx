@@ -15,7 +15,7 @@ export function SiteFloatbar() {
     { icon: FileText, label: "Docs", href: "/docs" },
     { icon: Box, label: "Components", href: "/components" },
     { icon: Layout, label: "Blocks", href: "/blocks" },
-    { icon: Sparkles, label: "R2Go", href: "/r2go" },
+    { icon: Sparkles, label: "Schemes", href: "/schemes" },
   ];
 
   return (

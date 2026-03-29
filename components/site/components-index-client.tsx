@@ -8,14 +8,18 @@ import { Badge } from "@/src/components/ui/badge";
 import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { cn } from "@/src/lib/utils";
-import type { ComponentCatalogEntry } from "@/src/lib/registry/catalog";
+import type {
+  ComponentCatalogEntry,
+  ComponentCoverageSummary,
+} from "@/src/lib/registry/catalog";
 
 interface ComponentsIndexClientProps {
   components: ComponentCatalogEntry[];
+  coverage: ComponentCoverageSummary;
 }
 
 // Mini visual preview thumbnail based on category
-function ComponentThumbnail({ category, slug }: { category: string; slug: string }) {
+function ComponentThumbnail({ category }: { category: string }) {
   const gradients: Record<string, string> = {
     "General": "from-blue-500/20 via-blue-400/10 to-transparent",
     "Forms": "from-violet-500/20 via-violet-400/10 to-transparent",
@@ -109,7 +113,10 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 type ViewMode = "grid" | "list";
 
-export function ComponentsIndexClient({ components }: ComponentsIndexClientProps) {
+export function ComponentsIndexClient({
+  components,
+  coverage,
+}: ComponentsIndexClientProps) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [view, setView] = useState<ViewMode>("grid");
@@ -153,6 +160,20 @@ export function ComponentsIndexClient({ components }: ComponentsIndexClientProps
         <p className="max-w-2xl text-lg text-muted-foreground">
           Source files, code-first install guidance, and markdown-backed docs in one registry.
         </p>
+        <div className="flex flex-wrap gap-2">
+          <span className="border border-border/70 bg-card px-3 py-1 text-xs text-muted-foreground">
+            {coverage.totalComponents} UI files
+          </span>
+          <span className="border border-border/70 bg-card px-3 py-1 text-xs text-muted-foreground">
+            {coverage.registryMapped} registry mapped
+          </span>
+          <span className="border border-border/70 bg-card px-3 py-1 text-xs text-muted-foreground">
+            {coverage.docsAvailable} docs ready
+          </span>
+          <span className="border border-border/70 bg-card px-3 py-1 text-xs text-muted-foreground">
+            {coverage.categories} categories
+          </span>
+        </div>
       </div>
 
       {/* Toolbar */}
@@ -232,7 +253,7 @@ export function ComponentsIndexClient({ components }: ComponentsIndexClientProps
             <Link key={component.slug} href={`/components/${component.slug}`}>
               <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/80 bg-card transition-all hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5">
                 {/* Thumbnail */}
-                <ComponentThumbnail category={component.category} slug={component.slug} />
+                <ComponentThumbnail category={component.category} />
 
                 {/* Content */}
                 <div className="flex flex-1 flex-col gap-3 p-4">

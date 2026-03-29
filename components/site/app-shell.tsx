@@ -3,8 +3,8 @@
 import type { ReactNode } from "react";
 import { SessionProvider } from "next-auth/react";
 import type { Session } from "next-auth";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
 
 import { SiteFooter } from "@/src/components/site/footer";
 import { SiteNavbar } from "@/src/components/site/navbar";
@@ -23,17 +23,15 @@ export function AppShell({
   session,
   starCount,
 }: AppShellProps) {
+  const pathname = usePathname();
   const [theme, setTheme] = useState<"light" | "dark" | "khaki" | "khaki-dark">(
     "dark",
   );
+  const isOpsDemoRoute = pathname.startsWith("/setups/ops/");
 
   useEffect(() => {
     document.documentElement.className = theme;
   }, [theme]);
-
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const isBarePreview = pathname === "/r2go" && searchParams.get("preview") === "1";
 
   return (
     <SessionProvider session={session}>
@@ -44,11 +42,11 @@ export function AppShell({
             theme,
           )}
         >
-          {!isBarePreview ? <SiteNavbar starCount={starCount} /> : null}
+          {!isOpsDemoRoute ? <SiteNavbar starCount={starCount} /> : null}
           <main>{children}</main>
-          {!isBarePreview ? <SiteFooter /> : null}
-          {!isBarePreview ? <CookiesBanner /> : null}
-          {!isBarePreview ? (
+          {!isOpsDemoRoute ? <SiteFooter /> : null}
+          {!isOpsDemoRoute ? <CookiesBanner /> : null}
+          {!isOpsDemoRoute ? (
             <div className="fixed right-4 top-20 z-50 flex scale-90 flex-col gap-1.5 rounded-full border border-primary/10 bg-background/50 p-1.5 shadow-lg backdrop-blur-md">
               {(["light", "dark", "khaki", "khaki-dark"] as const).map((item) => (
                 <button

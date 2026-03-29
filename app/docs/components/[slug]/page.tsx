@@ -53,7 +53,7 @@ export default async function Page({
     : null;
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex max-w-7xl mx-auto min-h-screen">
       {/* Sidebar */}
       <SiteSidebar
         items={[
@@ -72,7 +72,7 @@ export default async function Page({
         className="sticky top-12 hidden h-[calc(100vh-3rem)] w-60 shrink-0 overflow-y-auto border-r lg:block"
       />
 
-      <main className="min-w-0 flex-1">
+      <main className="min-w-0 max-w-7xl mx-auto flex-1">
         <div className="mx-auto px-6 py-10 lg:px-10">
 
           {/* Breadcrumb */}
@@ -161,7 +161,7 @@ export default async function Page({
                   </p>
                 </div>
                 <div className="p-6 lg:p-8">
-                  <article className="prose prose-neutral max-w-none dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-p:leading-relaxed prose-p:text-muted-foreground prose-code:rounded prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:text-xs prose-code:font-mono prose-code:before:content-none prose-code:after:content-none prose-pre:rounded-xl prose-pre:border prose-pre:border-border/70 prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+                  <article className="prose truncate prose-neutral max-w-none dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-p:leading-relaxed prose-p:text-muted-foreground prose-code:rounded prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:text-xs prose-code:font-mono prose-code:before:content-none prose-code:after:content-none prose-pre:rounded-xl prose-pre:border prose-pre:border-border/70 prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
                     <ReactMarkdown>{doc.content}</ReactMarkdown>
                   </article>
                 </div>
